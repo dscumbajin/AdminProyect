@@ -48,17 +48,36 @@ include_once('templates/navegacion.php');
             $sql = "SELECT * FROM proyectos WHERE proyecto_id = $id ";
             $resultado = $conn->query($sql);
             $proyecto = $resultado->fetch_assoc();
-           
+
             ?>
             <!-- form start -->
             <form class="form-horizontal" name="guardar-registro" id="guardar-registro" method="post" action="modelo-proyecto.php">
               <div class="card-body">
 
                 <!-- Input detalle del proyecto-->
-              <div class="form-group row">
+                <div class="form-group row">
                   <label for="detalle" class="col-sm-2 col-form-label">Proyecto</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="detalle" name="detalle" placeholder="Nombre del proyecto" required  value="<?php echo $proyecto['detalle'] ?>">
+                    <input type="text" class="form-control" id="detalle" name="detalle" placeholder="Nombre del proyecto" required value="<?php echo $proyecto['detalle'] ?>">
+                  </div>
+                </div>
+
+
+                <!-- Input Objetivo estrategico-->
+
+                <div class="form-group row">
+                  <label for="objetivo_estrategico" class="col-sm-2 col-form-label">Objetivo estratégico</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="objetivo_estrategico" name="objetivo_estrategico" placeholder="Objetivo estratégico" required value="<?php echo $proyecto['objetivo_estrategico'] ?>">
+                  </div>
+                </div>
+
+                <!-- Input Objetivo Link de video-->
+
+                <div class="form-group row">
+                  <label for="url_video" class="col-sm-2 col-form-label">Link video</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="url_video" name="url_video" placeholder="Link video youtube - opcional" value="<?php echo $proyecto['url_video '] ?>">
                   </div>
                 </div>
 
@@ -71,19 +90,10 @@ include_once('templates/navegacion.php');
                   </div>
                 </div>
 
-                
-             
-              <!-- Input Objetivo estrategico-->
-
-              <div class="form-group row">
-                  <label for="objetivo_estrategico" class="col-sm-2 col-form-label">Objetivo estratégico</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="objetivo_estrategico" name="objetivo_estrategico" placeholder="Objetivo estratégico" required value="<?php echo $proyecto['objetivo_estrategico'] ?>">
-                  </div>
-                </div>
 
 
-              <!--Select Portafolio-->
+
+                <!--Select Portafolio-->
 
                 <div class="form-group row">
                   <label for="area" class="col-sm-2 col-form-label">Portafolio:</label>
@@ -95,11 +105,11 @@ include_once('templates/navegacion.php');
                         $portafolio_actual = $proyecto['portafolio_id'];
                         $sql = 'SELECT portafolio_id, area FROM portafolios';
                         $resultado = $conn->query($sql);
-                        while ($portafolio = $resultado->fetch_assoc()) { 
-                          if($portafolio['portafolio_id'] == $portafolio_actual){?>
-                          <option value="<?php echo $portafolio['portafolio_id']; ?>" selected><?php echo $portafolio['area']  ?></option>
+                        while ($portafolio = $resultado->fetch_assoc()) {
+                          if ($portafolio['portafolio_id'] == $portafolio_actual) { ?>
+                            <option value="<?php echo $portafolio['portafolio_id']; ?>" selected><?php echo $portafolio['area']  ?></option>
                           <?php } else { ?>
-                            <option value="<?php echo $portafolio['portafolio_id']; ?>"><?php echo $portafolio['area'] ; ?></option>
+                            <option value="<?php echo $portafolio['portafolio_id']; ?>"><?php echo $portafolio['area']; ?></option>
                       <?php }
                         }
                       } catch (Exception $e) {
@@ -122,11 +132,11 @@ include_once('templates/navegacion.php');
                         $programa_actual = $proyecto['programa_id'];
                         $sql = 'SELECT programa_id, descripcion FROM programas';
                         $resultado = $conn->query($sql);
-                        while ($programa = $resultado->fetch_assoc()) { 
-                          if($programa['programa_id'] == $programa_actual){?>
-                          <option value="<?php echo $programa['programa_id']; ?>" selected><?php echo $programa['descripcion']  ?></option>
+                        while ($programa = $resultado->fetch_assoc()) {
+                          if ($programa['programa_id'] == $programa_actual) { ?>
+                            <option value="<?php echo $programa['programa_id']; ?>" selected><?php echo $programa['descripcion']  ?></option>
                           <?php } else { ?>
-                            <option value="<?php echo $programa['programa_id']; ?>"><?php echo $programa['descripcion'] ; ?></option>
+                            <option value="<?php echo $programa['programa_id']; ?>"><?php echo $programa['descripcion']; ?></option>
                       <?php }
                         }
                       } catch (Exception $e) {
@@ -137,7 +147,7 @@ include_once('templates/navegacion.php');
                   </div>
                 </div>
 
-            
+
                 <!--Select estado neural-->
 
                 <div class="form-group row">
@@ -149,16 +159,16 @@ include_once('templates/navegacion.php');
                         <option value="activar" selected>Activar</option>
                         <option value="activo">Activo</option>
                         <option value="cerrado">Cerrado</option>
-                        
-                      <?php } else if($proyecto['estado_neural'] == 'activo') { ?>
-                        <option value="activar" >Activar</option>
+
+                      <?php } else if ($proyecto['estado_neural'] == 'activo') { ?>
+                        <option value="activar">Activar</option>
                         <option value="activo" selected>Activo</option>
                         <option value="cerrado">Cerrado</option>
                       <?php
-                      }  else { ?>
-                        <option value="activar" >Activar</option>
-                        <option value="activo" >Activo</option>
-                        <option value="cerrado" selected>Cerrado</option> 
+                      } else { ?>
+                        <option value="activar">Activar</option>
+                        <option value="activo">Activo</option>
+                        <option value="cerrado" selected>Cerrado</option>
                       <?php
                       }
                       ?>
@@ -167,48 +177,47 @@ include_once('templates/navegacion.php');
                   <!-- /.form-group -->
                 </div>
 
-                 <!--Select estado-->
+                <!--Select estado-->
 
-                 <div class="form-group row">
+                <div class="form-group row">
                   <label for="estado" class="col-sm-2 col-form-label">Estado</label>
                   <div class="col-sm-10">
                     <select class="form-control select2 select2-danger" id="estado" name="estado" data-dropdown-css-class="select2-danger" style="width: 100%;">
                       <?php
                       if ($proyecto['estado'] == 'analisis') { ?>
                         <option value="analisis" selected>Análisis</option>
-                      <option value="aprobado">Aprobado</option>
-                      <option value="cerrado">Cerrado</option>
-                      <option value="entrega">Entrega</option>
-                      <option value="proceso">Proceso</option>
-                        
-                      <?php } else if($proyecto['estado'] == 'aprobado') { ?>
+                        <option value="aprobado">Aprobado</option>
+                        <option value="cerrado">Cerrado</option>
+                        <option value="entrega">Entrega</option>
+                        <option value="proceso">Proceso</option>
+
+                      <?php } else if ($proyecto['estado'] == 'aprobado') { ?>
                         <option value="analisis">Análisis</option>
-                      <option value="aprobado" selected>Aprobado</option>
-                      <option value="cerrado">Cerrado</option>
-                      <option value="entrega">Entrega</option>
-                      <option value="proceso">Proceso</option>
+                        <option value="aprobado" selected>Aprobado</option>
+                        <option value="cerrado">Cerrado</option>
+                        <option value="entrega">Entrega</option>
+                        <option value="proceso">Proceso</option>
                       <?php
-                      } else if($proyecto['estado'] == 'proceso') { ?>
+                      } else if ($proyecto['estado'] == 'proceso') { ?>
                         <option value="analisis">Análisis</option>
-                       <option value="aprobado">Aprobado</option>
-                       <option value="cerrado">Cerrado</option>
-                       <option value="entrega">Entrega</option>
-                       <option value="proceso" selected>Proceso</option>
-                       <?php
-                       }
-                       else if($proyecto['estado'] == 'entrega') { ?>
-                        <option value="analisis">Análisis</option>
-                      <option value="aprobado">Aprobado</option>
-                      <option value="cerrado">Cerrado</option>
-                      <option value="entrega" selected>Entrega</option>
-                      <option value="proceso">Proceso</option>
+                        <option value="aprobado">Aprobado</option>
+                        <option value="cerrado">Cerrado</option>
+                        <option value="entrega">Entrega</option>
+                        <option value="proceso" selected>Proceso</option>
                       <?php
-                      }   else { ?>
+                      } else if ($proyecto['estado'] == 'entrega') { ?>
                         <option value="analisis">Análisis</option>
-                      <option value="aprobado">Aprobado</option>
-                      <option value="cerrado" selected>Cerrado</option>
-                      <option value="entrega">Entrega</option>
-                      <option value="proceso">Proceso</option>
+                        <option value="aprobado">Aprobado</option>
+                        <option value="cerrado">Cerrado</option>
+                        <option value="entrega" selected>Entrega</option>
+                        <option value="proceso">Proceso</option>
+                      <?php
+                      } else { ?>
+                        <option value="analisis">Análisis</option>
+                        <option value="aprobado">Aprobado</option>
+                        <option value="cerrado" selected>Cerrado</option>
+                        <option value="entrega">Entrega</option>
+                        <option value="proceso">Proceso</option>
                       <?php
                       }
                       ?>
@@ -221,7 +230,7 @@ include_once('templates/navegacion.php');
               <!-- /.card-body -->
               <div class="card-footer">
                 <input type="hidden" name="registro" value="actualizar">
-                <input type="hidden" name="id_registro" value="<?php echo $id?>">
+                <input type="hidden" name="id_registro" value="<?php echo $id ?>">
                 <button type="submit" class="btn btn-dark float-right">Guardar</button>
               </div>
               <!-- /.card-footer -->

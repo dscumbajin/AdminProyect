@@ -36,6 +36,7 @@ if ($_POST['registro'] == 'nuevo') {
         $respuesta = array(
             'respuesta' => $e->getMessage()
         ); 
+        
     }
     die(json_encode(($respuesta)));
 }
@@ -44,7 +45,7 @@ if ($_POST['registro'] == 'nuevo') {
 if ($_POST['registro'] == 'actualizar') {
    // die(json_encode($_POST));
     try {
-            $stmt = $conn->prepare('UPDATE proyectos SET detalle= ?, objetivo_estrategico= ?, presupuesto_inicial =? , estado_neural= ?, estado= ?, portafolio_id= ?, programa_id= ?, editado = NOW(), url_video = ?, WHERE proyecto_id =?');
+            $stmt = $conn->prepare('UPDATE proyectos SET detalle= ?, objetivo_estrategico= ?, presupuesto_inicial =? , estado_neural= ?, estado= ?, portafolio_id= ?, programa_id= ?,url_video = ?, editado = NOW() WHERE proyecto_id =?');
             $stmt->bind_param('ssdssiisi', $detalle, $objetivo_estrategico, $presupuesto_inicial, $estado_neural, $estado, $portafolio_id, $programa_id,$url_video, $id_registro );
             $stmt->execute();
         if ($stmt->affected_rows) {

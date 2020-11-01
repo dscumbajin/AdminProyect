@@ -63,12 +63,12 @@ include_once('templates/navegacion.php');
                   </div>
                 </div>
 
-                 <!-- Input Objetivo estrategico-->
+                 <!-- Input Objetivo Link de video-->
 
                  <div class="form-group row">
                     <label for="url_video" class="col-sm-2 col-form-label">Link video</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="url_video" name="url_video" placeholder="Opcional">
+                      <input type="text" class="form-control" id="url_video" name="url_video" placeholder="Link video youtube - opcional">
                     </div>
                   </div>
                 <!-- Input presupuesto del proyecto-->
@@ -76,7 +76,7 @@ include_once('templates/navegacion.php');
                 <div class="form-group row">
                   <label for="presupuesto_inicial" class="col-sm-2 col-form-label">Presupuesto inicial</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="presupuesto_inicial" name="presupuesto_inicial" placeholder="Presupuesto Inicial" required>
+                    <input type="text" class="form-control" id="presupuesto_inicial" name="presupuesto_inicial" placeholder="Presupuesto Inicial" required value="0">
                   </div>
                 </div>
 
