@@ -15,8 +15,8 @@
 if ($_POST['registro'] == 'nuevo') {
   //  die(json_encode(($_POST))); 
     try {
-        $stmt = $conn->prepare('INSERT INTO proyectos (detalle, objetivo_estrategico, presupuesto_inicial, estado_neural, estado, portafolio_id, programa_id, url_video) VALUES(?,?,?,?,?,?,?,?)');
-        $stmt->bind_param('ssdssiis', $detalle, $objetivo_estrategico, $presupuesto_inicial, $estado_neural, $estado, $portafolio_id, $programa_id, $url_video );
+        $stmt = $conn->prepare('INSERT INTO proyectos (detalle, objetivo_estrategico, presupuesto_inicial, estado_neural, estado_id, portafolio_id, programa_id, url_video) VALUES(?,?,?,?,?,?,?,?)');
+        $stmt->bind_param('ssdsiiis', $detalle, $objetivo_estrategico, $presupuesto_inicial, $estado_neural, $estado, $portafolio_id, $programa_id, $url_video );
         $stmt->execute();
         $id_registro = $stmt->insert_id;
          
@@ -45,8 +45,8 @@ if ($_POST['registro'] == 'nuevo') {
 if ($_POST['registro'] == 'actualizar') {
    // die(json_encode($_POST));
     try {
-            $stmt = $conn->prepare('UPDATE proyectos SET detalle= ?, objetivo_estrategico= ?, presupuesto_inicial =? , estado_neural= ?, estado= ?, portafolio_id= ?, programa_id= ?,url_video = ?, editado = NOW() WHERE proyecto_id =?');
-            $stmt->bind_param('ssdssiisi', $detalle, $objetivo_estrategico, $presupuesto_inicial, $estado_neural, $estado, $portafolio_id, $programa_id,$url_video, $id_registro );
+            $stmt = $conn->prepare('UPDATE proyectos SET detalle= ?, objetivo_estrategico= ?, presupuesto_inicial =? , estado_neural= ?, estado_id= ?, portafolio_id= ?, programa_id= ?,url_video = ?, editado = NOW() WHERE proyecto_id =?');
+            $stmt->bind_param('ssdsiiisi', $detalle, $objetivo_estrategico, $presupuesto_inicial, $estado_neural, $estado, $portafolio_id, $programa_id,$url_video, $id_registro );
             $stmt->execute();
         if ($stmt->affected_rows) {
             $respuesta = array(

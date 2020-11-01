@@ -48,6 +48,9 @@ include_once('templates/navegacion.php');
             $sql = "SELECT * FROM proyectos WHERE proyecto_id = $id ";
             $resultado = $conn->query($sql);
             $proyecto = $resultado->fetch_assoc();
+           /*  echo '<pre>';
+            var_dump($proyecto);
+            echo '</pre'; */
 
             ?>
             <!-- form start -->
@@ -178,53 +181,36 @@ include_once('templates/navegacion.php');
                 </div>
 
                 <!--Select estado-->
-
                 <div class="form-group row">
-                  <label for="estado" class="col-sm-2 col-form-label">Estado</label>
+                  <label for="estado" class="col-sm-2 col-form-label">Estado:</label>
                   <div class="col-sm-10">
-                    <select class="form-control select2 select2-danger" id="estado" name="estado" data-dropdown-css-class="select2-danger" style="width: 100%;">
+                    <select name="estado" id="estado" class="form-control seleccionar" style="width: 100%;">
+                      <option value="0">- Seleccione -</option>
                       <?php
-                      if ($proyecto['estado'] == 'analisis') { ?>
-                        <option value="analisis" selected>Análisis</option>
-                        <option value="aprobado">Aprobado</option>
-                        <option value="cerrado">Cerrado</option>
-                        <option value="entrega">Entrega</option>
-                        <option value="proceso">Proceso</option>
+                      try {
+                        $estado_actual = $proyecto['estado_id'];
+                        $sql = " SELECT * FROM estados ";
+                        $resultado = $conn->query($sql);
 
-                      <?php } else if ($proyecto['estado'] == 'aprobado') { ?>
-                        <option value="analisis">Análisis</option>
-                        <option value="aprobado" selected>Aprobado</option>
-                        <option value="cerrado">Cerrado</option>
-                        <option value="entrega">Entrega</option>
-                        <option value="proceso">Proceso</option>
-                      <?php
-                      } else if ($proyecto['estado'] == 'proceso') { ?>
-                        <option value="analisis">Análisis</option>
-                        <option value="aprobado">Aprobado</option>
-                        <option value="cerrado">Cerrado</option>
-                        <option value="entrega">Entrega</option>
-                        <option value="proceso" selected>Proceso</option>
-                      <?php
-                      } else if ($proyecto['estado'] == 'entrega') { ?>
-                        <option value="analisis">Análisis</option>
-                        <option value="aprobado">Aprobado</option>
-                        <option value="cerrado">Cerrado</option>
-                        <option value="entrega" selected>Entrega</option>
-                        <option value="proceso">Proceso</option>
-                      <?php
-                      } else { ?>
-                        <option value="analisis">Análisis</option>
-                        <option value="aprobado">Aprobado</option>
-                        <option value="cerrado" selected>Cerrado</option>
-                        <option value="entrega">Entrega</option>
-                        <option value="proceso">Proceso</option>
-                      <?php
+                        while ($estado = $resultado->fetch_assoc()) {
+                          
+                          if ($estado['estado_id'] == $estado_actual) { ?>
+                            <option value="<?php echo $estado['estado_id']; ?>" selected><?php echo $estado['estado']; ?>
+                            </option>
+                          <?php } else { ?>
+                            <option value="<?php echo $estado['estado_id']; ?>">
+                              <?php echo $estado['estado']; ?>
+                            </option>
+                      <?php }
+                        }
+                      } catch (Exception $e) {
+                        echo "Error: " . $e->getMessage();
                       }
                       ?>
                     </select>
                   </div>
-                  <!-- /.form-group -->
                 </div>
+
 
               </div>
               <!-- /.card-body -->

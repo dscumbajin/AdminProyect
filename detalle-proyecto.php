@@ -28,17 +28,22 @@ include_once('templates/navegacion.php');
   <section class="content">
     <?php
     try {
-      $sql = "SELECT proyecto_id, detalle,url_video, objetivo_estrategico, presupuesto_inicial, estado_neural, estado, area, descripcion , presupuesto ,anio ";
+      $sql = "SELECT proyecto_id, detalle,url_video, objetivo_estrategico, presupuesto_inicial, estado_neural, estados.estado_id, estado, area, descripcion ";
       $sql .= " FROM proyectos ";
       $sql .= " INNER JOIN portafolios ";
       $sql .= " ON proyectos.portafolio_id = portafolios.portafolio_id ";
       $sql .= " INNER JOIN programas ";
       $sql .= " ON proyectos.programa_id=programas.programa_id ";
-      $sql .= " INNER JOIN registros ";
-      $sql .= " ON proyectos.proyecto_id = registros.registros_id ";
+      $sql .= " INNER JOIN estados ";
+      $sql .= " ON proyectos.estado_id=estados.estado_id ";
       $sql .= " WHERE proyecto_id = $id ";
+
       $resultado = $conn->query($sql);
+
       $proyecto = $resultado->fetch_assoc();
+      /* echo '<pre>';
+      var_dump($proyecto);
+      echo '</pre'; */
     } catch (Exception $e) {
       echo "Error: " . $e->getMessage();
     }
@@ -50,26 +55,34 @@ include_once('templates/navegacion.php');
 
       </div>
       <div class="card-body">
-
+        <!--New Row-->
         <div class="row">
-
-
-
-          <div class=" col-2">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <p>Video</p>
+          <!--Mostar video-->
+          <?php
+          $video = "col-2";
+          $cartel = "col-10";
+          if ($proyecto['url_video'] !== "") {
+            $video = "col-2";
+            $cartel = "col-10"; ?>
+            <!--Div video-->
+            <div class="<?php echo $video ?>">
+              <div class="small-box bg-danger">
+                <div class="inner">
+                  <p>Video</p>
+                </div>
+                <div class="icon">
+                  <i class="fab fa-youtube"></i>
+                </div>
+                <a href="<?php echo $proyecto['url_video'] ?>" class="small-box-footer">Ir <i class="fas fa-arrow-circle-right"></i></a>
               </div>
-              <div class="icon">
-              <i class="fab fa-youtube"></i>
-              </div>
-              <a href="<?php echo $proyecto['url_video']?>" class="small-box-footer">Ir <i class="fas fa-arrow-circle-right"></i></a>
             </div>
-          </div>
 
-
-          <div class="col-10">
+          <?php } else {
+            $cartel = "col-12";
+          }
+          ?>
+          <!--Div Objetivo-->
+          <div class="<?php echo $cartel ?>">
             <div class="info-box bg-light">
               <div class="info-box-content">
                 <span class="info-box-text text-center text-muted">Objetivo</span>
@@ -79,9 +92,9 @@ include_once('templates/navegacion.php');
           </div>
 
         </div>
-
+        <!--New Row-->
         <div class="row">
-
+          <!--Div presupuesto estimado-->
           <div class="col-6 ">
             <div class="info-box bg-light">
               <div class="info-box-content">
@@ -90,6 +103,8 @@ include_once('templates/navegacion.php');
               </div>
             </div>
           </div>
+
+          <!--Div presupuesto total-->
           <div class="col-6">
             <?php
             $sql = " SELECT  SUM(presupuesto) AS total FROM cuentas ";
@@ -119,9 +134,9 @@ include_once('templates/navegacion.php');
 
         </div>
 
-
+        <!--New Row-->
         <div class="row">
-
+          <!--Div Portafolio-->
           <div class="col-12 col-sm-3">
             <div class="info-box bg-light">
               <div class="info-box-content">
@@ -130,6 +145,7 @@ include_once('templates/navegacion.php');
               </div>
             </div>
           </div>
+          <!--Div Programa-->
           <div class="col-12 col-sm-3">
             <div class="info-box bg-light">
               <div class="info-box-content">
@@ -138,7 +154,7 @@ include_once('templates/navegacion.php');
               </div>
             </div>
           </div>
-
+          <!--Div estado neural-->
           <div class="col-12 col-sm-3">
             <div class="info-box bg-light">
               <div class="info-box-content">
@@ -148,7 +164,7 @@ include_once('templates/navegacion.php');
             </div>
           </div>
 
-
+          <!--Div estado-->
           <div class="col-12 col-sm-3">
             <div class="info-box bg-light">
               <div class="info-box-content">
@@ -167,6 +183,38 @@ include_once('templates/navegacion.php');
                         <!-- Formulario del comentario-->
                         <form name="guardar-registro" id="guardar-registro" action="modelo-comentario.php" method="post">
                           <div class="modal-body">
+
+                            <!--Select estado-->
+                            <div class="form-group row">
+                              <label for="estado" class="col-sm-2 col-form-label">Estado:</label>
+                              <div class="col-sm-10">
+                                <select name="estado" id="estado" class="form-control seleccionar" style="width: 100%;">
+                                  <option value="0">- Seleccione -</option>
+                                  <?php
+                                  try {
+                                    $estado_actual = $proyecto['estado_id'];
+                                    $sql = " SELECT * FROM estados ";
+                                    $resultado = $conn->query($sql);
+
+                                    while ($estado = $resultado->fetch_assoc()) {
+
+                                      if ($estado['estado_id'] == $estado_actual) { ?>
+                                        <option value="<?php echo $estado['estado_id']; ?>" selected><?php echo $estado['estado']; ?>
+                                        </option>
+                                      <?php } else { ?>
+                                        <option value="<?php echo $estado['estado_id']; ?>">
+                                          <?php echo $estado['estado']; ?>
+                                        </option>
+                                  <?php }
+                                    }
+                                  } catch (Exception $e) {
+                                    echo "Error: " . $e->getMessage();
+                                  }
+                                  ?>
+                                </select>
+                              </div>
+                            </div>
+
                             <div class="form-group">
                               <input type="comentario" class="form-control" name="comentario" placeholder="Escribe un comentario">
                             </div>

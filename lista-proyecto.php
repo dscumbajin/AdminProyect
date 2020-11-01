@@ -58,6 +58,8 @@ include_once('templates/navegacion.php');
                     $sql .= " ON proyectos.portafolio_id = portafolios.portafolio_id ";
                     $sql .= " INNER JOIN programas ";
                     $sql .= " ON proyectos.programa_id=programas.programa_id ";
+                    $sql .= " INNER JOIN estados ";
+                    $sql .= " ON proyectos.estado_id=estados.estado_id ";
                     $sql .= " ORDER BY proyecto_id DESC ";
                     $resultado = $conn->query($sql);
                   } catch (Exception $e) {

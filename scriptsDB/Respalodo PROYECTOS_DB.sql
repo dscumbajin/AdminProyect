@@ -49,14 +49,31 @@ CREATE TABLE IF NOT EXISTS `cuentas` (
   CONSTRAINT `FK_cuentas_registros` FOREIGN KEY (`registros_id`) REFERENCES `registros` (`registros_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla proyectos_db.cuentas: ~4 rows (aproximadamente)
+-- Volcando datos para la tabla proyectos_db.cuentas: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `cuentas` DISABLE KEYS */;
 INSERT INTO `cuentas` (`proyecto_id`, `registros_id`) VALUES
-	(1, 1),
-	(1, 2),
-	(2, 3),
-	(1, 7);
+	(10, 1),
+	(11, 10),
+	(11, 11);
 /*!40000 ALTER TABLE `cuentas` ENABLE KEYS */;
+
+-- Volcando estructura para tabla proyectos_db.estados
+DROP TABLE IF EXISTS `estados`;
+CREATE TABLE IF NOT EXISTS `estados` (
+  `estado_id` int(11) NOT NULL AUTO_INCREMENT,
+  `estado` varchar(50) NOT NULL DEFAULT '',
+  PRIMARY KEY (`estado_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- Volcando datos para la tabla proyectos_db.estados: ~4 rows (aproximadamente)
+/*!40000 ALTER TABLE `estados` DISABLE KEYS */;
+INSERT INTO `estados` (`estado_id`, `estado`) VALUES
+	(1, 'Análisis'),
+	(2, 'Aprobado'),
+	(3, 'Proceso'),
+	(4, 'Entrega'),
+	(5, 'Cerrado');
+/*!40000 ALTER TABLE `estados` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyectos_db.portafolios
 DROP TABLE IF EXISTS `portafolios`;
@@ -101,25 +118,27 @@ CREATE TABLE IF NOT EXISTS `proyectos` (
   `objetivo_estrategico` varchar(100) NOT NULL,
   `presupuesto_inicial` double NOT NULL,
   `estado_neural` varchar(50) NOT NULL,
-  `estado` varchar(50) NOT NULL,
   `url_video` varchar(255) DEFAULT NULL,
   `portafolio_id` int(11) NOT NULL DEFAULT '0',
   `programa_id` int(11) NOT NULL,
+  `estado_id` int(11) NOT NULL,
   `editado` datetime DEFAULT NULL,
   PRIMARY KEY (`proyecto_id`),
   UNIQUE KEY `detalle` (`detalle`),
   KEY `FK_proyectos_portafolios` (`portafolio_id`),
   KEY `FK_proyectos_programas` (`programa_id`),
+  KEY `FK_proyectos_estados` (`estado_id`),
+  CONSTRAINT `FK_proyectos_estados` FOREIGN KEY (`estado_id`) REFERENCES `estados` (`estado_id`),
   CONSTRAINT `FK_proyectos_portafolios` FOREIGN KEY (`portafolio_id`) REFERENCES `portafolios` (`portafolio_id`),
   CONSTRAINT `FK_proyectos_programas` FOREIGN KEY (`programa_id`) REFERENCES `programas` (`programa_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 
 -- Volcando datos para la tabla proyectos_db.proyectos: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `proyectos` DISABLE KEYS */;
-INSERT INTO `proyectos` (`proyecto_id`, `detalle`, `objetivo_estrategico`, `presupuesto_inicial`, `estado_neural`, `estado`, `url_video`, `portafolio_id`, `programa_id`, `editado`) VALUES
-	(1, 'Mejora tanque de agua', 'mejorar', 3000, 'cerrado', 'cerrado', NULL, 1, 1, '2020-10-29 22:03:06'),
-	(2, 'Prueba', 'Mejora', 10, 'activo', 'aprobado', NULL, 1, 1, '2020-10-29 21:12:07'),
-	(6, '3', '3', 2000, 'activar', 'analisis', NULL, 2, 1, '2020-10-30 11:35:02');
+INSERT INTO `proyectos` (`proyecto_id`, `detalle`, `objetivo_estrategico`, `presupuesto_inicial`, `estado_neural`, `url_video`, `portafolio_id`, `programa_id`, `estado_id`, `editado`) VALUES
+	(10, 'Mejora Tanque de agua', 'Mejorar planta', 0, 'activar', 'https://www.youtube.com/watch?v=cWLLPVNZtAw', 1, 1, 1, NULL),
+	(11, '6', '6', 0, 'activar', 'https://www.youtube.com/watch?v=cWLLPVNZtAw', 1, 1, 1, NULL),
+	(12, '7', 'Mejora', 0, 'activar', '', 1, 1, 2, '2020-11-01 18:35:31');
 /*!40000 ALTER TABLE `proyectos` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyectos_db.registros
@@ -130,9 +149,9 @@ CREATE TABLE IF NOT EXISTS `registros` (
   `anio` date NOT NULL,
   `editado` datetime DEFAULT NULL,
   PRIMARY KEY (`registros_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla proyectos_db.registros: ~8 rows (aproximadamente)
+-- Volcando datos para la tabla proyectos_db.registros: ~11 rows (aproximadamente)
 /*!40000 ALTER TABLE `registros` DISABLE KEYS */;
 INSERT INTO `registros` (`registros_id`, `presupuesto`, `anio`, `editado`) VALUES
 	(1, 200, '2020-10-29', NULL),
@@ -142,7 +161,10 @@ INSERT INTO `registros` (`registros_id`, `presupuesto`, `anio`, `editado`) VALUE
 	(5, 1000, '2020-10-27', NULL),
 	(6, 30, '2020-10-27', NULL),
 	(7, 6000, '2022-02-09', NULL),
-	(8, 50000, '2020-10-27', NULL);
+	(8, 50000, '2020-10-27', NULL),
+	(9, 1000, '2020-10-27', NULL),
+	(10, 50000, '2020-10-27', NULL),
+	(11, 1000, '2022-02-09', NULL);
 /*!40000 ALTER TABLE `registros` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

@@ -42,19 +42,19 @@ include_once('templates/navegacion.php');
             <!-- /.card-header -->
             <!-- form start -->
             <form class="form-horizontal" name="guardar-registro" id="guardar-registro" method="post" action="modelo-proyecto.php">
-             
+
               <div class="card-body">
 
-              <!-- Input detalle del proyecto-->
+                <!-- Input detalle del proyecto-->
 
-              <div class="form-group row">
+                <div class="form-group row">
                   <label for="detalle" class="col-sm-2 col-form-label">Proyecto</label>
                   <div class="col-sm-10">
                     <input type="text" class="form-control" id="detalle" name="detalle" placeholder="Nombre del proyecto" required>
                   </div>
                 </div>
 
-              <!-- Input Objetivo estrategico-->
+                <!-- Input Objetivo estrategico-->
 
                 <div class="form-group row">
                   <label for="objetivo_estrategico" class="col-sm-2 col-form-label">Objetivo estratégico</label>
@@ -63,14 +63,14 @@ include_once('templates/navegacion.php');
                   </div>
                 </div>
 
-                 <!-- Input Objetivo Link de video-->
+                <!-- Input Objetivo Link de video-->
 
-                 <div class="form-group row">
-                    <label for="url_video" class="col-sm-2 col-form-label">Link video</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="url_video" name="url_video" placeholder="Link video youtube - opcional">
-                    </div>
+                <div class="form-group row">
+                  <label for="url_video" class="col-sm-2 col-form-label">Link video</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="url_video" name="url_video" placeholder="Link video youtube - opcional">
                   </div>
+                </div>
                 <!-- Input presupuesto del proyecto-->
 
                 <div class="form-group row">
@@ -82,24 +82,24 @@ include_once('templates/navegacion.php');
 
 
                 <!-- Select -->
-                
+
                 <div class="form-group row">
                   <label for="area" class="col-sm-2 col-form-label">Portafolio:</label>
                   <div class="col-sm-10">
-                    <select name="area" id="area" class="form-control seleccionar" style="width: 100%;" >
-                    <option value="0">- Seleccione -</option>
-                     <?php
-                     try {
-                       $sql = 'SELECT * FROM portafolios';
-                       
-                       $resultado = $conn->query($sql);
-                       while ($portafolio = $resultado->fetch_assoc()) { ?>
-                         <option value="<?php echo $portafolio['portafolio_id'];?>"><?php echo $portafolio['area'];?></option>
+                    <select name="area" id="area" class="form-control seleccionar" style="width: 100%;">
+                      <option value="0">- Seleccione -</option>
+                      <?php
+                      try {
+                        $sql = 'SELECT * FROM portafolios';
+
+                        $resultado = $conn->query($sql);
+                        while ($portafolio = $resultado->fetch_assoc()) { ?>
+                          <option value="<?php echo $portafolio['portafolio_id']; ?>"><?php echo $portafolio['area']; ?></option>
                       <?php }
-                     } catch (Exception $e) {
-                       echo "Error: " . $e->getMessage();
-                     }
-                     ?>
+                      } catch (Exception $e) {
+                        echo "Error: " . $e->getMessage();
+                      }
+                      ?>
                     </select>
                   </div>
                 </div>
@@ -108,24 +108,24 @@ include_once('templates/navegacion.php');
                 <div class="form-group row">
                   <label for="descripcion" class="col-sm-2 col-form-label">Programa:</label>
                   <div class="col-sm-10">
-                    <select name="descripcion" id="descripcion" class="form-control seleccionar" style="width: 100%;" >
-                    <option value="0">- Seleccione -</option>
-                     <?php
-                     try {
-                       $sql = 'SELECT * FROM programas';
-                       $resultado = $conn->query($sql);
-                       while ($programa = $resultado->fetch_assoc()) { ?>
-                         <option value="<?php echo $programa['programa_id'];?>"><?php echo $programa['descripcion'];?></option>
+                    <select name="descripcion" id="descripcion" class="form-control seleccionar" style="width: 100%;">
+                      <option value="0">- Seleccione -</option>
+                      <?php
+                      try {
+                        $sql = 'SELECT * FROM programas';
+                        $resultado = $conn->query($sql);
+                        while ($programa = $resultado->fetch_assoc()) { ?>
+                          <option value="<?php echo $programa['programa_id']; ?>"><?php echo $programa['descripcion']; ?></option>
                       <?php }
-                     } catch (Exception $e) {
-                       echo "Error: " . $e->getMessage();
-                     }
-                     ?>
+                      } catch (Exception $e) {
+                        echo "Error: " . $e->getMessage();
+                      }
+                      ?>
                     </select>
                   </div>
                 </div>
 
-               
+
 
                 <!-- Select estado neutal-->
 
@@ -142,27 +142,30 @@ include_once('templates/navegacion.php');
                 </div>
 
                 <!-- Select estado-->
-
                 <div class="form-group row">
                   <label for="estado" class="col-sm-2 col-form-label">Estado:</label>
                   <div class="col-sm-10">
-                    <select class="form-control select2 select2-danger" id="estado" name="estado" data-dropdown-css-class="select2-danger" style="width: 100%;">
-                      <option value="analisis">Análisis</option>
-                      <option value="aprobado">Aprobado</option>
-                      <option value="proceso">Proceso</option>
-                      <option value="entrega">Entrega</option>
-                      <option value="cerrado">Cerrado</option>                    
+                    <select name="estado" id="estado" class="form-control seleccionar" style="width: 100%;">
+                      <?php
+                      try {
+                        $sql = 'SELECT * FROM estados';
+                        $resultado = $conn->query($sql);
+                        while ($estado = $resultado->fetch_assoc()) { ?>
+                          <option value="<?php echo $estado['estado_id']; ?>"><?php echo $estado['estado']; ?></option>
+                      <?php }
+                      } catch (Exception $e) {
+                        echo "Error: " . $e->getMessage();
+                      }
+                      ?>
                     </select>
                   </div>
-                  <!-- /.form-group -->
                 </div>
 
-                
               </div>
               <!-- /.card-body -->
               <div class="card-footer">
                 <input type="hidden" name="registro" value="nuevo">
-                <button type="submit" class="btn btn-dark float-right" >Añadir</button>
+                <button type="submit" class="btn btn-dark float-right">Añadir</button>
               </div>
               <!-- /.card-footer -->
             </form>

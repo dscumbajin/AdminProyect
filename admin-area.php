@@ -28,7 +28,7 @@ include_once('templates/navegacion.php');
     <div class="row">
       <div class="col-lg-3 col-6">
         <?php
-        $sql = "SELECT COUNT(proyecto_id) AS proyecto FROM proyectos WHERE estado = 'analisis' ";
+        $sql = "SELECT COUNT(proyecto_id) AS proyecto FROM proyectos WHERE estado_id = 1 ";
         $resultado = $conn->query($sql);
         $registrados = $resultado->fetch_assoc();
         ?>
@@ -46,9 +46,10 @@ include_once('templates/navegacion.php');
         </div>
       </div>
 
+      
       <div class="col-lg-3 col-6">
         <?php
-        $sql = "SELECT COUNT(proyecto_id) AS proyecto FROM proyectos WHERE estado = 'aprobado' ";
+        $sql = "SELECT COUNT(proyecto_id) AS proyecto FROM proyectos WHERE estado_id = 2 ";
         $resultado = $conn->query($sql);
         $registrados = $resultado->fetch_assoc();
         ?>
@@ -69,7 +70,7 @@ include_once('templates/navegacion.php');
 
       <div class="col-lg-3 col-6">
         <?php
-        $sql = "SELECT COUNT(proyecto_id) AS proyecto FROM proyectos WHERE estado = 'proceso' ";
+        $sql = "SELECT COUNT(proyecto_id) AS proyecto FROM proyectos WHERE estado_id = 3 ";
         $resultado = $conn->query($sql);
         $registrados = $resultado->fetch_assoc();
         ?>
@@ -90,7 +91,7 @@ include_once('templates/navegacion.php');
 
       <div class="col-lg-3 col-6">
         <?php
-        $sql = "SELECT COUNT(proyecto_id) AS proyecto FROM proyectos WHERE estado = 'entregado' ";
+        $sql = "SELECT COUNT(proyecto_id) AS proyecto FROM proyectos WHERE estado_id = 4 ";
         $resultado = $conn->query($sql);
         $registrados = $resultado->fetch_assoc();
         ?>
@@ -110,7 +111,7 @@ include_once('templates/navegacion.php');
 
       <div class="col-lg-3 col-6">
         <?php
-        $sql = "SELECT COUNT(proyecto_id) AS proyecto FROM proyectos WHERE estado = 'cerrado' ";
+        $sql = "SELECT COUNT(proyecto_id) AS proyecto FROM proyectos WHERE estado_id = 5 ";
         $resultado = $conn->query($sql);
         $registrados = $resultado->fetch_assoc();
         ?>
@@ -128,7 +129,6 @@ include_once('templates/navegacion.php');
           <a href="lista-proyecto.php" class="small-box-footer">Más información <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
-
 
 
     </div>
