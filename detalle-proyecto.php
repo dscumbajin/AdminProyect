@@ -53,9 +53,23 @@ include_once('templates/navegacion.php');
 
         <div class="row">
 
-          <div class="youtube-player" data-id="VIDEO_ID"></div>
-         
-          <div class="col-12">
+
+
+          <div class=" col-2">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <p>Video</p>
+              </div>
+              <div class="icon">
+              <i class="fab fa-youtube"></i>
+              </div>
+              <a href="<?php echo $proyecto['url_video']?>" class="small-box-footer">Ir <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
+
+          <div class="col-10">
             <div class="info-box bg-light">
               <div class="info-box-content">
                 <span class="info-box-text text-center text-muted">Objetivo</span>
@@ -63,8 +77,6 @@ include_once('templates/navegacion.php');
               </div>
             </div>
           </div>
-
-   
 
         </div>
 
@@ -89,18 +101,17 @@ include_once('templates/navegacion.php');
             <div class="info-box bg-light">
               <div class="info-box-content">
                 <span class="info-box-text text-center text-muted">Presupuesto Total</span>
-                <span class="info-box-number text-center text-muted mb-0"> <i class="fas fa-dollar-sign"></i> 
-                
-                <?php
-                        if ($registrados['total']== null) {
-                         
-                            echo 'Sin asignar';
+                <span class="info-box-number text-center text-muted mb-0"> <i class="fas fa-dollar-sign"></i>
 
-                        }else{
-                          echo  $registrados['total'];
-                        }
-                        ?>
-                
+                  <?php
+                  if ($registrados['total'] == null) {
+
+                    echo 'Sin asignar';
+                  } else {
+                    echo  $registrados['total'];
+                  }
+                  ?>
+
                 </span>
               </div>
             </div>
@@ -143,35 +154,35 @@ include_once('templates/navegacion.php');
               <div class="info-box-content">
                 <span class="info-box-text text-center text-muted">Estado</span>
                 <span class="info-box-number text-center text-muted mb-0"><?php echo $proyecto['estado'] ?> <span>
-                  </span class = "info-box-number text-center text-muted mb-0">
+                  </span class="info-box-number text-center text-muted mb-0">
                   <!-- Button trigger modal -->
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                          Comentario
-                      </button>
-                     <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Comentario
+                  </button>
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
 
-                                <!-- Formulario del comentario-->
-                                    <form name="guardar-registro" id="guardar-registro" action="modelo-comentario.php" method="post">
-                                        <div class="modal-body">
-                                            <div class="form-group">
-                                                <input type="comentario" class="form-control" name="comentario" placeholder="Escribe un comentario">
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <input type="hidden" name="registro" value="nuevo">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                            <button type="submit" name="submitSave" class="btn btn-primary">Guardar cambios</button>
-                                        </div>
-                                    </form>
-                                </div>
+                        <!-- Formulario del comentario-->
+                        <form name="guardar-registro" id="guardar-registro" action="modelo-comentario.php" method="post">
+                          <div class="modal-body">
+                            <div class="form-group">
+                              <input type="comentario" class="form-control" name="comentario" placeholder="Escribe un comentario">
                             </div>
-                        </div>
-                  </span>
-                      
-                </div>
+                          </div>
+                          <div class="modal-footer">
+                            <input type="hidden" name="registro" value="nuevo">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" name="submitSave" class="btn btn-primary">Guardar cambios</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </span>
+
+              </div>
             </div>
           </div>
         </div>
@@ -213,7 +224,7 @@ include_once('templates/navegacion.php');
                     echo $anio;
                     ?>
                   </span>
-                    <span class="info-box-number text-center text-muted mb-0"> <i class="fas fa-dollar-sign"></i> <?php echo $registrados['presupuesto'] ?> </span>
+                  <span class="info-box-number text-center text-muted mb-0"> <i class="fas fa-dollar-sign"></i> <?php echo $registrados['presupuesto'] ?> </span>
                 </div>
               </div>
             </div>
@@ -224,47 +235,10 @@ include_once('templates/navegacion.php');
 
     </div>
 
-
-
-
-
   </section>
   <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
-<script>
- 
- document.addEventListener("DOMContentLoaded",
- function() {
- var div, n,
- v = document.getElementsByClassName("youtube-player");
- for (n = 0; n < v.length; n++) {
- div = document.createElement("div");
- div.setAttribute("data-id", v[n].dataset.id);
- div.innerHTML = labnolThumb(v[n].dataset.id);
- div.onclick = labnolIframe;
- v[n].appendChild(div);
- }
- });
- 
- function labnolThumb(id) {
- var thumb = '<img src="https://i.ytimg.com/vi/ID/hqdefault.jpg">',
- play = '<div class="play"></div>';
- return thumb.replace("ID", id) + play;
- }
- 
-
- function labnolIframe() {
- var iframe = document.createElement("iframe");
- var embed = "https://www.youtube.com/embed/cWLLPVNZtAw";
- iframe.setAttribute("src", embed.replace("ID", this.dataset.id));
- iframe.setAttribute("frameborder", "0");
- iframe.setAttribute("allowfullscreen", "1");
- this.parentNode.replaceChild(iframe, this);
- }
- 
-</script>
 
 
 <?php

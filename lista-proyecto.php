@@ -52,14 +52,12 @@ include_once('templates/navegacion.php');
                 <tbody>
                   <?php
                   try {
-                    $sql = "SELECT proyecto_id, detalle, objetivo_estrategico, presupuesto_inicial, estado_neural, estado, area, descripcion , presupuesto ";
+                    $sql = "SELECT proyecto_id, detalle, objetivo_estrategico, presupuesto_inicial, estado_neural, estado, area, descripcion ";
                     $sql .= " FROM proyectos ";
                     $sql .= " INNER JOIN portafolios ";
                     $sql .= " ON proyectos.portafolio_id = portafolios.portafolio_id ";
                     $sql .= " INNER JOIN programas ";
                     $sql .= " ON proyectos.programa_id=programas.programa_id ";
-                    $sql .= " INNER JOIN registros ";
-                    $sql .= " ON proyectos.proyecto_id = registros.registros_id ";
                     $sql .= " ORDER BY proyecto_id DESC ";
                     $resultado = $conn->query($sql);
                   } catch (Exception $e) {

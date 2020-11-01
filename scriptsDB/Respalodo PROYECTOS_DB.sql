@@ -1,13 +1,23 @@
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Versión del servidor:         5.7.24 - MySQL Community Server (GPL)
+-- SO del servidor:              Win32
+-- HeidiSQL Versión:             11.0.0.5919
+-- --------------------------------------------------------
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8 */;
 /*!50503 SET NAMES utf8mb4 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
+
+-- Volcando estructura de base de datos para proyectos_db
 DROP DATABASE IF EXISTS `proyectos_db`;
 CREATE DATABASE IF NOT EXISTS `proyectos_db` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `proyectos_db`;
 
+-- Volcando estructura para tabla proyectos_db.admins
 DROP TABLE IF EXISTS `admins`;
 CREATE TABLE IF NOT EXISTS `admins` (
   `id_admin` int(11) NOT NULL AUTO_INCREMENT,
@@ -20,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `admins` (
   UNIQUE KEY `usuario` (`usuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
+-- Volcando datos para la tabla proyectos_db.admins: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `admins` DISABLE KEYS */;
 INSERT INTO `admins` (`id_admin`, `usuario`, `nombre`, `password`, `editado`, `nivel`) VALUES
 	(1, 'admin', 'Darwin Cumbajin', '$2y$12$zBtBWe374pUdCgqQ2yeECO/4skNiuwVyhlQ5u6fak8h1eUIdOZu8C', '2020-10-29 12:19:45', 1),
@@ -27,6 +38,7 @@ INSERT INTO `admins` (`id_admin`, `usuario`, `nombre`, `password`, `editado`, `n
 	(3, 'Genesis', 'Genesis', '$2y$12$z9wS/h1I88JuHu7JhQzYUOJue3vjlVTM5cjf7N5VM0YE9RYz4t5Tm', '2020-10-29 11:17:55', 1);
 /*!40000 ALTER TABLE `admins` ENABLE KEYS */;
 
+-- Volcando estructura para tabla proyectos_db.cuentas
 DROP TABLE IF EXISTS `cuentas`;
 CREATE TABLE IF NOT EXISTS `cuentas` (
   `proyecto_id` int(11) NOT NULL DEFAULT '0',
@@ -37,6 +49,7 @@ CREATE TABLE IF NOT EXISTS `cuentas` (
   CONSTRAINT `FK_cuentas_registros` FOREIGN KEY (`registros_id`) REFERENCES `registros` (`registros_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- Volcando datos para la tabla proyectos_db.cuentas: ~4 rows (aproximadamente)
 /*!40000 ALTER TABLE `cuentas` DISABLE KEYS */;
 INSERT INTO `cuentas` (`proyecto_id`, `registros_id`) VALUES
 	(1, 1),
@@ -45,6 +58,7 @@ INSERT INTO `cuentas` (`proyecto_id`, `registros_id`) VALUES
 	(1, 7);
 /*!40000 ALTER TABLE `cuentas` ENABLE KEYS */;
 
+-- Volcando estructura para tabla proyectos_db.portafolios
 DROP TABLE IF EXISTS `portafolios`;
 CREATE TABLE IF NOT EXISTS `portafolios` (
   `portafolio_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -54,12 +68,14 @@ CREATE TABLE IF NOT EXISTS `portafolios` (
   UNIQUE KEY `area` (`area`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
+-- Volcando datos para la tabla proyectos_db.portafolios: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `portafolios` DISABLE KEYS */;
 INSERT INTO `portafolios` (`portafolio_id`, `area`, `editado`) VALUES
 	(1, 'Planta', NULL),
 	(2, 'Terminado', NULL);
 /*!40000 ALTER TABLE `portafolios` ENABLE KEYS */;
 
+-- Volcando estructura para tabla proyectos_db.programas
 DROP TABLE IF EXISTS `programas`;
 CREATE TABLE IF NOT EXISTS `programas` (
   `programa_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -69,6 +85,7 @@ CREATE TABLE IF NOT EXISTS `programas` (
   UNIQUE KEY `descripcion` (`descripcion`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
+-- Volcando datos para la tabla proyectos_db.programas: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `programas` DISABLE KEYS */;
 INSERT INTO `programas` (`programa_id`, `descripcion`, `editado`) VALUES
 	(1, 'Programa mejoras de planta', NULL),
@@ -76,6 +93,7 @@ INSERT INTO `programas` (`programa_id`, `descripcion`, `editado`) VALUES
 	(3, 'Programa incremento baterías fabricadas', NULL);
 /*!40000 ALTER TABLE `programas` ENABLE KEYS */;
 
+-- Volcando estructura para tabla proyectos_db.proyectos
 DROP TABLE IF EXISTS `proyectos`;
 CREATE TABLE IF NOT EXISTS `proyectos` (
   `proyecto_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -84,6 +102,7 @@ CREATE TABLE IF NOT EXISTS `proyectos` (
   `presupuesto_inicial` double NOT NULL,
   `estado_neural` varchar(50) NOT NULL,
   `estado` varchar(50) NOT NULL,
+  `url_video` varchar(255) DEFAULT NULL,
   `portafolio_id` int(11) NOT NULL DEFAULT '0',
   `programa_id` int(11) NOT NULL,
   `editado` datetime DEFAULT NULL,
@@ -95,13 +114,15 @@ CREATE TABLE IF NOT EXISTS `proyectos` (
   CONSTRAINT `FK_proyectos_programas` FOREIGN KEY (`programa_id`) REFERENCES `programas` (`programa_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
+-- Volcando datos para la tabla proyectos_db.proyectos: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `proyectos` DISABLE KEYS */;
-INSERT INTO `proyectos` (`proyecto_id`, `detalle`, `objetivo_estrategico`, `presupuesto_inicial`, `estado_neural`, `estado`, `portafolio_id`, `programa_id`, `editado`) VALUES
-	(1, 'Mejora tanque de agua', 'mejorar', 3000, 'cerrado', 'cerrado', 1, 1, '2020-10-29 22:03:06'),
-	(2, 'Prueba', 'Mejora', 10, 'activo', 'aprobado', 1, 1, '2020-10-29 21:12:07'),
-	(6, '3', '3', 2000, 'activar', 'analisis', 2, 1, '2020-10-30 11:35:02');
+INSERT INTO `proyectos` (`proyecto_id`, `detalle`, `objetivo_estrategico`, `presupuesto_inicial`, `estado_neural`, `estado`, `url_video`, `portafolio_id`, `programa_id`, `editado`) VALUES
+	(1, 'Mejora tanque de agua', 'mejorar', 3000, 'cerrado', 'cerrado', NULL, 1, 1, '2020-10-29 22:03:06'),
+	(2, 'Prueba', 'Mejora', 10, 'activo', 'aprobado', NULL, 1, 1, '2020-10-29 21:12:07'),
+	(6, '3', '3', 2000, 'activar', 'analisis', NULL, 2, 1, '2020-10-30 11:35:02');
 /*!40000 ALTER TABLE `proyectos` ENABLE KEYS */;
 
+-- Volcando estructura para tabla proyectos_db.registros
 DROP TABLE IF EXISTS `registros`;
 CREATE TABLE IF NOT EXISTS `registros` (
   `registros_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -111,6 +132,7 @@ CREATE TABLE IF NOT EXISTS `registros` (
   PRIMARY KEY (`registros_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
+-- Volcando datos para la tabla proyectos_db.registros: ~8 rows (aproximadamente)
 /*!40000 ALTER TABLE `registros` DISABLE KEYS */;
 INSERT INTO `registros` (`registros_id`, `presupuesto`, `anio`, `editado`) VALUES
 	(1, 200, '2020-10-29', NULL),
