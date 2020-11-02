@@ -49,12 +49,11 @@ CREATE TABLE IF NOT EXISTS `cuentas` (
   CONSTRAINT `FK_cuentas_registros` FOREIGN KEY (`registros_id`) REFERENCES `registros` (`registros_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla proyectos_db.cuentas: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla proyectos_db.cuentas: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `cuentas` DISABLE KEYS */;
 INSERT INTO `cuentas` (`proyecto_id`, `registros_id`) VALUES
 	(10, 1),
-	(11, 10),
-	(11, 11);
+	(10, 12);
 /*!40000 ALTER TABLE `cuentas` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyectos_db.estados
@@ -131,15 +130,36 @@ CREATE TABLE IF NOT EXISTS `proyectos` (
   CONSTRAINT `FK_proyectos_estados` FOREIGN KEY (`estado_id`) REFERENCES `estados` (`estado_id`),
   CONSTRAINT `FK_proyectos_portafolios` FOREIGN KEY (`portafolio_id`) REFERENCES `portafolios` (`portafolio_id`),
   CONSTRAINT `FK_proyectos_programas` FOREIGN KEY (`programa_id`) REFERENCES `programas` (`programa_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla proyectos_db.proyectos: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla proyectos_db.proyectos: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `proyectos` DISABLE KEYS */;
 INSERT INTO `proyectos` (`proyecto_id`, `detalle`, `objetivo_estrategico`, `presupuesto_inicial`, `estado_neural`, `url_video`, `portafolio_id`, `programa_id`, `estado_id`, `editado`) VALUES
 	(10, 'Mejora Tanque de agua', 'Mejorar planta', 0, 'activar', 'https://www.youtube.com/watch?v=cWLLPVNZtAw', 1, 1, 1, NULL),
-	(11, '6', '6', 0, 'activar', 'https://www.youtube.com/watch?v=cWLLPVNZtAw', 1, 1, 1, NULL),
-	(12, '7', 'Mejora', 0, 'activar', '', 1, 1, 2, '2020-11-01 18:35:31');
+	(19, '5', 'Mejora', 0, 'activar', '', 1, 1, 1, '2020-11-01 23:59:45');
 /*!40000 ALTER TABLE `proyectos` ENABLE KEYS */;
+
+-- Volcando estructura para tabla proyectos_db.proyecto_estado
+DROP TABLE IF EXISTS `proyecto_estado`;
+CREATE TABLE IF NOT EXISTS `proyecto_estado` (
+  `id_pe` int(11) NOT NULL AUTO_INCREMENT,
+  `proyecto_id` int(11) NOT NULL DEFAULT '0',
+  `estado_id` int(11) NOT NULL DEFAULT '0',
+  `comentario` varchar(255) DEFAULT NULL,
+  `editado` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_pe`),
+  KEY `FK_proyecto_estado_proyectos` (`proyecto_id`),
+  KEY `FK_proyecto_estado_estados` (`estado_id`),
+  CONSTRAINT `FK_proyecto_estado_estados` FOREIGN KEY (`estado_id`) REFERENCES `estados` (`estado_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_proyecto_estado_proyectos` FOREIGN KEY (`proyecto_id`) REFERENCES `proyectos` (`proyecto_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- Volcando datos para la tabla proyectos_db.proyecto_estado: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `proyecto_estado` DISABLE KEYS */;
+INSERT INTO `proyecto_estado` (`id_pe`, `proyecto_id`, `estado_id`, `comentario`, `editado`) VALUES
+	(1, 19, 1, '', '2020-11-01 23:59:45'),
+	(2, 10, 1, 'Hola como estas', '2020-11-02 00:08:51');
+/*!40000 ALTER TABLE `proyecto_estado` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyectos_db.registros
 DROP TABLE IF EXISTS `registros`;
@@ -149,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `registros` (
   `anio` date NOT NULL,
   `editado` datetime DEFAULT NULL,
   PRIMARY KEY (`registros_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- Volcando datos para la tabla proyectos_db.registros: ~11 rows (aproximadamente)
 /*!40000 ALTER TABLE `registros` DISABLE KEYS */;
@@ -164,7 +184,8 @@ INSERT INTO `registros` (`registros_id`, `presupuesto`, `anio`, `editado`) VALUE
 	(8, 50000, '2020-10-27', NULL),
 	(9, 1000, '2020-10-27', NULL),
 	(10, 50000, '2020-10-27', NULL),
-	(11, 1000, '2022-02-09', NULL);
+	(11, 1000, '2022-02-09', NULL),
+	(12, 1000, '2020-10-27', NULL);
 /*!40000 ALTER TABLE `registros` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

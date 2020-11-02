@@ -44,6 +44,9 @@ include_once('templates/navegacion.php');
       /* echo '<pre>';
       var_dump($proyecto);
       echo '</pre'; */
+
+    /*   $valor_estado = $proyecto['estado_id'];
+      echo $valor_estado; */
     } catch (Exception $e) {
       echo "Error: " . $e->getMessage();
     }
@@ -112,6 +115,9 @@ include_once('templates/navegacion.php');
             $sql .= " WHERE proyecto_id = $id ";
             $resultado = $conn->query($sql);
             $registrados = $resultado->fetch_assoc();
+            /*  echo '<pre>';
+            var_dump($registrados);
+            echo '</pre'; */
             ?>
             <div class="info-box bg-light">
               <div class="info-box-content">
@@ -181,7 +187,9 @@ include_once('templates/navegacion.php');
                       <div class="modal-content">
 
                         <!-- Formulario del comentario-->
-                        <form name="guardar-registro" id="guardar-registro" action="modelo-comentario.php" method="post">
+                        <form name="guardar-registro" id="guardar-registro" action="modelo-proyecto-estado.php" method="post">
+
+                        
                           <div class="modal-body">
 
                             <!--Select estado-->
@@ -195,7 +203,6 @@ include_once('templates/navegacion.php');
                                     $estado_actual = $proyecto['estado_id'];
                                     $sql = " SELECT * FROM estados ";
                                     $resultado = $conn->query($sql);
-
                                     while ($estado = $resultado->fetch_assoc()) {
 
                                       if ($estado['estado_id'] == $estado_actual) { ?>
@@ -215,12 +222,30 @@ include_once('templates/navegacion.php');
                               </div>
                             </div>
 
+                            <?php
+                              try {
+                                $sql = " SELECT * FROM proyecto_estado ";
+                                $sql .= " WHERE proyecto_id= $id";
+                                $resultado = $conn->query($sql);
+                                $comentario = $resultado->fetch_assoc();
+                                /* echo '<pre>';
+                                      var_dump($comentario);
+                                      echo '</pre'; */
+                              } catch (Exception $e) {
+                                echo "Error: " . $e->getMessage();
+                              }
+                              ?>
+
                             <div class="form-group">
-                              <input type="comentario" class="form-control" name="comentario" placeholder="Escribe un comentario">
+
+                              <input type="text" class="form-control" name="comentario" placeholder="Escribe un comentario" value="<?php echo $comentario['comentario'] ?>">
+                              
                             </div>
                           </div>
                           <div class="modal-footer">
-                            <input type="hidden" name="registro" value="nuevo">
+                            <input type="hidden" name="registro" value="actualizar">
+                            <input type="hidden" name="proyecto_id" value="<?php echo $id ?>">
+                            <input type="hidden" name="id_registro" value="<?php echo $comentario['id_pe'] ?>">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                             <button type="submit" name="submitSave" class="btn btn-primary">Guardar cambios</button>
                           </div>
@@ -257,6 +282,9 @@ include_once('templates/navegacion.php');
             $sql .= " INNER JOIN registros ON registros.registros_id = cuentas.registros_id ";
             $sql .= " WHERE proyecto_id = $id ";
             $resultado = $conn->query($sql);
+            /* echo '<pre>';
+            var_dump($resultado);
+            echo '</pre'; */
           } catch (Exception $e) {
             $error = $e->getMessage();
             echo $error;
