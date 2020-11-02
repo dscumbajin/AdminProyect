@@ -8,12 +8,18 @@ $id_registro = $_POST['id_registro'];
 
 //Editar Registro
 if ($_POST['registro'] == 'actualizar') {
-    // die(json_encode($_POST));
+     //die(json_encode($_POST));
     try {
-        $stmt = $conn->prepare('UPDATE proyecto_estado SET proyecto_id=?, estado_id = ?, comentario = ?, editado = NOW() WHERE id_pe =?');
-        $stmt->bind_param('iisi',$proyecto_id,  $estado_id, $comentario, $id_registro);
+
+        $stmt = $conn->prepare('UPDATE proyectos SET estado_id= ?, editado = NOW() WHERE proyecto_id =?');
+        $stmt->bind_param('ii',  $estado_id, $proyecto_id);
         $stmt->execute();
+        
         if ($stmt->affected_rows) {
+            $stmt = $conn->prepare('UPDATE proyecto_estado SET proyecto_id=?, estado_id = ?, comentario = ?, editado = NOW() WHERE id_pe =?');
+            $stmt->bind_param('iisi',$proyecto_id,  $estado_id, $comentario, $id_registro);
+            $stmt->execute();
+      
             $respuesta = array(
                 'respuesta' => 'exito',
                 'id_actualizado' => $id_registro
