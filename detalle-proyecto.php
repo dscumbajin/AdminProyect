@@ -44,9 +44,6 @@ include_once('templates/navegacion.php');
       /* echo '<pre>';
       var_dump($proyecto);
       echo '</pre'; */
-
-    /*   $valor_estado = $proyecto['estado_id'];
-      echo $valor_estado; */
     } catch (Exception $e) {
       echo "Error: " . $e->getMessage();
     }
@@ -62,13 +59,13 @@ include_once('templates/navegacion.php');
         <div class="row">
           <!--Mostar video-->
           <?php
-          $video = "col-2";
-          $cartel = "col-10";
+          $video = "col-sm-2";
+          $cartel = "col-sm-10";
           if ($proyecto['url_video'] !== "") {
-            $video = "col-2";
-            $cartel = "col-10"; ?>
+            $video = "col-sm-2";
+            $cartel = "col-sm-10"; ?>
             <!--Div video-->
-            <div class="<?php echo $video ?>">
+            <div class=" col-12 <?php echo $video ?>">
               <div class="small-box bg-danger">
                 <div class="inner">
                   <p>Video</p>
@@ -81,11 +78,11 @@ include_once('templates/navegacion.php');
             </div>
 
           <?php } else {
-            $cartel = "col-12";
+            $cartel = "col-sm-12";
           }
           ?>
           <!--Div Objetivo-->
-          <div class="<?php echo $cartel ?>">
+          <div class=" col-12 <?php echo $cartel ?>">
             <div class="info-box bg-light">
               <div class="info-box-content">
                 <span class="info-box-text text-center text-muted">Objetivo</span>
@@ -98,7 +95,7 @@ include_once('templates/navegacion.php');
         <!--New Row-->
         <div class="row">
           <!--Div presupuesto estimado-->
-          <div class="col-6 ">
+          <div class="col-12 col-sm-6">
             <div class="info-box bg-light">
               <div class="info-box-content">
                 <span class="info-box-text text-center text-muted">Presupuesto Estimado</span>
@@ -108,7 +105,7 @@ include_once('templates/navegacion.php');
           </div>
 
           <!--Div presupuesto total-->
-          <div class="col-6">
+          <div class="col-12 col-sm-6">
             <?php
             $sql = " SELECT  SUM(presupuesto) AS total FROM cuentas ";
             $sql .= " INNER JOIN registros ON registros.registros_id = cuentas.registros_id ";
@@ -189,7 +186,7 @@ include_once('templates/navegacion.php');
                         <!-- Formulario del comentario-->
                         <form name="guardar-registro" id="guardar-registro" action="modelo-proyecto-estado.php" method="post">
 
-                        
+
                           <div class="modal-body">
 
                             <!--Select estado-->
@@ -223,23 +220,23 @@ include_once('templates/navegacion.php');
                             </div>
 
                             <?php
-                              try {
-                                $sql = " SELECT * FROM proyecto_estado ";
-                                $sql .= " WHERE proyecto_id= $id";
-                                $resultado = $conn->query($sql);
-                                $comentario = $resultado->fetch_assoc();
-                                /* echo '<pre>';
+                            try {
+                              $sql = " SELECT * FROM proyecto_estado ";
+                              $sql .= " WHERE proyecto_id= $id";
+                              $resultado = $conn->query($sql);
+                              $comentario = $resultado->fetch_assoc();
+                              /* echo '<pre>';
                                       var_dump($comentario);
                                       echo '</pre'; */
-                              } catch (Exception $e) {
-                                echo "Error: " . $e->getMessage();
-                              }
-                              ?>
+                            } catch (Exception $e) {
+                              echo "Error: " . $e->getMessage();
+                            }
+                            ?>
 
                             <div class="form-group">
 
                               <input type="text" class="form-control" name="comentario" placeholder="Escribe un comentario" value="<?php echo $comentario['comentario'] ?>">
-                              
+
                             </div>
                           </div>
                           <div class="modal-footer">
@@ -247,7 +244,14 @@ include_once('templates/navegacion.php');
                             <input type="hidden" name="proyecto_id" value="<?php echo $id ?>">
                             <input type="hidden" name="id_registro" value="<?php echo $comentario['id_pe'] ?>">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button type="submit" name="submitSave" class="btn btn-primary">Guardar cambios</button>
+                            <button type="submit" name="submitSave" id="myBtn" class="btn btn-primary">Guardar cambios</button>
+                            <script>
+                              $(document).ready(function() {
+                                $("#myBtn").click(function() {
+                                  $("#exampleModal").modal("hide");
+                                });
+                              });
+                            </script>
                           </div>
                         </form>
                       </div>
@@ -305,6 +309,87 @@ include_once('templates/navegacion.php');
               </div>
             </div>
           <?php } ?>
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- Default box -->
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Cargar Multiple Archivos</h3>
+
+      </div>
+
+      <div class="card-body">
+
+        <div class="row">
+
+          <div class="col-12 col-sm-6">
+            <div class="info-box bg-light">
+              <div class="info-box-content">
+
+                <form role="form" name="guardar-registro" id="guardar-registro-archivo" method="post" action="guardar_documentos.php" enctype="multipart/form-data">
+
+                  <div class="form-group">
+                    <label class="col-sm-2 col-form-label ">Archivos</label>
+                    <div class="col-sm-10">
+                      <input type="file" class="form-control" id="archivo[]" name="archivo[]" multiple="">
+                    </div>
+                    <input type="hidden" name=registro value="nuevo">
+                    <input type="hidden" name="proyecto_id" value="<?php echo $id ?>">
+                    <button type="submit" class="btn btn-primary float-right" id="crear_registro">Cargar</button>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6">
+            <div class="info-box bg-light">
+             
+
+                <?php
+                try {
+
+                  $sql = " SELECT url_documento FROM proyecto_documento";
+                  $sql .= " INNER JOIN documentos ON proyecto_documento.documento_id = documentos.documento_id ";
+                  $sql .= " WHERE proyecto_id = $id ";
+                  $resultado = $conn->query($sql);
+                  $documento = $resultado->fetch_assoc();
+
+                  if ($documento['url_documento'] == "") { ?>
+
+                  <h1>No existen documentos <i class="fas fa-book-dead"></i></h1>
+                    
+                <?php  } else{
+                    $array = explode(",", $documento['url_documento']);
+
+                    $tamano =intdiv(12, sizeof($array));
+                   
+                    foreach ($array as $clave => $valor) { ?>
+                      <a class="col-12 col-sm-<?php echo $tamano; ?> info-box-content float-right" href="docs/<?php echo $valor;?>">
+                     
+                      <iframe   src="docs/<?php echo $valor;?>"></iframe>
+                      </a>
+                  <?php  }
+                  }
+
+                
+                } catch (Exception $e) {
+                  $error = $e->getMessage();
+                  echo $error;
+                }
+
+                ?>
+
+              
+            </div>
+          </div>
+
 
         </div>
       </div>

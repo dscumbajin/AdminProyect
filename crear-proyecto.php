@@ -169,6 +169,7 @@ include_once('templates/navegacion.php');
               </div>
               <!-- /.card-footer -->
             </form>
+
           </div>
           <!-- /.card -->
         </div>
