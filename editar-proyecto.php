@@ -76,12 +76,12 @@ include_once('templates/navegacion.php');
                     </div>
                   </div>
 
-                  <!-- Input Objetivo Link de video-->
+                  <!-- InputLink de video-->
 
                   <div class="form-group row">
                     <label for="url_video" class="col-sm-2 col-form-label">Link video</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="url_video" name="url_video" placeholder="Link video youtube - opcional" value="<?php echo $proyecto['url_video '] ?>">
+                      <input type="text" class="form-control" id="url_video" name="url_video" placeholder="Link video youtube - opcional" value="<?php echo $proyecto['url_video'] ?>">
                     </div>
                   </div>
 
@@ -223,6 +223,7 @@ include_once('templates/navegacion.php');
                 <div class="card-footer">
                   <input type="hidden" name="registro" value="actualizar">
                   <input type="hidden" name="id_registro" value="<?php echo $id ?>">
+                  <input type="hidden" name="url_documento" value="<?php echo $proyecto['url_documento'];?>">
                   <button type="submit" class="btn btn-dark float-right">Guardar</button>
                 </div>
                 <!-- /.card-footer -->

@@ -9,6 +9,7 @@ $cuenta_id = $_POST['cuenta'];
 $estado_neural = $_POST['estado_neural'];
 $estado = $_POST['estado'];
 $url_video = $_POST['url_video'];
+$url_documento = $_POST['url_documento'];
 $comentario = " ";
 $id_registro = $_POST['id_registro'];
 
@@ -89,11 +90,12 @@ if ($_POST['registro'] == 'nuevo') {
 
 //Editar Registro
 if ($_POST['registro'] == 'actualizar') {
-    $respuesta = array(
+    /* $respuesta = array(
         'post' => $_POST,
         'file' => $_FILES
     );
-  
+    die(json_encode(($respuesta))); */
+
 
     $valores = array();
     //Como el elemento es un arreglos utilizamos foreach para extraer todos los valores
@@ -126,23 +128,28 @@ if ($_POST['registro'] == 'actualizar') {
             closedir($dir); //Cerramos el directorio de destino
         }
     }
-
     $cadena = implode(",", $valores);
 
     try {
 
-        if ($_FILES['archivo']['size'] > 0) {
-            // Con Archivos
-            $stmt = $conn->prepare('UPDATE proyectos SET detalle= ?, objetivo_estrategico= ?, presupuesto_inicial =? , estado_neural= ?, estado_id= ?, portafolio_id= ?, programa_id= ?,url_video = ?, url_documento = ?, editado = NOW() WHERE proyecto_id =?');
-            $stmt->bind_param('ssdsiiissi', $detalle, $objetivo_estrategico, $presupuesto_inicial, $estado_neural, $estado, $portafolio_id, $programa_id, $url_video, $cadena, $id_registro);
-        } else {
-            // Sin Archivos
-            $stmt = $conn->prepare('UPDATE proyectos SET detalle= ?, objetivo_estrategico= ?, presupuesto_inicial =? , estado_neural= ?, estado_id= ?, portafolio_id= ?, programa_id= ?,url_video = ?, editado = NOW() WHERE proyecto_id =?');
-            $stmt->bind_param('ssdsiiisi', $detalle, $objetivo_estrategico, $presupuesto_inicial, $estado_neural, $estado, $portafolio_id, $programa_id, $url_video, $id_registro);
+        //Como el elemento es un arreglos utilizamos foreach para extraer todos los valores
+        foreach ($_FILES["archivo"]['tmp_name'] as $key => $tmp_name) {
+
+
+            if ($_FILES['archivo']['size'][$key] > 0) {
+
+                $stmt = $conn->prepare('UPDATE proyectos SET detalle= ?, objetivo_estrategico= ?, presupuesto_inicial =? , estado_neural= ?, estado_id= ?, portafolio_id= ?, programa_id= ?,url_video = ?, url_documento = ?, editado = NOW() WHERE proyecto_id =?');
+                $stmt->bind_param('ssdsiiissi', $detalle, $objetivo_estrategico, $presupuesto_inicial, $estado_neural, $estado, $portafolio_id, $programa_id, $url_video, $cadena, $id_registro);
+            } else {
+                // Sin Archivos
+                $stmt = $conn->prepare('UPDATE proyectos SET detalle= ?, objetivo_estrategico= ?, presupuesto_inicial =? , estado_neural= ?, estado_id= ?, portafolio_id= ?, programa_id= ?,url_video = ?, url_documento = ?, editado = NOW() WHERE proyecto_id =?');
+                $stmt->bind_param('ssdsiiissi', $detalle, $objetivo_estrategico, $presupuesto_inicial, $estado_neural, $estado, $portafolio_id, $programa_id, $url_video, $url_documento, $id_registro);
+            }
         }
         $stmt->execute();
-        $registros = $stmt->affected_rows;
-        if ($registros > 0 ) {
+        $valores = [];
+
+        if ($stmt->affected_rows) {
             $stmt = $conn->prepare('UPDATE proyecto_estado SET estado_id= ?,comentario=?, editado = NOW() WHERE proyecto_id =?');
             $stmt->bind_param('isi', $estado, $comentario, $id_registro);
             $stmt->execute();
@@ -169,12 +176,30 @@ if ($_POST['registro'] == 'actualizar') {
 // Eliminar Registro
 if ($_POST['registro'] == 'eliminar') {
     $id_borrar = $_POST['id'];
+    //buscar el proyecto por id
+    $sql = "SELECT * FROM proyectos WHERE proyecto_id = $id_borrar";
+    $resultado = $conn->query($sql);
+    $proyecto = $resultado->fetch_assoc();
+    // extraer el valor del url_documento
+    // convertir a array
+
+    if (!$proyecto['url_documento'] == "") {
+        $array = explode(",", $proyecto['url_documento']);
+    }
+   
+    // borro el registro
+    // borro los documentos
     try {
         $stmt = $conn->prepare('DELETE FROM proyectos WHERE proyecto_id = ?');
         $stmt->bind_param('i', $id_borrar);
         $stmt->execute();
         if ($stmt->affected_rows) {
-
+            
+            if(sizeof($array)>0){
+                foreach ($array as $clave => $valor) {
+                    unlink('docs/'.$valor);
+                }
+            }
             $stmt = $conn->prepare('DELETE FROM proyecto_estado WHERE proyecto_id = ?');
             $stmt->bind_param('i', $id_borrar);
             $stmt->execute();
