@@ -55,7 +55,7 @@ include_once('templates/navegacion.php');
 
               ?>
               <!-- form start -->
-              <form class="form-horizontal" name="guardar-registro" id="guardar-registro" method="post" action="modelo-proyecto.php">
+              <form class="form-horizontal" role="form" name="guardar-registro" id="guardar-registro-archivo" method="post" action="modelo-proyecto.php" enctype="multipart/form-data">
                 <div class="card-body">
 
                   <!-- Input detalle del proyecto-->
@@ -93,9 +93,6 @@ include_once('templates/navegacion.php');
                       <input type="text" class="form-control" id="presupuesto_inicial" name="presupuesto_inicial" placeholder="Presupuesto Inicial" required value="<?php echo $proyecto['presupuesto_inicial'] ?>">
                     </div>
                   </div>
-
-
-
 
                   <!--Select Portafolio-->
 
@@ -212,6 +209,14 @@ include_once('templates/navegacion.php');
                     </div>
                   </div>
 
+                  <!--Archivos -->
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label ">Archivos:</label>
+                    <div class="col-sm-10">
+                      <input type="file" class="form-control" id="archivo[]" name="archivo[]" multiple="">
+                    </div>
+                  </div>
+
 
                 </div>
                 <!-- /.card-body -->
@@ -228,7 +233,6 @@ include_once('templates/navegacion.php');
 
 
           <div class="col-12 col-sm-6">
-
 
             <div class="row">
               <?php
@@ -264,9 +268,8 @@ include_once('templates/navegacion.php');
                     </div>
                   </div>
               <?php  }
-              }
+              } ?>
 
-              ?>
             </div>
 
           </div>

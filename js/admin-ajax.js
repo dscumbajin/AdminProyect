@@ -11,9 +11,9 @@ $(document).ready(function() {
             url: $(this).attr('action'),
             dataType: 'json',
             success: function(data) {
-                var resusltado = data;
+                var resultado = data;
                 console.log(data);
-                if (resusltado.respuesta == 'exito') {
+                if (resultado.respuesta == 'exito') {
                     Swal.fire({
                         icon: 'success',
                         title: 'Correcto',
@@ -52,8 +52,8 @@ $(document).ready(function() {
             cache: false,
             success: function(data) {
                 console.log(data);
-                var resusltado = data;
-                if (resusltado.respuesta == 'exito') {
+                var resultado = data;
+                if (resultado.respuesta == 'exito') {
                     Swal.fire({
                         icon: 'success',
                         title: 'Correcto',

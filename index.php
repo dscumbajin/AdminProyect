@@ -1,16 +1,14 @@
 <?php
-include_once('funciones/sesiones.php');
+
 include_once('funciones/funciones.php');
 include_once('templates/header.php');
-include_once('templates/barra.php');
-include_once('templates/navegacion.php');
 
 ?>
 
-
-
+<body class="hold-transition">
+  
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
+<div class="content">
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <div class="container-fluid">
@@ -252,8 +250,7 @@ include_once('templates/navegacion.php');
   <!-- /.content-wrapper -->
 </div>
 
+  <?php
 
-<?php
-
-include_once('templates/footer.php');
-?>
+  include_once('templates/footer.php');
+  ?>
