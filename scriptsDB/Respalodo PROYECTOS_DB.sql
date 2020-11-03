@@ -13,10 +13,12 @@
 
 
 -- Volcando estructura de base de datos para proyectos_db
+DROP DATABASE IF EXISTS `proyectos_db`;
 CREATE DATABASE IF NOT EXISTS `proyectos_db` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `proyectos_db`;
 
 -- Volcando estructura para tabla proyectos_db.admins
+DROP TABLE IF EXISTS `admins`;
 CREATE TABLE IF NOT EXISTS `admins` (
   `id_admin` int(11) NOT NULL AUTO_INCREMENT,
   `usuario` varchar(50) NOT NULL,
@@ -31,12 +33,13 @@ CREATE TABLE IF NOT EXISTS `admins` (
 -- Volcando datos para la tabla proyectos_db.admins: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `admins` DISABLE KEYS */;
 INSERT INTO `admins` (`id_admin`, `usuario`, `nombre`, `password`, `editado`, `nivel`) VALUES
-	(1, 'admin', 'Darwin Cumbajin', '$2y$12$zBtBWe374pUdCgqQ2yeECO/4skNiuwVyhlQ5u6fak8h1eUIdOZu8C', '2020-10-29 12:19:45', 1),
+	(1, 'admin', 'SuperUsuario', '$2y$12$zBtBWe374pUdCgqQ2yeECO/4skNiuwVyhlQ5u6fak8h1eUIdOZu8C', '2020-10-29 12:19:45', 1),
 	(2, 'baterias', 'Baterias Ecuador', '$2y$12$QLq0bitYq8NBlna3GGEl8.raUHWr8uXVmx28KuQS6Rdmn8K0nRtW2', '2020-10-27 18:59:30', 0),
 	(3, 'Genesis', 'Genesis', '$2y$12$z9wS/h1I88JuHu7JhQzYUOJue3vjlVTM5cjf7N5VM0YE9RYz4t5Tm', '2020-10-29 11:17:55', 1);
 /*!40000 ALTER TABLE `admins` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyectos_db.cuentas
+DROP TABLE IF EXISTS `cuentas`;
 CREATE TABLE IF NOT EXISTS `cuentas` (
   `proyecto_id` int(11) NOT NULL DEFAULT '0',
   `registros_id` int(11) NOT NULL DEFAULT '0',
@@ -46,14 +49,12 @@ CREATE TABLE IF NOT EXISTS `cuentas` (
   CONSTRAINT `FK_cuentas_registros` FOREIGN KEY (`registros_id`) REFERENCES `registros` (`registros_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla proyectos_db.cuentas: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla proyectos_db.cuentas: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `cuentas` DISABLE KEYS */;
-INSERT INTO `cuentas` (`proyecto_id`, `registros_id`) VALUES
-	(10, 1),
-	(10, 12);
 /*!40000 ALTER TABLE `cuentas` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyectos_db.estados
+DROP TABLE IF EXISTS `estados`;
 CREATE TABLE IF NOT EXISTS `estados` (
   `estado_id` int(11) NOT NULL AUTO_INCREMENT,
   `estado` varchar(50) NOT NULL DEFAULT '',
@@ -71,6 +72,7 @@ INSERT INTO `estados` (`estado_id`, `estado`) VALUES
 /*!40000 ALTER TABLE `estados` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyectos_db.portafolios
+DROP TABLE IF EXISTS `portafolios`;
 CREATE TABLE IF NOT EXISTS `portafolios` (
   `portafolio_id` int(11) NOT NULL AUTO_INCREMENT,
   `area` varchar(50) NOT NULL DEFAULT '',
@@ -87,6 +89,7 @@ INSERT INTO `portafolios` (`portafolio_id`, `area`, `editado`) VALUES
 /*!40000 ALTER TABLE `portafolios` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyectos_db.programas
+DROP TABLE IF EXISTS `programas`;
 CREATE TABLE IF NOT EXISTS `programas` (
   `programa_id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(50) NOT NULL DEFAULT '0',
@@ -104,6 +107,7 @@ INSERT INTO `programas` (`programa_id`, `descripcion`, `editado`) VALUES
 /*!40000 ALTER TABLE `programas` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyectos_db.proyectos
+DROP TABLE IF EXISTS `proyectos`;
 CREATE TABLE IF NOT EXISTS `proyectos` (
   `proyecto_id` int(11) NOT NULL AUTO_INCREMENT,
   `detalle` varchar(255) NOT NULL,
@@ -124,22 +128,14 @@ CREATE TABLE IF NOT EXISTS `proyectos` (
   CONSTRAINT `FK_proyectos_estados` FOREIGN KEY (`estado_id`) REFERENCES `estados` (`estado_id`),
   CONSTRAINT `FK_proyectos_portafolios` FOREIGN KEY (`portafolio_id`) REFERENCES `portafolios` (`portafolio_id`),
   CONSTRAINT `FK_proyectos_programas` FOREIGN KEY (`programa_id`) REFERENCES `programas` (`programa_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla proyectos_db.proyectos: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla proyectos_db.proyectos: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `proyectos` DISABLE KEYS */;
-INSERT INTO `proyectos` (`proyecto_id`, `detalle`, `objetivo_estrategico`, `presupuesto_inicial`, `estado_neural`, `url_video`, `url_documento`, `portafolio_id`, `programa_id`, `estado_id`, `editado`) VALUES
-	(10, 'Mejora Tanque de agua', 'Mejorar planta', 0, 'activar', 'https://www.youtube.com/watch?v=cWLLPVNZtAw', 'Herramientas utilizadas.pdf', 1, 1, 2, '2020-11-02 17:51:13'),
-	(22, 'Prueba', 'Mejora', 0, 'activar', 'https://www.youtube.com/watch?v=cWLLPVNZtAw', NULL, 1, 1, 1, NULL),
-	(23, '5', 'Mejora', 0, 'activar', 'https://www.youtube.com/watch?v=cWLLPVNZtAw', 'Certificado PHP.pdf', 1, 1, 1, NULL),
-	(24, '6', 'Mejora', 0, 'activar', 'https://www.youtube.com/watch?v=cWLLPVNZtAw', 'Certificado Angular Avanzado MEAN.pdf,Certificado Angular.pdf', 1, 1, 1, NULL),
-	(27, 'Pruebaq', '5', 0, 'activar', 'https://www.youtube.com/watch?v=cWLLPVNZtAw', '2.pdf', 1, 1, 1, NULL),
-	(28, 'aaaaaa', 'Mejora', 0, 'activar', 'https://www.youtube.com/watch?v=cWLLPVNZtAw', '', 1, 1, 1, NULL),
-	(29, 'aaaaaa1', 'Mejora', 0, 'activar', 'https://www.youtube.com/watch?v=cWLLPVNZtAw', '4.pdf', 1, 1, 1, NULL),
-	(30, '7777', 'Mejora', 0, 'activar', 'https://www.youtube.com/watch?v=cWLLPVNZtAw', 'ejemplo_esp.pdf,paginas1pdf.pdf', 1, 1, 1, NULL);
 /*!40000 ALTER TABLE `proyectos` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyectos_db.proyecto_estado
+DROP TABLE IF EXISTS `proyecto_estado`;
 CREATE TABLE IF NOT EXISTS `proyecto_estado` (
   `id_pe` int(11) NOT NULL AUTO_INCREMENT,
   `proyecto_id` int(11) NOT NULL DEFAULT '0',
@@ -151,45 +147,24 @@ CREATE TABLE IF NOT EXISTS `proyecto_estado` (
   KEY `FK_proyecto_estado_proyectos` (`proyecto_id`),
   CONSTRAINT `FK_proyecto_estado_estados` FOREIGN KEY (`estado_id`) REFERENCES `estados` (`estado_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_proyecto_estado_proyectos` FOREIGN KEY (`proyecto_id`) REFERENCES `proyectos` (`proyecto_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla proyectos_db.proyecto_estado: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla proyectos_db.proyecto_estado: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `proyecto_estado` DISABLE KEYS */;
-INSERT INTO `proyecto_estado` (`id_pe`, `proyecto_id`, `estado_id`, `comentario`, `editado`) VALUES
-	(2, 10, 2, 'Es viable', '2020-11-02 17:51:13'),
-	(5, 22, 1, NULL, NULL),
-	(6, 23, 1, NULL, NULL),
-	(7, 24, 1, NULL, NULL),
-	(10, 27, 1, NULL, NULL),
-	(11, 28, 1, NULL, NULL),
-	(12, 29, 1, NULL, NULL),
-	(13, 30, 1, NULL, NULL);
 /*!40000 ALTER TABLE `proyecto_estado` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyectos_db.registros
+DROP TABLE IF EXISTS `registros`;
 CREATE TABLE IF NOT EXISTS `registros` (
   `registros_id` int(11) NOT NULL AUTO_INCREMENT,
   `presupuesto` double(22,0) NOT NULL,
   `anio` date NOT NULL,
   `editado` datetime DEFAULT NULL,
   PRIMARY KEY (`registros_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla proyectos_db.registros: ~11 rows (aproximadamente)
+-- Volcando datos para la tabla proyectos_db.registros: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `registros` DISABLE KEYS */;
-INSERT INTO `registros` (`registros_id`, `presupuesto`, `anio`, `editado`) VALUES
-	(1, 200, '2020-10-29', NULL),
-	(2, 3000, '2021-10-29', NULL),
-	(3, 1001, '2020-10-29', '2020-10-29 20:46:57'),
-	(4, 50000, '2020-10-27', NULL),
-	(5, 1000, '2020-10-27', NULL),
-	(6, 30, '2020-10-27', NULL),
-	(7, 6000, '2022-02-09', NULL),
-	(8, 50000, '2020-10-27', NULL),
-	(9, 1000, '2020-10-27', NULL),
-	(10, 50000, '2020-10-27', NULL),
-	(11, 1000, '2022-02-09', NULL),
-	(12, 1000, '2020-10-27', NULL);
 /*!40000 ALTER TABLE `registros` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

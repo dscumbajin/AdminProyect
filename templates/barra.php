@@ -31,7 +31,7 @@
             </a>
             <?php endif; ?>
             <div class="dropdown-divider"></div>
-            <a href="login.php?cerrar_sesion=true" class="dropdown-item">
+            <a href="index.php?cerrar_sesion=true" class="dropdown-item">
               <i class="fas fa-users mr-2"></i>
               <span class="float-right text-muted text-sm">Cerrar Sesión</span>
             </a>
