@@ -9,18 +9,58 @@ $cuenta_id = $_POST['cuenta'];
 $estado_neural = $_POST['estado_neural'];
 $estado = $_POST['estado'];
 $url_video = $_POST['url_video'];
-$comentario = ""; 
+$comentario = " ";
 $id_registro = $_POST['id_registro'];
 
 // Crear nuevo registro
 if ($_POST['registro'] == 'nuevo') {
-    //  die(json_encode(($_POST))); 
-    try {
-        $stmt = $conn->prepare('INSERT INTO proyectos (detalle, objetivo_estrategico, presupuesto_inicial, estado_neural, estado_id, portafolio_id, programa_id, url_video) VALUES(?,?,?,?,?,?,?,?)');
-        $stmt->bind_param('ssdsiiis', $detalle, $objetivo_estrategico, $presupuesto_inicial, $estado_neural, $estado, $portafolio_id, $programa_id, $url_video);
-        $stmt->execute();
-        $id_registro = $stmt->insert_id;
+    /* $respuesta = array(
+        'post' => $_POST,
+        'file' => $_FILES
+    );
+    die(json_encode(($respuesta))); */
 
+    $valores = array();
+    //Como el elemento es un arreglos utilizamos foreach para extraer todos los valores
+    foreach ($_FILES["archivo"]['tmp_name'] as $key => $tmp_name) {
+        //Validamos que el archivo exista
+        if ($_FILES["archivo"]["name"][$key]) {
+            $filename = $_FILES["archivo"]["name"][$key]; //Obtenemos el nombre original del archivo
+            $source = $_FILES["archivo"]["tmp_name"][$key]; //Obtenemos un nombre temporal del archivo
+
+            $directorio = 'docs/'; //Declaramos un  variable con la ruta donde guardaremos los archivos
+
+            //Validamos si la ruta de destino existe, en caso de no existir la creamos
+            if (!file_exists($directorio)) {
+                mkdir($directorio, 0777, true) or die("No se puede crear el directorio");
+            }
+
+            $dir = opendir($directorio); //Abrimos el directorio de destino
+            $target_path = $directorio . '/' . $filename; //Indicamos la ruta de destino, así como el nombre del archivo
+
+            //Movemos y validamos que el archivo se haya cargado correctamente
+            //El primer campo es el origen y el segundo el destino
+            if (move_uploaded_file($source, $target_path)) {
+                $valores[] = $filename;
+                $resultado_doc = "Se subio correctamente";
+            } else {
+                $respuesta = array(
+                    'respuesta' => error_get_last()
+                );
+            }
+            closedir($dir); //Cerramos el directorio de destino
+        }
+    }
+
+    $cadena = implode(",", $valores);
+
+    try {
+        $stmt = $conn->prepare('INSERT INTO proyectos (detalle, objetivo_estrategico, presupuesto_inicial, estado_neural, estado_id, portafolio_id, programa_id, url_video, url_documento) VALUES(?,?,?,?,?,?,?,?,?)');
+        $stmt->bind_param('ssdsiiiss', $detalle, $objetivo_estrategico, $presupuesto_inicial, $estado_neural, $estado, $portafolio_id, $programa_id, $url_video, $cadena);
+        $stmt->execute();
+        
+        $id_registro = $stmt->insert_id;
+        $valores = [];
         if ($stmt->affected_rows) {
 
             $stmt = $conn->prepare('INSERT INTO proyecto_estado (proyecto_id, estado_id) VALUES(?,?)');
@@ -29,7 +69,8 @@ if ($_POST['registro'] == 'nuevo') {
 
             $respuesta = array(
                 'respuesta' => 'exito',
-                'id_insertado' => $id_registro
+                'id_insertado' => $id_registro,
+				'resultado_doc' => $resultado_doc
             );
         } else {
             $respuesta = array(
@@ -55,7 +96,7 @@ if ($_POST['registro'] == 'actualizar') {
         $stmt->execute();
         if ($stmt->affected_rows) {
             $stmt = $conn->prepare('UPDATE proyecto_estado SET estado_id= ?,comentario=?, editado = NOW() WHERE proyecto_id =?');
-            $stmt->bind_param('isi',$estado,$comentario, $id_registro );
+            $stmt->bind_param('isi', $estado, $comentario, $id_registro);
             $stmt->execute();
 
             $respuesta = array(

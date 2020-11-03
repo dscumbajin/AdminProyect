@@ -41,7 +41,7 @@ include_once('templates/navegacion.php');
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form class="form-horizontal" name="guardar-registro" id="guardar-registro" method="post" action="modelo-proyecto.php">
+            <form class="form-horizontal" role="form" name="guardar-registro" id="guardar-registro-archivo" method="post" action="modelo-proyecto.php" enctype="multipart/form-data">
 
               <div class="card-body">
 
@@ -161,11 +161,18 @@ include_once('templates/navegacion.php');
                   </div>
                 </div>
 
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label ">Archivos:</label>
+                  <div class="col-sm-10">
+                    <input type="file" class="form-control" id="archivo[]" name="archivo[]" multiple="">
+                  </div>
+                </div>
+
               </div>
               <!-- /.card-body -->
               <div class="card-footer">
                 <input type="hidden" name="registro" value="nuevo">
-                <button type="submit" class="btn btn-dark float-right">Añadir</button>
+                <button type="submit" class="btn btn-dark float-right" id="crear_registro">Añadir</button>
               </div>
               <!-- /.card-footer -->
             </form>

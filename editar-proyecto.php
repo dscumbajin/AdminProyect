@@ -37,192 +37,240 @@ include_once('templates/navegacion.php');
       </div>
       <div class="card-body">
 
-        <div class="container">
-          <!-- Horizontal Form -->
-          <div class="card card-dark">
-            <div class="card-header">
-              <h3 class="card-title">Llena el formulario para editar un proyecto</h3>
-            </div>
-            <!-- /.card-header -->
-            <?php
-            $sql = "SELECT * FROM proyectos WHERE proyecto_id = $id ";
-            $resultado = $conn->query($sql);
-            $proyecto = $resultado->fetch_assoc();
-           /*  echo '<pre>';
+        <div class="row">
+          <div class="col-12 col-sm-6">
+            <!-- Horizontal Form -->
+            <div class="card card-dark">
+              <div class="card-header">
+                <h3 class="card-title">Llena el formulario para editar un proyecto</h3>
+              </div>
+              <!-- /.card-header -->
+              <?php
+              $sql = "SELECT * FROM proyectos WHERE proyecto_id = $id ";
+              $resultado = $conn->query($sql);
+              $proyecto = $resultado->fetch_assoc();
+              /*  echo '<pre>';
             var_dump($proyecto);
             echo '</pre'; */
 
-            ?>
-            <!-- form start -->
-            <form class="form-horizontal" name="guardar-registro" id="guardar-registro" method="post" action="modelo-proyecto.php">
-              <div class="card-body">
+              ?>
+              <!-- form start -->
+              <form class="form-horizontal" name="guardar-registro" id="guardar-registro" method="post" action="modelo-proyecto.php">
+                <div class="card-body">
 
-                <!-- Input detalle del proyecto-->
-                <div class="form-group row">
-                  <label for="detalle" class="col-sm-2 col-form-label">Proyecto</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="detalle" name="detalle" placeholder="Nombre del proyecto" required value="<?php echo $proyecto['detalle'] ?>">
+                  <!-- Input detalle del proyecto-->
+                  <div class="form-group row">
+                    <label for="detalle" class="col-sm-2 col-form-label">Proyecto</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="detalle" name="detalle" placeholder="Nombre del proyecto" required value="<?php echo $proyecto['detalle'] ?>">
+                    </div>
                   </div>
-                </div>
 
 
-                <!-- Input Objetivo estrategico-->
+                  <!-- Input Objetivo estrategico-->
 
-                <div class="form-group row">
-                  <label for="objetivo_estrategico" class="col-sm-2 col-form-label">Objetivo estratégico</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="objetivo_estrategico" name="objetivo_estrategico" placeholder="Objetivo estratégico" required value="<?php echo $proyecto['objetivo_estrategico'] ?>">
+                  <div class="form-group row">
+                    <label for="objetivo_estrategico" class="col-sm-2 col-form-label">Objetivo estratégico</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="objetivo_estrategico" name="objetivo_estrategico" placeholder="Objetivo estratégico" required value="<?php echo $proyecto['objetivo_estrategico'] ?>">
+                    </div>
                   </div>
-                </div>
 
-                <!-- Input Objetivo Link de video-->
+                  <!-- Input Objetivo Link de video-->
 
-                <div class="form-group row">
-                  <label for="url_video" class="col-sm-2 col-form-label">Link video</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="url_video" name="url_video" placeholder="Link video youtube - opcional" value="<?php echo $proyecto['url_video '] ?>">
+                  <div class="form-group row">
+                    <label for="url_video" class="col-sm-2 col-form-label">Link video</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="url_video" name="url_video" placeholder="Link video youtube - opcional" value="<?php echo $proyecto['url_video '] ?>">
+                    </div>
                   </div>
-                </div>
 
-                <!-- Input presupuesto del proyecto-->
+                  <!-- Input presupuesto del proyecto-->
 
-                <div class="form-group row">
-                  <label for="presupuesto_inicial" class="col-sm-2 col-form-label">Presupuesto inicial</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="presupuesto_inicial" name="presupuesto_inicial" placeholder="Presupuesto Inicial" required value="<?php echo $proyecto['presupuesto_inicial'] ?>">
+                  <div class="form-group row">
+                    <label for="presupuesto_inicial" class="col-sm-2 col-form-label">Presupuesto inicial</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="presupuesto_inicial" name="presupuesto_inicial" placeholder="Presupuesto Inicial" required value="<?php echo $proyecto['presupuesto_inicial'] ?>">
+                    </div>
                   </div>
-                </div>
 
 
 
 
-                <!--Select Portafolio-->
+                  <!--Select Portafolio-->
 
-                <div class="form-group row">
-                  <label for="area" class="col-sm-2 col-form-label">Portafolio:</label>
-                  <div class="col-sm-10">
-                    <select name="area" id="area" class="form-control seleccionar" style="width: 100%;">
-                      <option value="0">- Seleccione -</option>
-                      <?php
-                      try {
-                        $portafolio_actual = $proyecto['portafolio_id'];
-                        $sql = 'SELECT portafolio_id, area FROM portafolios';
-                        $resultado = $conn->query($sql);
-                        while ($portafolio = $resultado->fetch_assoc()) {
-                          if ($portafolio['portafolio_id'] == $portafolio_actual) { ?>
-                            <option value="<?php echo $portafolio['portafolio_id']; ?>" selected><?php echo $portafolio['area']  ?></option>
-                          <?php } else { ?>
-                            <option value="<?php echo $portafolio['portafolio_id']; ?>"><?php echo $portafolio['area']; ?></option>
-                      <?php }
+                  <div class="form-group row">
+                    <label for="area" class="col-sm-2 col-form-label">Portafolio:</label>
+                    <div class="col-sm-10">
+                      <select name="area" id="area" class="form-control seleccionar" style="width: 100%;">
+                        <option value="0">- Seleccione -</option>
+                        <?php
+                        try {
+                          $portafolio_actual = $proyecto['portafolio_id'];
+                          $sql = 'SELECT portafolio_id, area FROM portafolios';
+                          $resultado = $conn->query($sql);
+                          while ($portafolio = $resultado->fetch_assoc()) {
+                            if ($portafolio['portafolio_id'] == $portafolio_actual) { ?>
+                              <option value="<?php echo $portafolio['portafolio_id']; ?>" selected><?php echo $portafolio['area']  ?></option>
+                            <?php } else { ?>
+                              <option value="<?php echo $portafolio['portafolio_id']; ?>"><?php echo $portafolio['area']; ?></option>
+                        <?php }
+                          }
+                        } catch (Exception $e) {
+                          echo "Error: " . $e->getMessage();
                         }
-                      } catch (Exception $e) {
-                        echo "Error: " . $e->getMessage();
-                      }
-                      ?>
-                    </select>
+                        ?>
+                      </select>
+                    </div>
                   </div>
-                </div>
 
-                <!--Select Programa-->
+                  <!--Select Programa-->
 
-                <div class="form-group row">
-                  <label for="descripcion" class="col-sm-2 col-form-label">Programa:</label>
-                  <div class="col-sm-10">
-                    <select name="descripcion" id="descripcion" class="form-control seleccionar" style="width: 100%;">
-                      <option value="0">- Seleccione -</option>
-                      <?php
-                      try {
-                        $programa_actual = $proyecto['programa_id'];
-                        $sql = 'SELECT programa_id, descripcion FROM programas';
-                        $resultado = $conn->query($sql);
-                        while ($programa = $resultado->fetch_assoc()) {
-                          if ($programa['programa_id'] == $programa_actual) { ?>
-                            <option value="<?php echo $programa['programa_id']; ?>" selected><?php echo $programa['descripcion']  ?></option>
-                          <?php } else { ?>
-                            <option value="<?php echo $programa['programa_id']; ?>"><?php echo $programa['descripcion']; ?></option>
-                      <?php }
+                  <div class="form-group row">
+                    <label for="descripcion" class="col-sm-2 col-form-label">Programa:</label>
+                    <div class="col-sm-10">
+                      <select name="descripcion" id="descripcion" class="form-control seleccionar" style="width: 100%;">
+                        <option value="0">- Seleccione -</option>
+                        <?php
+                        try {
+                          $programa_actual = $proyecto['programa_id'];
+                          $sql = 'SELECT programa_id, descripcion FROM programas';
+                          $resultado = $conn->query($sql);
+                          while ($programa = $resultado->fetch_assoc()) {
+                            if ($programa['programa_id'] == $programa_actual) { ?>
+                              <option value="<?php echo $programa['programa_id']; ?>" selected><?php echo $programa['descripcion']  ?></option>
+                            <?php } else { ?>
+                              <option value="<?php echo $programa['programa_id']; ?>"><?php echo $programa['descripcion']; ?></option>
+                        <?php }
+                          }
+                        } catch (Exception $e) {
+                          echo "Error: " . $e->getMessage();
                         }
-                      } catch (Exception $e) {
-                        echo "Error: " . $e->getMessage();
-                      }
-                      ?>
-                    </select>
+                        ?>
+                      </select>
+                    </div>
                   </div>
-                </div>
 
 
-                <!--Select estado neural-->
+                  <!--Select estado neural-->
 
-                <div class="form-group row">
-                  <label for="estado_neural" class="col-sm-2 col-form-label">Estado neural</label>
-                  <div class="col-sm-10">
-                    <select class="form-control select2 select2-danger" id="estado_neural" name="estado_neural" data-dropdown-css-class="select2-danger" style="width: 100%;">
-                      <?php
-                      if ($proyecto['estado_neural'] == 'activar') { ?>
-                        <option value="activar" selected>Activar</option>
-                        <option value="activo">Activo</option>
-                        <option value="cerrado">Cerrado</option>
+                  <div class="form-group row">
+                    <label for="estado_neural" class="col-sm-2 col-form-label">Estado neural</label>
+                    <div class="col-sm-10">
+                      <select class="form-control select2 select2-danger" id="estado_neural" name="estado_neural" data-dropdown-css-class="select2-danger" style="width: 100%;">
+                        <?php
+                        if ($proyecto['estado_neural'] == 'activar') { ?>
+                          <option value="activar" selected>Activar</option>
+                          <option value="activo">Activo</option>
+                          <option value="cerrado">Cerrado</option>
 
-                      <?php } else if ($proyecto['estado_neural'] == 'activo') { ?>
-                        <option value="activar">Activar</option>
-                        <option value="activo" selected>Activo</option>
-                        <option value="cerrado">Cerrado</option>
-                      <?php
-                      } else { ?>
-                        <option value="activar">Activar</option>
-                        <option value="activo">Activo</option>
-                        <option value="cerrado" selected>Cerrado</option>
-                      <?php
-                      }
-                      ?>
-                    </select>
-                  </div>
-                  <!-- /.form-group -->
-                </div>
-
-                <!--Select estado-->
-                <div class="form-group row">
-                  <label for="estado" class="col-sm-2 col-form-label">Estado:</label>
-                  <div class="col-sm-10">
-                    <select name="estado" id="estado" class="form-control seleccionar" style="width: 100%;">
-                      <option value="0">- Seleccione -</option>
-                      <?php
-                      try {
-                        $estado_actual = $proyecto['estado_id'];
-                        $sql = " SELECT * FROM estados ";
-                        $resultado = $conn->query($sql);
-
-                        while ($estado = $resultado->fetch_assoc()) {
-                          
-                          if ($estado['estado_id'] == $estado_actual) { ?>
-                            <option value="<?php echo $estado['estado_id']; ?>" selected><?php echo $estado['estado']; ?>
-                            </option>
-                          <?php } else { ?>
-                            <option value="<?php echo $estado['estado_id']; ?>">
-                              <?php echo $estado['estado']; ?>
-                            </option>
-                      <?php }
+                        <?php } else if ($proyecto['estado_neural'] == 'activo') { ?>
+                          <option value="activar">Activar</option>
+                          <option value="activo" selected>Activo</option>
+                          <option value="cerrado">Cerrado</option>
+                        <?php
+                        } else { ?>
+                          <option value="activar">Activar</option>
+                          <option value="activo">Activo</option>
+                          <option value="cerrado" selected>Cerrado</option>
+                        <?php
                         }
-                      } catch (Exception $e) {
-                        echo "Error: " . $e->getMessage();
-                      }
-                      ?>
-                    </select>
+                        ?>
+                      </select>
+                    </div>
+                    <!-- /.form-group -->
                   </div>
+
+                  <!--Select estado-->
+                  <div class="form-group row">
+                    <label for="estado" class="col-sm-2 col-form-label">Estado:</label>
+                    <div class="col-sm-10">
+                      <select name="estado" id="estado" class="form-control seleccionar" style="width: 100%;">
+                        <option value="0">- Seleccione -</option>
+                        <?php
+                        try {
+                          $estado_actual = $proyecto['estado_id'];
+                          $sql = " SELECT * FROM estados ";
+                          $resultado = $conn->query($sql);
+
+                          while ($estado = $resultado->fetch_assoc()) {
+
+                            if ($estado['estado_id'] == $estado_actual) { ?>
+                              <option value="<?php echo $estado['estado_id']; ?>" selected><?php echo $estado['estado']; ?>
+                              </option>
+                            <?php } else { ?>
+                              <option value="<?php echo $estado['estado_id']; ?>">
+                                <?php echo $estado['estado']; ?>
+                              </option>
+                        <?php }
+                          }
+                        } catch (Exception $e) {
+                          echo "Error: " . $e->getMessage();
+                        }
+                        ?>
+                      </select>
+                    </div>
+                  </div>
+
+
                 </div>
-
-
-              </div>
-              <!-- /.card-body -->
-              <div class="card-footer">
-                <input type="hidden" name="registro" value="actualizar">
-                <input type="hidden" name="id_registro" value="<?php echo $id ?>">
-                <button type="submit" class="btn btn-dark float-right">Guardar</button>
-              </div>
-              <!-- /.card-footer -->
-            </form>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <input type="hidden" name="registro" value="actualizar">
+                  <input type="hidden" name="id_registro" value="<?php echo $id ?>">
+                  <button type="submit" class="btn btn-dark float-right">Guardar</button>
+                </div>
+                <!-- /.card-footer -->
+              </form>
+            </div>
+            <!-- /.card -->
           </div>
-          <!-- /.card -->
+
+
+          <div class="col-12 col-sm-6">
+
+
+            <div class="row">
+              <?php
+              if ($proyecto['url_documento'] == "") { ?>
+
+                <div class="col-lg-3 col-6">
+                  <div class="small-box bg-ligt">
+                    <div class="inner">
+                      <p>No existen documentos</p>
+                    </div>
+                    <div class="icon">
+                      <i class="fas fa-book-dead" style="color: black;"></i>
+                    </div>
+                    <a href="lista-cuenta.php" class="small-box-footer" style="color: black;"> </a>
+                  </div>
+                </div>
+
+                <?php  } else {
+                $array = explode(",", $proyecto['url_documento']);
+
+                foreach ($array as $clave => $valor) { ?>
+
+                  <div class="col-lg-3 col-6">
+                    <div class="small-box bg-ligt">
+                      <div class="inner">
+                        <h6><?php echo $valor; ?></h6>
+                        <p><?php echo $clave + 1 ?></p>
+                      </div>
+                      <div class="icon">
+                        <i class="far fa-file-pdf" style="color: red;"></i>
+                      </div>
+                      <a href="docs/<?php echo $valor; ?>" class="small-box-footer" style="color: black;">Abri archivo <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                  </div>
+              <?php  }
+              }
+
+              ?>
+            </div>
+
+          </div>
+
         </div>
 
       </div>

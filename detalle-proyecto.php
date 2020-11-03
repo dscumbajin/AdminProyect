@@ -28,7 +28,7 @@ include_once('templates/navegacion.php');
   <section class="content">
     <?php
     try {
-      $sql = "SELECT proyecto_id, detalle,url_video, objetivo_estrategico, presupuesto_inicial, estado_neural, estados.estado_id, estado, area, descripcion ";
+      $sql = "SELECT proyecto_id, detalle,url_video, url_documento, objetivo_estrategico, presupuesto_inicial, estado_neural, estados.estado_id, estado, area, descripcion ";
       $sql .= " FROM proyectos ";
       $sql .= " INNER JOIN portafolios ";
       $sql .= " ON proyectos.portafolio_id = portafolios.portafolio_id ";
@@ -319,79 +319,51 @@ include_once('templates/navegacion.php');
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">Cargar Multiple Archivos</h3>
+        <h3 class="card-title">Archivos </h3>
 
       </div>
 
       <div class="card-body">
 
         <div class="row">
+          <?php
+          if ($proyecto['url_documento'] == "") { ?>
 
-          <div class="col-12 col-sm-6">
-            <div class="info-box bg-light">
-              <div class="info-box-content">
-
-                <form role="form" name="guardar-registro" id="guardar-registro-archivo" method="post" action="guardar_documentos.php" enctype="multipart/form-data">
-
-                  <div class="form-group">
-                    <label class="col-sm-2 col-form-label ">Archivos</label>
-                    <div class="col-sm-10">
-                      <input type="file" class="form-control" id="archivo[]" name="archivo[]" multiple="">
-                    </div>
-                    <input type="hidden" name=registro value="nuevo">
-                    <input type="hidden" name="proyecto_id" value="<?php echo $id ?>">
-                    <button type="submit" class="btn btn-primary float-right" id="crear_registro">Cargar</button>
-                  </div>
-
-                </form>
+            <div class="col-lg-3 col-6">
+              <div class="small-box bg-ligt">
+                <div class="inner">
+                  <p>No existen documentos</p>
+                </div>
+                <div class="icon">
+                  <i class="fas fa-book-dead" style="color: black;"></i>
+                </div>
+                <a href="lista-cuenta.php" class="small-box-footer" style="color: black;"> </a>
               </div>
             </div>
-          </div>
 
-          <div class="col-12 col-sm-6">
-            <div class="info-box bg-light">
-             
+            <?php  } else {
+            $array = explode(",", $proyecto['url_documento']);
 
-                <?php
-                try {
+            foreach ($array as $clave => $valor) { ?>
 
-                  $sql = " SELECT url_documento FROM proyecto_documento";
-                  $sql .= " INNER JOIN documentos ON proyecto_documento.documento_id = documentos.documento_id ";
-                  $sql .= " WHERE proyecto_id = $id ";
-                  $resultado = $conn->query($sql);
-                  $documento = $resultado->fetch_assoc();
+              <div class="col-lg-3 col-6">
+                <div class="small-box bg-ligt">
+                  <div class="inner">
+                    <h6><?php echo $valor; ?></h6>
+                    <p><?php echo $clave + 1 ?></p>
+                  </div>
+                  <div class="icon">
+                  <i class="far fa-file-pdf" style="color: red;"></i>
+                  </div>
+                  <a href="docs/<?php echo $valor; ?>" class="small-box-footer" style="color: black;">Abri archivo <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+          <?php  }
+          }
 
-                  if ($documento['url_documento'] == "") { ?>
-
-                  <h1>No existen documentos <i class="fas fa-book-dead"></i></h1>
-                    
-                <?php  } else{
-                    $array = explode(",", $documento['url_documento']);
-
-                    $tamano =intdiv(12, sizeof($array));
-                   
-                    foreach ($array as $clave => $valor) { ?>
-                      <a class="col-12 col-sm-<?php echo $tamano; ?> info-box-content float-right" href="docs/<?php echo $valor;?>">
-                     
-                      <iframe   src="docs/<?php echo $valor;?>"></iframe>
-                      </a>
-                  <?php  }
-                  }
-
-                
-                } catch (Exception $e) {
-                  $error = $e->getMessage();
-                  echo $error;
-                }
-
-                ?>
-
-              
-            </div>
-          </div>
-
-
+          ?>
         </div>
+
       </div>
 
     </div>
