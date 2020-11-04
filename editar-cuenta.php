@@ -45,10 +45,14 @@ include_once('templates/navegacion.php');
             </div>
             <!-- /.card-header -->
             <?php
-            $sql = "SELECT * FROM registros WHERE registros_id = $id ";
+            $sql = "SELECT cuentas.proyecto_id, presupuesto, anio FROM cuentas INNER JOIN registros ON registros.registros_id=cuentas.registros_id WHERE registros.registros_id = $id ";
             $resultado = $conn->query($sql);
             $resultado = $conn->query($sql);
             $cuenta = $resultado->fetch_assoc();
+            $valor = $cuenta['proyecto_id'];
+            /* echo '<pre>';
+            var_dump($cuenta);
+            echo '</pre'; */
 
             ?>
             <!-- form start -->
@@ -56,17 +60,19 @@ include_once('templates/navegacion.php');
               <div class="card-body">
 
 
-              <div class="form-group row">
+                <div class="form-group row">
                   <label for="cuenta" class="col-sm-2 col-form-label">Proyecto:</label>
                   <div class="col-sm-10">
                     <input type="text" class="form-control" id="cuenta" name="cuenta" placeholder="Número de cuenta" required value="
                     <?php
 
-                    $sql = " SELECT *  FROM proyectos ";
-                    $sql .= " INNER JOIN cuentas ON cuentas.proyecto_id = proyectos.proyecto_id ";
-                    $sql .= " WHERE cuentas.registros_id = 2 ";
+                    $sql = " SELECT detalle FROM Cuentas g left OUTER JOIN proyectos p  ON g.proyecto_id =  p.proyecto_id AND g.proyecto_id = p.proyecto_id  WHERE g.proyecto_id = 44  GROUP BY g.proyecto_id ";
+
                     $resultado = $conn->query($sql);
                     $detalle = $resultado->fetch_assoc();
+                    /* echo '<pre>';
+                    var_dump($detalle);
+                    echo '</pre'; */
                     echo $detalle['detalle']
                     ?>" readonly="readonly">
                   </div>

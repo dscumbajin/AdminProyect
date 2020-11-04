@@ -86,8 +86,8 @@ include_once('templates/navegacion.php');
                 <div class="form-group row">
                   <label for="area" class="col-sm-2 col-form-label">Portafolio:</label>
                   <div class="col-sm-10">
-                    <select name="area" id="area" class="form-control seleccionar" style="width: 100%;">
-                      <option value="0">- Seleccione -</option>
+                    <select name="area" id="area" class="form-control seleccionar" style="width: 100%;" required>
+                      <option value="">- Seleccione -</option>
                       <?php
                       try {
                         $sql = 'SELECT * FROM portafolios';
@@ -108,8 +108,8 @@ include_once('templates/navegacion.php');
                 <div class="form-group row">
                   <label for="descripcion" class="col-sm-2 col-form-label">Programa:</label>
                   <div class="col-sm-10">
-                    <select name="descripcion" id="descripcion" class="form-control seleccionar" style="width: 100%;">
-                      <option value="0">- Seleccione -</option>
+                    <select name="descripcion" id="descripcion" class="form-control seleccionar" style="width: 100%;" required>
+                      <option value="">- Seleccione -</option>
                       <?php
                       try {
                         $sql = 'SELECT * FROM programas';

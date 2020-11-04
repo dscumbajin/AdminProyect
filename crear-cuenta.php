@@ -50,8 +50,8 @@ include_once('templates/navegacion.php');
                 <div class="form-group row">
                   <label for="cuenta" class="col-sm-2 col-form-label">Proyecto:</label>
                   <div class="col-sm-10">
-                    <select name="cuenta" id="cuenta" class="form-control seleccionar" style="width: 100%;" >
-                    <option value="0">- Seleccione -</option>
+                    <select name="cuenta" id="cuenta" class="form-control seleccionar" style="width: 100%;" required>
+                    <option value="">- Seleccione -</option>
                      <?php
                      try {
                        $sql = 'SELECT * FROM proyectos';

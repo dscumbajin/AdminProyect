@@ -20,6 +20,7 @@ $(function () {
     });
 
     $('#crear_registro_admin').attr('disabled', true);
+
     $('#repetir_password').on('input', function () {
         var password_nuevo = $('#password').val();
         if ($(this).val() == password_nuevo) {
@@ -34,6 +35,24 @@ $(function () {
         }
     });
 
+    // Validacion de input formularios
+    $('#presupuesto_inicial').on('input', function () {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
+    $('#presupuesto').keyup(function () {
+        this.value = (this.value + '').replace(/[^0-9]/g, '');
+    });
+
+    // Validar input tipo date
+    $(".anio").focusout(function () {
+        s = $(this).val();
+        var bits = s.split('/');
+        var d = new Date(bits[2] + '/' + bits[0] + '/' + bits[1]);
+        alert(d);
+    });
+    
+
+
     //Date range picker
     $('#fecha').datetimepicker({
         format: 'L'
@@ -42,13 +61,6 @@ $(function () {
     //Initialize Select2 Elements
     $('.seleccionar').select2();
 
-    //Timepicker
-    $('#hora').datetimepicker({
-        format: 'LT'
-    });
-
-    //Icono
-    $('#icono').iconpicker();
 
     //Seleccionar imagen
     bsCustomFileInput.init();

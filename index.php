@@ -35,7 +35,8 @@
       <nav id="menu">
         <ul>
           <li>
-            <a href="login.php">Iniciar sesión</a>
+            
+          <i class="fas fa-sign-in-alt" style="font-size: 20px; color: red;"></i> <a href="login.php">Iniciar sesión</a>
           </li>
         </ul>
       </nav>
