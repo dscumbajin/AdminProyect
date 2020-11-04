@@ -173,7 +173,7 @@ include_once('templates/navegacion.php');
               <div class="info-box-content">
                 <span class="info-box-text text-center text-muted">Estado</span>
                 <span class="info-box-number text-center text-muted mb-0"><?php echo $proyecto['estado'] ?> <span>
-                  </span class="info-box-number text-center text-muted mb-0">
+                  
                   <!-- Button trigger modal -->
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                     Comentario
@@ -226,8 +226,8 @@ include_once('templates/navegacion.php');
                               $resultado = $conn->query($sql);
                               $comentario = $resultado->fetch_assoc();
                               /* echo '<pre>';
-                                      var_dump($comentario);
-                                      echo '</pre'; */
+                              var_dump($comentario);
+                              echo '</pre'; */
                             } catch (Exception $e) {
                               echo "Error: " . $e->getMessage();
                             }
@@ -235,7 +235,15 @@ include_once('templates/navegacion.php');
 
                             <div class="form-group">
 
-                              <input type="text" class="form-control" name="comentario" placeholder="Escribe un comentario" value="<?php echo $comentario['comentario'] ?>">
+                            <?php
+                            if($comentario['comentario'] !== " " ) {?>
+                            <hr>
+                              <span class=""><?php echo $comentario['comentario'] ?> <span>
+                              <hr>
+                            <?php }?>
+
+                              <input type="text" class="form-control" name="comentario" placeholder="Escribe un comentario" >
+                              
 
                             </div>
                           </div>

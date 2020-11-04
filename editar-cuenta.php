@@ -66,7 +66,7 @@ include_once('templates/navegacion.php');
                     <input type="text" class="form-control" id="cuenta" name="cuenta" placeholder="Número de cuenta" required value="
                     <?php
 
-                    $sql = " SELECT detalle FROM Cuentas g left OUTER JOIN proyectos p  ON g.proyecto_id =  p.proyecto_id AND g.proyecto_id = p.proyecto_id  WHERE g.proyecto_id = 44  GROUP BY g.proyecto_id ";
+                    $sql = " SELECT detalle FROM Cuentas g left OUTER JOIN proyectos p  ON g.proyecto_id =  p.proyecto_id AND g.proyecto_id = p.proyecto_id  WHERE g.proyecto_id = $id  GROUP BY g.proyecto_id ";
 
                     $resultado = $conn->query($sql);
                     $detalle = $resultado->fetch_assoc();
@@ -97,7 +97,7 @@ include_once('templates/navegacion.php');
                 <div class="form-group row">
                   <label for="presupuesto" class="col-sm-2 col-form-label">Presupuesto:</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="presupuesto" name="presupuesto" placeholder="$ 0.0" required value="<?php echo $cuenta['presupuesto'] ?>">
+                    <input type="number" class="form-control" id="presupuesto" name="presupuesto" placeholder="$ 0.0" required value="<?php echo $cuenta['presupuesto'] ?>">
                   </div>
                 </div>
 
