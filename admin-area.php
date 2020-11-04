@@ -42,7 +42,7 @@ include_once('templates/navegacion.php');
           <div class="icon">
             <i class="fas fa-chart-line"></i>
           </div>
-          <a href="lista-proyecto.php" class="small-box-footer">Más información <i class="fas fa-arrow-circle-right"></i></a>
+          <a href="lista-proyecto-estado.php?id=1" class="small-box-footer">Más información <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
 
@@ -63,7 +63,7 @@ include_once('templates/navegacion.php');
           <div class="icon">
             <i class="far fa-check-circle"></i>
           </div>
-          <a href="lista-proyecto.php" class="small-box-footer">Más información <i class="fas fa-arrow-circle-right"></i></a>
+          <a  href="lista-proyecto-estado.php?id=2" class="small-box-footer">Más información <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
 
@@ -84,7 +84,7 @@ include_once('templates/navegacion.php');
           <div class="icon">
             <i class="fas fa-tasks"></i>
           </div>
-          <a href="lista-proyecto.php" class="small-box-footer">Más información <i class="fas fa-arrow-circle-right"></i></a>
+          <a  href="lista-proyecto-estado.php?id=3" class="small-box-footer">Más información <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
 
@@ -105,7 +105,7 @@ include_once('templates/navegacion.php');
           <div class="icon">
             <i class="ion ion-bag"></i>
           </div>
-          <a href="lista-proyecto.php" class="small-box-footer">Más información <i class="fas fa-arrow-circle-right"></i></a>
+          <a  href="lista-proyecto-estado.php?id=4" class="small-box-footer">Más información <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
 
@@ -126,7 +126,7 @@ include_once('templates/navegacion.php');
 
             <i class="far fa-times-circle"></i>
           </div>
-          <a href="lista-proyecto.php" class="small-box-footer">Más información <i class="fas fa-arrow-circle-right"></i></a>
+          <a  href="lista-proyecto-estado.php?id=5" class="small-box-footer">Más información <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
 
@@ -153,7 +153,7 @@ include_once('templates/navegacion.php');
 
       <div class="col-lg-3 col-6">
         <?php
-        $sql = "SELECT g.proyecto_id,COUNT(*) FROM Cuentas g left OUTER JOIN proyectos p ON g.proyecto_id =  p.proyecto_id AND g.proyecto_id = p.proyecto_id GROUP BY g.proyecto_id  ";
+        $sql = "SELECT c.proyecto_id,COUNT(*) FROM Cuentas c left OUTER JOIN proyectos p ON c.proyecto_id =  p.proyecto_id AND c.proyecto_id = p.proyecto_id GROUP BY c.proyecto_id";
 
         $resultado = $conn->query($sql);
 
