@@ -63,6 +63,7 @@ include_once('templates/navegacion.php');
                     <label for="detalle" class="col-sm-2 col-form-label">Proyecto</label>
                     <div class="col-sm-10">
                       <input type="text" class="form-control" id="detalle" name="detalle" placeholder="Nombre del proyecto" required value="<?php echo $proyecto['detalle'] ?>">
+                      
                     </div>
                   </div>
 

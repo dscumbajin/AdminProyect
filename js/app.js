@@ -1,4 +1,4 @@
-$(function () {
+$(function() {
     $("#registros").DataTable({
         "responsive": true,
         "autoWidth": false,
@@ -21,7 +21,7 @@ $(function () {
 
     $('#crear_registro_admin').attr('disabled', true);
 
-    $('#repetir_password').on('input', function () {
+    $('#repetir_password').on('input', function() {
         var password_nuevo = $('#password').val();
         if ($(this).val() == password_nuevo) {
             $('#resultado_password').text('Passwords iguales');
@@ -35,22 +35,26 @@ $(function () {
         }
     });
 
-    // Validacion de input formularios
-    $('#presupuesto_inicial').on('input', function () {
+    // validaciones
+
+    $('#presupuesto_inicial').on('input', function() {
         this.value = this.value.replace(/[^0-9]/g, '');
     });
-    $('#presupuesto').keyup(function () {
+    $('#presupuesto').keyup(function() {
         this.value = (this.value + '').replace(/[^0-9]/g, '');
     });
 
     // Validar input tipo date
-    $(".anio").focusout(function () {
+    $(".anio").focusout(function() {
         s = $(this).val();
         var bits = s.split('/');
         var d = new Date(bits[2] + '/' + bits[0] + '/' + bits[1]);
         alert(d);
     });
-    
+
+    $('#crear_registro').click(function() {
+        $("#guardar-registro-archivo").validate(); // This is not working and is not validating the form
+    });
 
 
     //Date range picker
