@@ -92,51 +92,7 @@ include_once('templates/navegacion.php');
           </div>
 
         </div>
-        <!--New Row-->
-        <div class="row">
-          <!--Div presupuesto estimado-->
-          <div class="col-12 col-sm-6">
-            <div class="info-box bg-light">
-              <div class="info-box-content">
-                <span class="info-box-text text-center text-muted">Presupuesto Estimado</span>
-                <span class="info-box-number text-center text-muted mb-0"> <i class="fas fa-dollar-sign"></i> <?php echo $proyecto['presupuesto_inicial'] ?> </span>
-              </div>
-            </div>
-          </div>
-
-          <!--Div presupuesto total-->
-          <div class="col-12 col-sm-6">
-            <?php
-            $sql = " SELECT  SUM(presupuesto) AS total FROM cuentas ";
-            $sql .= " INNER JOIN registros ON registros.registros_id = cuentas.registros_id ";
-            $sql .= " WHERE proyecto_id = $id ";
-            $resultado = $conn->query($sql);
-            $registrados = $resultado->fetch_assoc();
-            /*  echo '<pre>';
-            var_dump($registrados);
-            echo '</pre'; */
-            ?>
-            <div class="info-box bg-light">
-              <div class="info-box-content">
-                <span class="info-box-text text-center text-muted">Presupuesto Total</span>
-                <span class="info-box-number text-center text-muted mb-0"> <i class="fas fa-dollar-sign"></i>
-
-                  <?php
-                  if ($registrados['total'] == null) {
-
-                    echo 'Sin asignar';
-                  } else {
-                    echo  $registrados['total'];
-                  }
-                  ?>
-
-                </span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
+       
         <!--New Row-->
         <div class="row">
           <!--Div Portafolio-->
@@ -271,6 +227,52 @@ include_once('templates/navegacion.php');
             </div>
           </div>
         </div>
+
+         <!--New Row-->
+         <div class="row">
+          <!--Div presupuesto estimado-->
+          <div class="col-12 col-sm-6">
+            <div class="info-box bg-light">
+              <div class="info-box-content">
+                <span class="info-box-text text-center text-muted">Presupuesto</span>
+                <span class="info-box-number text-center text-muted mb-0"> <i class="fas fa-dollar-sign"></i> <?php echo $proyecto['presupuesto_inicial'] ?> </span>
+              </div>
+            </div>
+          </div>
+
+          <!--Div presupuesto total-->
+          <div class="col-12 col-sm-6">
+            <?php
+            $sql = " SELECT  SUM(presupuesto) AS total FROM cuentas ";
+            $sql .= " INNER JOIN registros ON registros.registros_id = cuentas.registros_id ";
+            $sql .= " WHERE proyecto_id = $id ";
+            $resultado = $conn->query($sql);
+            $registrados = $resultado->fetch_assoc();
+            /*  echo '<pre>';
+            var_dump($registrados);
+            echo '</pre'; */
+            ?>
+            <div class="info-box bg-light">
+              <div class="info-box-content">
+                <span class="info-box-text text-center text-muted">Total Inversión</span>
+                <span class="info-box-number text-center text-muted mb-0"> <i class="fas fa-dollar-sign"></i>
+
+                  <?php
+                  if ($registrados['total'] == null) {
+
+                    echo 'Sin asignar';
+                  } else {
+                    echo  $registrados['total'];
+                  }
+                  ?>
+
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
 
       </div>
       <!-- /.card-body -->

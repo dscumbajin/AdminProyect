@@ -79,14 +79,7 @@ include_once('templates/navegacion.php');
 
                   
                 </tbody>
-                <tfoot>
-                  <tr>
-                    <th>Usuario</th>
-                    <th>Nombre</th>
-                    <th>Permisos de acceso</th>
-                    <th>Acciones</th>
-                  </tr>
-                </tfoot>
+               
               </table>
             </div>
             <!-- /.card-body -->

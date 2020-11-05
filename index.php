@@ -258,36 +258,6 @@
 <section class="content">
 <div class="row">
 
-
-  <div class="col-lg-3 col-6">
-    <?php
-    $sql = "SELECT c.proyecto_id,COUNT(*) FROM Cuentas c left OUTER JOIN proyectos p ON c.proyecto_id =  p.proyecto_id AND c.proyecto_id = p.proyecto_id GROUP BY c.proyecto_id";
-
-    $resultado = $conn->query($sql);
-
-    ?>
-
-    <?php
-
-    while ($registrados = $resultado->fetch_assoc()) {
-      $i++;
-    }
-    ?>
-
-    <div class="small-box bg-info">
-      <div class="inner">
-        <h3><?php echo $i ?></h3>
-
-        <p>Cuentas</p>
-      </div>
-      <div class="icon">
-        <i class="fas fa-file-invoice-dollar"></i>
-      </div>
-      <a href="lista-cuenta.php" class="small-box-footer">Más información <i class="fas fa-arrow-circle-right"></i></a>
-    </div>
-  </div>
-
-
   <!-- ./col -->
   <div class="col-lg-3 col-6">
     <?php

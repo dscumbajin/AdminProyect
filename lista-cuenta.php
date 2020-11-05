@@ -86,14 +86,7 @@ include_once('templates/navegacion.php');
                     </tr>
                   <?php } ?>
                 </tbody>
-                <tfoot>
-                  <tr>
-                    <th>Inversión</th>
-                    <th>Año</th>
-                    <th>Presupuesto</th>
-                    <th>Acciones</th>
-                  </tr>
-                </tfoot>
+                
               </table>
             </div>
             <!-- /.card-body -->

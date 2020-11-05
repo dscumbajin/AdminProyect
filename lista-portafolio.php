@@ -70,12 +70,7 @@ include_once('templates/navegacion.php');
                     </tr>
                   <?php } ?>
                 </tbody>
-                <tfoot>
-                  <tr>
-                    <th>Area</th>
-                    <th>Acciones</th>
-                  </tr>
-                </tfoot>
+                
               </table>
             </div>
             <!-- /.card-body -->

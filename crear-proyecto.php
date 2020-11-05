@@ -74,7 +74,7 @@ include_once('templates/navegacion.php');
                 <!-- Input presupuesto del proyecto-->
 
                 <div class="form-group row">
-                  <label for="presupuesto_inicial" class="col-sm-2 col-form-label">Presupuesto estimando</label>
+                  <label for="presupuesto_inicial" class="col-sm-2 col-form-label">Presupuesto</label>
                   <div class="col-sm-10">
                     <input type="number" class="form-control" id="presupuesto_inicial" name="presupuesto_inicial" placeholder="Presupuesto Inicial" required value="0">
                   </div>

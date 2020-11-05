@@ -44,12 +44,12 @@ include_once('templates/navegacion.php');
                     <th>Item</th>
                     <th>Proyecto</th>
                     <th>Objetivo Estrategico</th>
-                    <th>Presupuesto Inicial</th>
                     <th>Portafolio</th>
                     <th>Programa</th>                  
                     <th>Estado neural</th>
                     <th>Estado</th>
-                    <th>Presupuesto Asignado</th>
+                    <th>Presupuesto</th>
+                    <th>Inversión</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
@@ -75,11 +75,11 @@ include_once('templates/navegacion.php');
                       <td><?php echo $proyecto['proyecto_id']; ?></td>
                       <td><a href="detalle-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>"><?php echo $proyecto['detalle']; ?></a></td>
                       <td><?php echo $proyecto['objetivo_estrategico']; ?></td>
-                      <td><?php echo $proyecto['presupuesto_inicial']; ?></td>
                       <td><?php echo $proyecto['area']; ?></td>
                       <td><?php echo $proyecto['descripcion']; ?></td>
                       <td><?php echo $proyecto['estado_neural']; ?></td>
-                      <td><?php echo $proyecto['estado']; ?></td>       
+                      <td><?php echo $proyecto['estado']; ?></td>
+                      <td><?php echo $proyecto['presupuesto_inicial']; ?></td>       
                       <td><a href="detalle-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>"> Detalle </a></td>
                       
                       <td>
@@ -95,21 +95,7 @@ include_once('templates/navegacion.php');
                     </tr>
                   <?php } ?>
                 </tbody>
-                <tfoot>
-                  <tr>
-                    
-                    <th>Item</th>
-                    <th>Proyecto</th>
-                    <th>Objetivo Estrategico</th>
-                    <th>Presupuesto Inicial</th>
-                    <th>Portafolio</th>
-                    <th>Programa</th>
-                    <th>Estado neural</th>
-                    <th>Estado</th>
-                    <th>Presupuesto Asignado</th>
-                    <th>Acciones</th>
-                  </tr>
-                </tfoot>
+               
               </table>
             </div>
             <!-- /.card-body -->
