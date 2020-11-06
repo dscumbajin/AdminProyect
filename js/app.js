@@ -2,7 +2,7 @@ $(function() {
     $("#registros").DataTable({
         "responsive": true,
         "autoWidth": false,
-        "pageLength": 10,
+        "pageLength": 5,
         "language": {
             paginate: {
                 next: 'Siguiente',
@@ -65,19 +65,29 @@ $(function() {
     //Initialize Select2 Elements
     $('.seleccionar').select2();
 
-    //Supera el Presupuesto asignado
-   /*  $('#supera').on('input', function() {
-        var password_nuevo = $('#password').val();
-        if ($(this).val() == password_nuevo) {
-            $('#resultado_password').text('Passwords iguales');
-            $('#resultado_password').parent('.form-group').addClass('has-success').removeClass('has-error');
-            $('input#password').parent('.form-group').addClass('has-success').removeClass('has-error');
-            $('#crear_registro_admin').attr('disabled', false);
+    $("#myBtn").click(function() {
+        $("#exampleModal").modal("hide");
+    });
+
+
+    // Supero presupuesto total vs presupuesto invertido
+    $("#boton01").click(function() {
+        var proyecto_id = $("#proyecto_id").val();
+        var presupuesto_inversion = $("#presupuesto_inversion").text();
+        var presupuesto_total = $("#presupuesto_total").text();
+        if (parseInt(presupuesto_inversion) < parseInt(presupuesto_total)) {
+
+            setTimeout(function() {
+                window.location.href = `crear-cuenta.php?id=${parseInt(proyecto_id)}`;
+
+            }, 500);
+
         } else {
-            $('#resultado_password').text('Los passwords no son iguales!');
-            $('#resultado_password').parent('.form-group').addClass('has-error').removeClass('has-success');
-            $('input#password').parent('.form-group').addClass('has-error').removeClass('has-success');
+            alert("Supera el presupuesto")
         }
-    }); */
+    });
+
+
+
 
 });

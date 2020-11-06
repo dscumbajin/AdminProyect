@@ -205,24 +205,16 @@ include_once('templates/navegacion.php');
                             </div>
                             <div class="modal-footer">
                               <input type="hidden" name="registro" value="actualizar">
-                              <input type="hidden" name="proyecto_id" value="<?php echo $id ?>">
+                              <input type="hidden" name="proyecto_id" id="proyecto_id"  value="<?php echo $id ?>">
                               <input type="hidden" name="id_registro" value="<?php echo $comentario['id_pe'] ?>">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                               <button type="submit" name="submitSave" id="myBtn" class="btn btn-primary">Guardar cambios</button>
-                              <script>
-                                $(document).ready(function() {
-                                  $("#myBtn").click(function() {
-                                    $("#exampleModal").modal("hide");
-                                  });
-                                });
-                              </script>
+      
                             </div>
                           </form>
                         </div>
                       </div>
                     </div>
-                  </span>
-
               </div>
             </div>
           </div>
@@ -245,19 +237,25 @@ include_once('templates/navegacion.php');
             <div class="info-box bg-light">
               <div class="info-box-content">
                 <span class="info-box-text text-center text-muted">Inversión Total</span>
-                <span class="info-box-number text-center text-muted mb-0"> <i class="fas fa-dollar-sign"></i>
+                <span class="info-box-number text-center text-muted mb-0" id = "presupuesto_inversion"> <i class="fas fa-dollar-sign"></i>
 
                   <?php
                   if ($registrados['total'] == null) {
 
-                    echo 'Sin asignar';
+                    echo '0';
                   } else {
                     echo  $registrados['total'];
                   }
                   ?>
 
                 </span>
-              </div>
+                <!-- Button trigger modal -->
+                <button  id="boton01" type="button" class="btn btn-primary">
+                      Invertir
+                    </button>
+                
+             
+                </div>
             </div>
           </div>
           <!--Div presupuesto-->
@@ -265,7 +263,7 @@ include_once('templates/navegacion.php');
             <div class="info-box bg-light">
               <div class="info-box-content">
                 <span class="info-box-text text-center text-muted">Presupuesto</span>
-                <span class="info-box-number text-center text-muted mb-0"> <i class="fas fa-dollar-sign"></i> <?php echo $proyecto['presupuesto_inicial'] ?> </span>
+                <span class="info-box-number text-center text-muted mb-0" id="presupuesto_total"> <i class="fas fa-dollar-sign"></i> <?php echo $proyecto['presupuesto_inicial'] ?> </span>
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
-$(document).ready(function(){
+$(document).ready(function() {
     // Login Admin
-    $('#login-admin').on('submit', function (e) {
+    $('#login-admin').on('submit', function(e) {
         e.preventDefault();
         var datos = $(this).serializeArray();
 
@@ -10,7 +10,7 @@ $(document).ready(function(){
             data: datos,
             url: $(this).attr('action'),
             dataType: 'json',
-            success: function (data) {
+            success: function(data) {
                 var resusltado = data;
                 if (resusltado.respuesta == 'exitoso') {
                     Swal.fire({
