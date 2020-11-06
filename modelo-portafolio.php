@@ -25,7 +25,7 @@ if ($_POST['registro'] == 'nuevo') {
         }
         $stmt->close();
         $conn->close();
-    } catch (Exception $e) {
+    } catch (PDOException $e) {
         $respuesta = array(
             'respuesta' => $e->getMessage()
         ); 

@@ -38,6 +38,7 @@ include_once('templates/navegacion.php');
                   <tr>
                     <th>Inversión</th>
                     <th>Año</th>
+                    <th>Mes</th>
                     <th>Presupuesto</th>
                     <th>Acciones</th>
                   </tr>
@@ -69,6 +70,13 @@ include_once('templates/navegacion.php');
                         <?php
                         $fechaComoEntero = strtotime($cuenta['anio']);
                         $anio = date("Y", $fechaComoEntero);
+                        echo $anio;
+                        ?>
+                      </td>
+                      <td>
+                        <?php
+                        $fechaComoEntero = strtotime($cuenta['anio']);
+                        $anio = date("M", $fechaComoEntero);
                         echo $anio;
                         ?>
                       </td>

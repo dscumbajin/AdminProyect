@@ -1,6 +1,7 @@
 <?php
 include_once('funciones/sesiones.php');
 include_once('funciones/funciones.php');
+include_once('funciones/utilitarios.php');
 include_once('templates/header.php');
 $id = $_GET['id'];
 if (!filter_var($id, FILTER_VALIDATE_INT)) {
@@ -20,7 +21,11 @@ include_once('templates/navegacion.php');
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Proyectos</h1>
+
+        <?php $sql = " SELECT estado FROM estados WHERE estado_id= $id ";
+        $resultado = $conn->query($sql);
+        $estado = $resultado->fetch_assoc(); ?>
+          <h1>Proyectos - <?php echo $estado['estado']?></h1>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -69,8 +74,8 @@ include_once('templates/navegacion.php');
                   } catch (Exception $e) {
                     $error = $e->getMessage();
                     echo $error;
-                  }
-                  while ($proyecto = $resultado->fetch_assoc()) { ?>
+                  }?>
+                  <?php while ($proyecto = $resultado->fetch_assoc()) { ?>
                     <tr>
                       <td><?php echo $proyecto['proyecto_id']; ?></td>
                       <td><a href="detalle-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>"><?php echo $proyecto['detalle']; ?></a></td>
@@ -105,12 +110,110 @@ include_once('templates/navegacion.php');
         <!-- /.col -->
       </div>
       <!-- /.row -->
+
+      
     </div>
     <!-- /.container-fluid -->
   </section>
   <!-- /.content -->
 
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
 
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Flujo de caja</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+            <table id="registros" class="table table-bordered table-striped" >
+<tr id="Cabecera_1">
+
+<th rowspan="2">Año</th>
+
+</tr>
+<tr id="Cabecera_2">
+<th>Enero</th>
+<th>Febrero</th>
+<th>Marzo</th>
+<th>Abril</th>
+<th>Mayo</th>
+<th>Jinio</th>
+<th>Julio</th>
+<th>Agosto</th>
+<th>Septiembre</th>
+<th>Octubre</th>
+<th>Noviembre</th>
+<th>Diciembre</th>
+</tr>
+<tr id="2017_Abril_Viernes_28">
+
+<td>Total pagar mes</td>
+<td>
+<?php $sql = " SELECT SUM(presupuesto) as total FROM cuentas ";
+    $sql .= " INNER JOIN proyectos ";
+    $sql .= " ON proyectos.proyecto_id= cuentas.proyecto_id ";
+    $sql .= " INNER JOIN registros ";
+    $sql .= " ON registros.registros_id= cuentas.registros_id ";
+    $sql .= " WHERE estado_id = 3 AND (MONTH(anio) = 1 AND YEAR(anio) = 2020) ";
+    $resultado = $conn->query($sql);
+    $registrados = $resultado->fetch_assoc();
+
+    echo $registrados['total']; ?>
+</td>
+<td><?php $sql = " SELECT SUM(presupuesto) as total FROM cuentas ";
+    $sql .= " INNER JOIN proyectos ";
+    $sql .= " ON proyectos.proyecto_id= cuentas.proyecto_id ";
+    $sql .= " INNER JOIN registros ";
+    $sql .= " ON registros.registros_id= cuentas.registros_id ";
+    $sql .= " WHERE estado_id = 3 AND (MONTH(anio) = 2 AND YEAR(anio) = 2020) ";
+    $resultado = $conn->query($sql);
+    $registrados = $resultado->fetch_assoc();
+
+    echo $registrados['total']; ?></td>
+<td><?php $sql = " SELECT SUM(presupuesto) as total FROM cuentas ";
+    $sql .= " INNER JOIN proyectos ";
+    $sql .= " ON proyectos.proyecto_id= cuentas.proyecto_id ";
+    $sql .= " INNER JOIN registros ";
+    $sql .= " ON registros.registros_id= cuentas.registros_id ";
+    $sql .= " WHERE estado_id = 3 AND (MONTH(anio) = 3 AND YEAR(anio) = 2020) ";
+    $resultado = $conn->query($sql);
+    $registrados = $resultado->fetch_assoc();
+
+    echo $registrados['total']; ?></td>
+<td><?php
+ echo '<pre>';
+                    var_dump(pagar(3,3,2020));
+                    echo '</pre';
+
+?></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+</table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
 
