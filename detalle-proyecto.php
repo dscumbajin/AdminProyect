@@ -92,7 +92,7 @@ include_once('templates/navegacion.php');
           </div>
 
         </div>
-       
+
         <!--New Row-->
         <div class="row">
           <!--Div Portafolio-->
@@ -129,117 +129,107 @@ include_once('templates/navegacion.php');
               <div class="info-box-content">
                 <span class="info-box-text text-center text-muted">Estado</span>
                 <span class="info-box-number text-center text-muted mb-0"><?php echo $proyecto['estado'] ?> <span>
-                  
-                  <!-- Button trigger modal -->
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Comentario
-                  </button>
-                  <!-- Modal -->
-                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
 
-                        <!-- Formulario del comentario-->
-                        <form name="guardar-registro" id="guardar-registro" action="modelo-proyecto-estado.php" method="post">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                      Comentario
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+
+                          <!-- Formulario del comentario-->
+                          <form name="guardar-registro" id="guardar-registro" action="modelo-proyecto-estado.php" method="post">
 
 
-                          <div class="modal-body">
+                            <div class="modal-body">
 
-                            <!--Select estado-->
-                            <div class="form-group row">
-                              <label for="estado" class="col-sm-2 col-form-label">Estado:</label>
-                              <div class="col-sm-10">
-                                <select name="estado" id="estado" class="form-control seleccionar" style="width: 100%;">
-                                  <option value="0">- Seleccione -</option>
-                                  <?php
-                                  try {
-                                    $estado_actual = $proyecto['estado_id'];
-                                    $sql = " SELECT * FROM estados ";
-                                    $resultado = $conn->query($sql);
-                                    while ($estado = $resultado->fetch_assoc()) {
+                              <!--Select estado-->
+                              <div class="form-group row">
+                                <label for="estado" class="col-sm-2 col-form-label">Estado:</label>
+                                <div class="col-sm-10">
+                                  <select name="estado" id="estado" class="form-control seleccionar" style="width: 100%;">
+                                    <option value="0">- Seleccione -</option>
+                                    <?php
+                                    try {
+                                      $estado_actual = $proyecto['estado_id'];
+                                      $sql = " SELECT * FROM estados ";
+                                      $resultado = $conn->query($sql);
+                                      while ($estado = $resultado->fetch_assoc()) {
 
-                                      if ($estado['estado_id'] == $estado_actual) { ?>
-                                        <option value="<?php echo $estado['estado_id']; ?>" selected><?php echo $estado['estado']; ?>
-                                        </option>
-                                      <?php } else { ?>
-                                        <option value="<?php echo $estado['estado_id']; ?>">
-                                          <?php echo $estado['estado']; ?>
-                                        </option>
-                                  <?php }
+                                        if ($estado['estado_id'] == $estado_actual) { ?>
+                                          <option value="<?php echo $estado['estado_id']; ?>" selected><?php echo $estado['estado']; ?>
+                                          </option>
+                                        <?php } else { ?>
+                                          <option value="<?php echo $estado['estado_id']; ?>">
+                                            <?php echo $estado['estado']; ?>
+                                          </option>
+                                    <?php }
+                                      }
+                                    } catch (Exception $e) {
+                                      echo "Error: " . $e->getMessage();
                                     }
-                                  } catch (Exception $e) {
-                                    echo "Error: " . $e->getMessage();
-                                  }
-                                  ?>
-                                </select>
+                                    ?>
+                                  </select>
+                                </div>
                               </div>
-                            </div>
 
-                            <?php
-                            try {
-                              $sql = " SELECT * FROM proyecto_estado ";
-                              $sql .= " WHERE proyecto_id= $id";
-                              $resultado = $conn->query($sql);
-                              $comentario = $resultado->fetch_assoc();
-                              /* echo '<pre>';
+                              <?php
+                              try {
+                                $sql = " SELECT * FROM proyecto_estado ";
+                                $sql .= " WHERE proyecto_id= $id";
+                                $resultado = $conn->query($sql);
+                                $comentario = $resultado->fetch_assoc();
+                                /* echo '<pre>';
                               var_dump($comentario);
                               echo '</pre'; */
-                            } catch (Exception $e) {
-                              echo "Error: " . $e->getMessage();
-                            }
-                            ?>
+                              } catch (Exception $e) {
+                                echo "Error: " . $e->getMessage();
+                              }
+                              ?>
 
-                            <div class="form-group">
+                              <div class="form-group">
 
-                            <?php
-                            if($comentario['comentario'] !== " " ) {?>
-                            <hr>
-                              <span class=""><?php echo $comentario['comentario'] ?> <span>
-                              <hr>
-                            <?php }?>
+                                <?php
+                                if ($comentario['comentario'] !== " ") { ?>
+                                  <hr>
+                                  <span class=""><?php echo $comentario['comentario'] ?> <span>
+                                      <hr>
+                                    <?php } ?>
 
-                              <input type="text" class="form-control" name="comentario" placeholder="Escribe un comentario" >
-                              
+                                    <input type="text" class="form-control" name="comentario" placeholder="Escribe un comentario">
 
+
+                              </div>
                             </div>
-                          </div>
-                          <div class="modal-footer">
-                            <input type="hidden" name="registro" value="actualizar">
-                            <input type="hidden" name="proyecto_id" value="<?php echo $id ?>">
-                            <input type="hidden" name="id_registro" value="<?php echo $comentario['id_pe'] ?>">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button type="submit" name="submitSave" id="myBtn" class="btn btn-primary">Guardar cambios</button>
-                            <script>
-                              $(document).ready(function() {
-                                $("#myBtn").click(function() {
-                                  $("#exampleModal").modal("hide");
+                            <div class="modal-footer">
+                              <input type="hidden" name="registro" value="actualizar">
+                              <input type="hidden" name="proyecto_id" value="<?php echo $id ?>">
+                              <input type="hidden" name="id_registro" value="<?php echo $comentario['id_pe'] ?>">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                              <button type="submit" name="submitSave" id="myBtn" class="btn btn-primary">Guardar cambios</button>
+                              <script>
+                                $(document).ready(function() {
+                                  $("#myBtn").click(function() {
+                                    $("#exampleModal").modal("hide");
+                                  });
                                 });
-                              });
-                            </script>
-                          </div>
-                        </form>
+                              </script>
+                            </div>
+                          </form>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </span>
+                  </span>
 
               </div>
             </div>
           </div>
         </div>
 
-         <!--New Row-->
-         <div class="row">
-          <!--Div presupuesto estimado-->
-          <div class="col-12 col-sm-6">
-            <div class="info-box bg-light">
-              <div class="info-box-content">
-                <span class="info-box-text text-center text-muted">Presupuesto</span>
-                <span class="info-box-number text-center text-muted mb-0"> <i class="fas fa-dollar-sign"></i> <?php echo $proyecto['presupuesto_inicial'] ?> </span>
-              </div>
-            </div>
-          </div>
-
+        <!--New Row-->
+        <div class="row">
           <!--Div presupuesto total-->
           <div class="col-12 col-sm-6">
             <?php
@@ -254,7 +244,7 @@ include_once('templates/navegacion.php');
             ?>
             <div class="info-box bg-light">
               <div class="info-box-content">
-                <span class="info-box-text text-center text-muted">Total Inversión</span>
+                <span class="info-box-text text-center text-muted">Inversión Total</span>
                 <span class="info-box-number text-center text-muted mb-0"> <i class="fas fa-dollar-sign"></i>
 
                   <?php
@@ -270,6 +260,17 @@ include_once('templates/navegacion.php');
               </div>
             </div>
           </div>
+          <!--Div presupuesto-->
+          <div class="col-12 col-sm-6">
+            <div class="info-box bg-light">
+              <div class="info-box-content">
+                <span class="info-box-text text-center text-muted">Presupuesto</span>
+                <span class="info-box-number text-center text-muted mb-0"> <i class="fas fa-dollar-sign"></i> <?php echo $proyecto['presupuesto_inicial'] ?> </span>
+              </div>
+            </div>
+          </div>
+
+
 
         </div>
 
@@ -281,49 +282,61 @@ include_once('templates/navegacion.php');
     <!-- /.card -->
 
     <!-- Default box -->
-    <div class="card">
-      <div class="card-header">
-        <h3 class="card-title">Presupuestos por año</h3>
 
-      </div>
-
-      <div class="card-body">
-
-        <div class="row">
-          <?php
-          try {
-            $sql = " SELECT  *  FROM cuentas ";
-            $sql .= " INNER JOIN registros ON registros.registros_id = cuentas.registros_id ";
-            $sql .= " WHERE proyecto_id = $id ";
-            $resultado = $conn->query($sql);
-            /* echo '<pre>';
-            var_dump($resultado);
-            echo '</pre'; */
-          } catch (Exception $e) {
-            $error = $e->getMessage();
-            echo $error;
-          }
-          while ($registrados = $resultado->fetch_assoc()) { ?>
-            <div class="col-12 col-sm-2">
-              <div class="info-box bg-light">
-                <div class="info-box-content">
-                  <span class="info-box-text text-center text-muted">
-                    <?php
-                    $fechaComoEntero = strtotime($registrados['anio']);
-                    $anio = date("Y", $fechaComoEntero);
-                    echo $anio;
-                    ?>
-                  </span>
-                  <span class="info-box-number text-center text-muted mb-0"> <i class="fas fa-dollar-sign"></i> <?php echo $registrados['presupuesto'] ?> </span>
-                </div>
-              </div>
-            </div>
-          <?php } ?>
+    <?php
+    if ($registrados['total'] == null) {
+    } else { ?>
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Inversión</h3>
 
         </div>
-      </div>
 
-    </div>
+        <div class="card-body">
+
+          <div class="row">
+            <?php
+            try {
+              $sql = " SELECT  *  FROM cuentas ";
+              $sql .= " INNER JOIN registros ON registros.registros_id = cuentas.registros_id ";
+              $sql .= " WHERE proyecto_id = $id ";
+              $resultado = $conn->query($sql);
+              /* echo '<pre>';
+            var_dump($resultado);
+            echo '</pre'; */
+            } catch (Exception $e) {
+              $error = $e->getMessage();
+              echo $error;
+            }
+            while ($registrados = $resultado->fetch_assoc()) { ?>
+              <div class="col-12 col-sm-2">
+                <div class="info-box bg-light">
+                  <div class="info-box-content">
+                    <span class="info-box-text text-center text-muted">
+                      <?php
+                      setlocale(LC_ALL, "ec_EC");
+
+                      $fechaComoEntero = strtotime($registrados['anio']);
+                      $anio = strftime("%B", $fechaComoEntero);
+
+                      /*  date("F", $fechaComoEntero); */
+                      echo $anio;
+                      ?>
+                    </span>
+                    <span class="info-box-number text-center text-muted mb-0"> <i class="fas fa-dollar-sign"></i> <?php echo $registrados['presupuesto'] ?> </span>
+                  </div>
+                </div>
+              </div>
+            <?php } ?>
+
+          </div>
+        </div>
+
+      </div>
+    <?php }  ?>
+
+
+
 
 
     <!-- Default box -->
@@ -363,7 +376,7 @@ include_once('templates/navegacion.php');
                     <p><?php echo $clave + 1 ?></p>
                   </div>
                   <div class="icon">
-                  <i class="far fa-file-pdf" style="color: red;"></i>
+                    <i class="far fa-file-pdf" style="color: red;"></i>
                   </div>
                   <a href="docs/<?php echo $valor; ?>" class="small-box-footer" style="color: black;">Abri archivo <i class="fas fa-arrow-circle-right"></i></a>
                 </div>

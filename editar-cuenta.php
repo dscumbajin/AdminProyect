@@ -66,21 +66,21 @@ include_once('templates/navegacion.php');
                     <input type="text" class="form-control" id="cuenta" name="cuenta" placeholder="Número de cuenta" required value="
                     <?php
 
-                    $sql = " SELECT detalle FROM Cuentas g left OUTER JOIN proyectos p  ON g.proyecto_id =  p.proyecto_id AND g.proyecto_id = p.proyecto_id  WHERE g.proyecto_id = $id  GROUP BY g.proyecto_id ";
+                    $sql = " SELECT detalle FROM proyectos WHERE proyecto_id= $valor ";
 
                     $resultado = $conn->query($sql);
                     $detalle = $resultado->fetch_assoc();
                     /* echo '<pre>';
                     var_dump($detalle);
                     echo '</pre'; */
-                    echo $detalle['detalle']
+                    echo $detalle['detalle'];
                     ?>" readonly="readonly">
                   </div>
                 </div>
 
                 <!-- Date -->
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Año:</label>
+                  <label class="col-sm-2 col-form-label">Mes:</label>
                   <?php
                   $anio = $cuenta['anio'];
                   $anio_formateada = date('m/d/Y', strtotime($anio));

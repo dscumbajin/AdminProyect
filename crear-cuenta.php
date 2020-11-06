@@ -70,7 +70,7 @@ include_once('templates/navegacion.php');
 
                 <!-- Date -->
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Año:</label>
+                  <label class="col-sm-2 col-form-label">Mes:</label>
                   <div class="col-sm-10 input-group date" id="fecha" data-target-input="nearest">
                     <input type="text" class="form-control datetimepicker-input" data-target="#fecha" name="anio" placeholder="Seleccionar fecha" required/>
                     <div class="input-group-append" data-target="#fecha" data-toggle="datetimepicker">

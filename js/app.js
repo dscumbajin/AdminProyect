@@ -65,8 +65,19 @@ $(function() {
     //Initialize Select2 Elements
     $('.seleccionar').select2();
 
-
-    //Seleccionar imagen
-    bsCustomFileInput.init();
+    //Supera el Presupuesto asignado
+   /*  $('#supera').on('input', function() {
+        var password_nuevo = $('#password').val();
+        if ($(this).val() == password_nuevo) {
+            $('#resultado_password').text('Passwords iguales');
+            $('#resultado_password').parent('.form-group').addClass('has-success').removeClass('has-error');
+            $('input#password').parent('.form-group').addClass('has-success').removeClass('has-error');
+            $('#crear_registro_admin').attr('disabled', false);
+        } else {
+            $('#resultado_password').text('Los passwords no son iguales!');
+            $('#resultado_password').parent('.form-group').addClass('has-error').removeClass('has-success');
+            $('input#password').parent('.form-group').addClass('has-error').removeClass('has-success');
+        }
+    }); */
 
 });
