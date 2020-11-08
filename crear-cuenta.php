@@ -2,6 +2,7 @@
 include_once('funciones/sesiones.php');
 include_once('funciones/funciones.php');
 include_once('templates/header.php');
+$id = $_GET['id'];
 include_once('templates/barra.php');
 include_once('templates/navegacion.php');
 
@@ -45,26 +46,59 @@ include_once('templates/navegacion.php');
               <div class="card-body">
 
 
-              <!-- Select -->
-                
+                <!-- Select -->
+
                 <div class="form-group row">
                   <label for="cuenta" class="col-sm-2 col-form-label">Proyecto:</label>
                   <div class="col-sm-10">
-                    <select name="cuenta" id="cuenta" class="form-control seleccionar" style="width: 100%;" required>
-                    <option value="">- Seleccione -</option>
-                     <?php
-                     try {
-                       $sql = 'SELECT * FROM proyectos';
-                       
-                       $resultado = $conn->query($sql);
-                       while ($proyecto = $resultado->fetch_assoc()) { ?>
-                         <option value="<?php echo $proyecto['proyecto_id'];?>"><?php echo $proyecto['detalle'];?></option>
-                      <?php }
-                     } catch (Exception $e) {
-                       echo "Error: " . $e->getMessage();
-                     }
-                     ?>
-                    </select>
+
+                    <?php
+                    if (!isset($id)) {
+
+                    ?>
+                      <select name="cuenta" id="cuenta" class="form-control seleccionar" style="width: 100%;" required>
+                        <option value="">- Seleccione -</option>
+                        <?php
+                        try {
+                          $sql = 'SELECT * FROM proyectos';
+
+                          $resultado = $conn->query($sql);
+                          while ($proyecto = $resultado->fetch_assoc()) { ?>
+                            <option value="<?php echo $proyecto['proyecto_id']; ?>"><?php echo $proyecto['detalle']; ?></option>
+                        <?php }
+                        } catch (Exception $e) {
+                          echo "Error: " . $e->getMessage();
+                        }
+                        ?>
+                      </select>
+
+
+                    <?php  } else {
+                      $sql = "SELECT * FROM proyectos WHERE proyecto_id = $id ";
+                      $resultado = $conn->query($sql);
+                      $proyecto = $resultado->fetch_assoc(); ?>
+                      <select name="cuenta" id="cuenta" class="form-control seleccionar" style="width: 100%;" readonly="readonly">
+                        <option value="0">- Seleccione -</option>
+                        <?php
+                        try {
+                          $proyecto_actual = $proyecto['proyecto_id'];
+                          $sql = 'SELECT proyecto_id, detalle FROM proyectos';
+                          $resultado = $conn->query($sql);
+                          while ($proyecto = $resultado->fetch_assoc()) {
+                            if ($proyecto['proyecto_id'] == $proyecto_actual) { ?>
+                              <option value="<?php echo $proyecto['proyecto_id']; ?>" selected><?php echo $proyecto['detalle']  ?></option>
+                            <?php } else { ?>
+                              <option value="<?php echo $proyecto['proyecto_id']; ?>"><?php echo $proyecto['detalle']; ?></option>
+                        <?php }
+                          }
+                        } catch (Exception $e) {
+                          echo "Error: " . $e->getMessage();
+                        }
+                        ?>
+                      </select>
+
+                    <?php } ?>
+
                   </div>
                 </div>
 
@@ -72,7 +106,7 @@ include_once('templates/navegacion.php');
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Mes:</label>
                   <div class="col-sm-10 input-group date" id="fecha" data-target-input="nearest">
-                    <input type="text" class="form-control datetimepicker-input" data-target="#fecha" name="anio" placeholder="Seleccionar fecha" required/>
+                    <input type="text" class="form-control datetimepicker-input" data-target="#fecha" name="anio" placeholder="Seleccionar fecha" required />
                     <div class="input-group-append" data-target="#fecha" data-toggle="datetimepicker">
                       <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
@@ -87,13 +121,13 @@ include_once('templates/navegacion.php');
                   </div>
                 </div>
 
-            
+
 
               </div>
               <!-- /.card-body -->
               <div class="card-footer">
                 <input type="hidden" name="registro" value="nuevo">
-                <button type="submit" class="btn btn-dark float-right" >Añadir</button>
+                <button type="submit" class="btn btn-dark float-right">Añadir</button>
               </div>
               <!-- /.card-footer -->
             </form>

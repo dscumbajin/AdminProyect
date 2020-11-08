@@ -88,6 +88,12 @@ $(function() {
     });
 
 
+    $('#Cabecera_1').datetimepicker({
+        viewMode: 'years',
+        format: 'YYYY'
+    });
+
+
 
 
 });

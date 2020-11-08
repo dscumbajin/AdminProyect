@@ -128,13 +128,22 @@ include_once('templates/navegacion.php');
 
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Flujo de caja</h3>
+              
+            <div class="col-sm-2 input-group date" id="Cabecera_1" data-target-input="nearest">
+                    <input type="text" class="form-control datetimepicker-input" data-target="#Cabecera_1" name="anio" placeholder="Año" required />
+                    <div class="input-group-append" data-target="#Cabecera_1" data-toggle="datetimepicker">
+                      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                  </div>
+
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="registros" class="table table-bordered table-striped">
-                <tr id="Cabecera_1">
-                  <th rowspan="2">Año</th>
+              <table id="registros1" class="table-responsive table table-bordered table-striped">
+                <tr >
+                  <th rowspan="2">
+
+                  </th>
                 </tr>
                 <tr id="Cabecera_2">
                   <th>Enero</th>
