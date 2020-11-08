@@ -312,7 +312,7 @@ include_once('templates/navegacion.php');
                   <div class="info-box-content">
                     <span class="info-box-text text-center text-muted">
                       <?php
-                      setlocale(LC_ALL, "ec_EC");
+                      setlocale(LC_ALL, "es_EC");
 
                       $fechaComoEntero = strtotime($registrados['anio']);
                       $anio = strftime("%B", $fechaComoEntero);

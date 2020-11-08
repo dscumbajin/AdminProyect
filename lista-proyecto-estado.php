@@ -48,6 +48,7 @@ include_once('templates/navegacion.php');
 
                     <th>Item</th>
                     <th>Proyecto</th>
+                    <th>Creado</th>
                     <th>Objetivo Estrategico</th>
                     <th>Portafolio</th>
                     <th>Programa</th>
@@ -61,7 +62,7 @@ include_once('templates/navegacion.php');
                 <tbody>
                   <?php
                   try {
-                    $sql = "SELECT proyecto_id, detalle, objetivo_estrategico, presupuesto_inicial, estado_neural, estado, area, descripcion ";
+                    $sql = "SELECT proyecto_id, inicio, detalle, objetivo_estrategico, presupuesto_inicial, estado_neural, estado, area, descripcion ";
                     $sql .= " FROM proyectos ";
                     $sql .= " INNER JOIN portafolios ";
                     $sql .= " ON proyectos.portafolio_id = portafolios.portafolio_id ";
@@ -79,6 +80,9 @@ include_once('templates/navegacion.php');
                     <tr>
                       <td><?php echo $proyecto['proyecto_id']; ?></td>
                       <td><a href="detalle-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>"><?php echo $proyecto['detalle']; ?></a></td>
+                      <td><?php
+                      $dt = new DateTime($proyecto['inicio']);
+                      echo $dt->format('d/m/Y');?></td>
                       <td><?php echo $proyecto['objetivo_estrategico']; ?></td>
                       <td><?php echo $proyecto['area']; ?></td>
                       <td><?php echo $proyecto['descripcion']; ?></td>
@@ -128,7 +132,7 @@ include_once('templates/navegacion.php');
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="registros" class="table table-bordered table-striped" >
+              <table id="registros" class="table table-bordered table-striped">
                 <tr id="Cabecera_1">
                   <th rowspan="2">Año</th>
                 </tr>
@@ -163,7 +167,7 @@ include_once('templates/navegacion.php');
                     </td>
 
                   <?php endwhile; ?>
-                 
+
                 </tr>
 
               </table>

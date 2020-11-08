@@ -36,12 +36,13 @@ include_once('templates/navegacion.php');
               <table id="registros" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    
+
                     <th>Item</th>
                     <th>Proyecto</th>
+                    <th>Creado</th>
                     <th>Objetivo Estrategico</th>
                     <th>Portafolio</th>
-                    <th>Programa</th>                  
+                    <th>Programa</th>
                     <th>Estado neural</th>
                     <th>Estado</th>
                     <th>Presupuesto</th>
@@ -52,7 +53,7 @@ include_once('templates/navegacion.php');
                 <tbody>
                   <?php
                   try {
-                    $sql = "SELECT proyecto_id, detalle, objetivo_estrategico, presupuesto_inicial, estado_neural, estado, area, descripcion ";
+                    $sql = "SELECT proyecto_id,inicio, detalle, objetivo_estrategico, presupuesto_inicial, estado_neural, estado, area, descripcion ";
                     $sql .= " FROM proyectos ";
                     $sql .= " INNER JOIN portafolios ";
                     $sql .= " ON proyectos.portafolio_id = portafolios.portafolio_id ";
@@ -70,28 +71,31 @@ include_once('templates/navegacion.php');
                     <tr>
                       <td><?php echo $proyecto['proyecto_id']; ?></td>
                       <td><a href="detalle-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>"><?php echo $proyecto['detalle']; ?></a></td>
-                      <td><?php echo $proyecto['objetivo_estrategico']; ?></td>    
+                      <td><?php
+                      $dt = new DateTime($proyecto['inicio']);
+                      echo $dt->format('d/m/Y');?></td>
+                      <td><?php echo $proyecto['objetivo_estrategico']; ?></td>
                       <td><?php echo $proyecto['area']; ?></td>
                       <td><?php echo $proyecto['descripcion']; ?></td>
                       <td><?php echo $proyecto['estado_neural']; ?></td>
-                      <td><?php echo $proyecto['estado']; ?></td>     
-                      <td><?php echo $proyecto['presupuesto_inicial']; ?></td>  
+                      <td><?php echo $proyecto['estado']; ?></td>
+                      <td><?php echo $proyecto['presupuesto_inicial']; ?></td>
                       <td><a href="detalle-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>"> Detalle </a></td>
-                      
+
                       <td>
-                      <?php if ($_SESSION['nivel'] == 1) : ?>
-                        <a href="editar-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>" class="btn bg-success btn-flat margin">
-                          <i class="fas fa-pen"></i>
-                        </a>
-                        <a href="#" data-id="<?php echo $proyecto['proyecto_id']; ?>" data-tipo="proyecto" class="btn bg-danger btn-flat margin borrar_registro">
-                          <i class="far fa-trash-alt"></i>
-                        </a>
+                        <?php if ($_SESSION['nivel'] == 1) : ?>
+                          <a href="editar-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>" class="btn bg-success btn-flat margin">
+                            <i class="fas fa-pen"></i>
+                          </a>
+                          <a href="#" data-id="<?php echo $proyecto['proyecto_id']; ?>" data-tipo="proyecto" class="btn bg-danger btn-flat margin borrar_registro">
+                            <i class="far fa-trash-alt"></i>
+                          </a>
                         <?php endif; ?>
                       </td>
                     </tr>
                   <?php } ?>
                 </tbody>
-                
+
               </table>
             </div>
             <!-- /.card-body -->

@@ -133,9 +133,9 @@ include_once('templates/navegacion.php');
                   <label for="estado_neural" class="col-sm-2 col-form-label">Estado neural:</label>
                   <div class="col-sm-10">
                     <select class="form-control select2 select2-danger" id="estado_neural" name="estado_neural" data-dropdown-css-class="select2-danger" style="width: 100%;">
-                      <option value="activar">Activar</option>
-                      <option value="activo">Activo</option>
-                      <option value="cerrado">Cerrado</option>
+                      <option value="Activar">Activar</option>
+                      <option value="Activo">Activo</option>
+                      <option value="Cerrado">Cerrado</option>
                     </select>
                   </div>
                   <!-- /.form-group -->

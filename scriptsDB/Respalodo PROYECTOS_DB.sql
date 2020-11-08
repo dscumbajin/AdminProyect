@@ -108,6 +108,7 @@ INSERT INTO `programas` (`programa_id`, `descripcion`, `editado`) VALUES
 DROP TABLE IF EXISTS `proyectos`;
 CREATE TABLE IF NOT EXISTS `proyectos` (
   `proyecto_id` int(11) NOT NULL AUTO_INCREMENT,
+  `inicio` date NOT NULL,
   `detalle` varchar(255) NOT NULL,
   `objetivo_estrategico` varchar(100) NOT NULL,
   `presupuesto_inicial` double NOT NULL,
@@ -129,9 +130,9 @@ CREATE TABLE IF NOT EXISTS `proyectos` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 /*!40000 ALTER TABLE `proyectos` DISABLE KEYS */;
-INSERT INTO `proyectos` (`proyecto_id`, `detalle`, `objetivo_estrategico`, `presupuesto_inicial`, `estado_neural`, `url_video`, `url_documento`, `portafolio_id`, `programa_id`, `estado_id`, `editado`) VALUES
-	(1, 'Planta Reciclaje (Itulcachi)', 'Utilizar la innovación para mejorar los procesos y los productos.', 0, 'cerrado', '', 'Logo-baterias.pdf', 1, 7, 5, '2020-11-04 08:20:18'),
-	(2, 'Via Itulcachi', 'Mantener la sustentabilidad del negocio', 0, 'cerrado', 'https://youtu.be/FsWpveduQqQ', 'Logo-baterias.pdf', 1, 7, 5, NULL);
+INSERT INTO `proyectos` (`proyecto_id`, `inicio`, `detalle`, `objetivo_estrategico`, `presupuesto_inicial`, `estado_neural`, `url_video`, `url_documento`, `portafolio_id`, `programa_id`, `estado_id`, `editado`) VALUES
+	(1,'2020-01-10' ,'Planta Reciclaje (Itulcachi)', 'Utilizar la innovación para mejorar los procesos y los productos.', 0, 'Cerrado', '', 'Logo-baterias.pdf', 1, 7, 5, '2020-11-04 08:20:18'),
+	(2,'2020-01-10' ,'Via Itulcachi', 'Mantener la sustentabilidad del negocio', 0, 'Cerrado', 'https://youtu.be/FsWpveduQqQ', 'Logo-baterias.pdf', 1, 7, 5, NULL);
 /*!40000 ALTER TABLE `proyectos` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `proyecto_estado`;

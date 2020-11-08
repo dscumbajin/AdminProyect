@@ -15,4 +15,6 @@ function pagar($estado_id, $mes, $anio)
                     $sql .= " WHERE estado_id = $estado_id AND (MONTH(anio) = $mes AND YEAR(anio) = $anio) ";
                     return $sql;
                   }
+
+                  date_default_timezone_set('America/Guayaquil');
 ?>

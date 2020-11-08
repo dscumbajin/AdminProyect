@@ -1,5 +1,6 @@
 <?php
 include_once('funciones/funciones.php');
+$inicio = date('Y-m-d',time());
 $detalle = $_POST['detalle'];
 $objetivo_estrategico = $_POST['objetivo_estrategico'];
 $presupuesto_inicial = $_POST['presupuesto_inicial'];
@@ -56,8 +57,8 @@ if ($_POST['registro'] == 'nuevo') {
     $cadena = implode(",", $valores);
 
     try {
-        $stmt = $conn->prepare('INSERT INTO proyectos (detalle, objetivo_estrategico, presupuesto_inicial, estado_neural, estado_id, portafolio_id, programa_id, url_video, url_documento) VALUES(?,?,?,?,?,?,?,?,?)');
-        $stmt->bind_param('ssdsiiiss', $detalle, $objetivo_estrategico, $presupuesto_inicial, $estado_neural, $estado, $portafolio_id, $programa_id, $url_video, $cadena);
+        $stmt = $conn->prepare('INSERT INTO proyectos (inicio, detalle, objetivo_estrategico, presupuesto_inicial, estado_neural, estado_id, portafolio_id, programa_id, url_video, url_documento) VALUES(?,?,?,?,?,?,?,?,?,?)');
+        $stmt->bind_param('sssdsiiiss',$inicio, $detalle, $objetivo_estrategico, $presupuesto_inicial, $estado_neural, $estado, $portafolio_id, $programa_id, $url_video, $cadena);
         $stmt->execute();
 
         $id_registro = $stmt->insert_id;
