@@ -2,7 +2,7 @@ $(function() {
     $("#registros").DataTable({
         "responsive": true,
         "autoWidth": false,
-        "pageLength": 5,
+        "pageLength": 10,
         "language": {
             paginate: {
                 next: 'Siguiente',

@@ -22,10 +22,10 @@ include_once('templates/navegacion.php');
       <div class="row mb-2">
         <div class="col-sm-6">
 
-        <?php $sql = " SELECT estado FROM estados WHERE estado_id= $id ";
-        $resultado = $conn->query($sql);
-        $estado = $resultado->fetch_assoc(); ?>
-          <h1>Proyectos - <?php echo $estado['estado']?></h1>
+          <?php $sql = " SELECT estado FROM estados WHERE estado_id= $id ";
+          $resultado = $conn->query($sql);
+          $estado = $resultado->fetch_assoc(); ?>
+          <h1>Proyectos - <?php echo $estado['estado'] ?></h1>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -45,12 +45,12 @@ include_once('templates/navegacion.php');
               <table id="registros" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    
+
                     <th>Item</th>
                     <th>Proyecto</th>
                     <th>Objetivo Estrategico</th>
                     <th>Portafolio</th>
-                    <th>Programa</th>                  
+                    <th>Programa</th>
                     <th>Estado neural</th>
                     <th>Estado</th>
                     <th>Presupuesto</th>
@@ -74,7 +74,7 @@ include_once('templates/navegacion.php');
                   } catch (Exception $e) {
                     $error = $e->getMessage();
                     echo $error;
-                  }?>
+                  } ?>
                   <?php while ($proyecto = $resultado->fetch_assoc()) { ?>
                     <tr>
                       <td><?php echo $proyecto['proyecto_id']; ?></td>
@@ -84,23 +84,23 @@ include_once('templates/navegacion.php');
                       <td><?php echo $proyecto['descripcion']; ?></td>
                       <td><?php echo $proyecto['estado_neural']; ?></td>
                       <td><?php echo $proyecto['estado']; ?></td>
-                      <td><?php echo $proyecto['presupuesto_inicial']; ?></td>       
+                      <td><?php echo $proyecto['presupuesto_inicial']; ?></td>
                       <td><a href="detalle-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>"> Detalle </a></td>
-                      
+
                       <td>
-                      <?php if ($_SESSION['nivel'] == 1) : ?>
-                        <a href="editar-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>" class="btn bg-success btn-flat margin">
-                          <i class="fas fa-pen"></i>
-                        </a>
-                        <a href="#" data-id="<?php echo $proyecto['proyecto_id']; ?>" data-tipo="proyecto" class="btn bg-danger btn-flat margin borrar_registro">
-                          <i class="far fa-trash-alt"></i>
-                        </a>
+                        <?php if ($_SESSION['nivel'] == 1) : ?>
+                          <a href="editar-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>" class="btn bg-success btn-flat margin">
+                            <i class="fas fa-pen"></i>
+                          </a>
+                          <a href="#" data-id="<?php echo $proyecto['proyecto_id']; ?>" data-tipo="proyecto" class="btn bg-danger btn-flat margin borrar_registro">
+                            <i class="far fa-trash-alt"></i>
+                          </a>
                         <?php endif; ?>
                       </td>
                     </tr>
                   <?php } ?>
                 </tbody>
-               
+
               </table>
             </div>
             <!-- /.card-body -->
@@ -111,7 +111,7 @@ include_once('templates/navegacion.php');
       </div>
       <!-- /.row -->
 
-      
+
     </div>
     <!-- /.container-fluid -->
   </section>
@@ -128,78 +128,45 @@ include_once('templates/navegacion.php');
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-            <table id="registros" class="table table-bordered table-striped" >
-<tr id="Cabecera_1">
+              <table id="registros" class="table table-bordered table-striped" >
+                <tr id="Cabecera_1">
+                  <th rowspan="2">Año</th>
+                </tr>
+                <tr id="Cabecera_2">
+                  <th>Enero</th>
+                  <th>Febrero</th>
+                  <th>Marzo</th>
+                  <th>Abril</th>
+                  <th>Mayo</th>
+                  <th>Jinio</th>
+                  <th>Julio</th>
+                  <th>Agosto</th>
+                  <th>Septiembre</th>
+                  <th>Octubre</th>
+                  <th>Noviembre</th>
+                  <th>Diciembre</th>
+                </tr>
+                <tr id="2017_Abril_Viernes_28">
 
-<th rowspan="2">Año</th>
+                  <td>Total pagar mes</td>
+                  <?php
+                  $i = 1;
+                  while ($i <= 12) : ?>
 
-</tr>
-<tr id="Cabecera_2">
-<th>Enero</th>
-<th>Febrero</th>
-<th>Marzo</th>
-<th>Abril</th>
-<th>Mayo</th>
-<th>Jinio</th>
-<th>Julio</th>
-<th>Agosto</th>
-<th>Septiembre</th>
-<th>Octubre</th>
-<th>Noviembre</th>
-<th>Diciembre</th>
-</tr>
-<tr id="2017_Abril_Viernes_28">
+                    <td>
+                      <?php
+                      $resultado = $conn->query(pagar($id, $i, 2020));
+                      $registrados = $resultado->fetch_assoc();
+                      echo $registrados['total'];
+                      $i++;
+                      ?>
+                    </td>
 
-<td>Total pagar mes</td>
-<td>
-<?php $sql = " SELECT SUM(presupuesto) as total FROM cuentas ";
-    $sql .= " INNER JOIN proyectos ";
-    $sql .= " ON proyectos.proyecto_id= cuentas.proyecto_id ";
-    $sql .= " INNER JOIN registros ";
-    $sql .= " ON registros.registros_id= cuentas.registros_id ";
-    $sql .= " WHERE estado_id = 3 AND (MONTH(anio) = 1 AND YEAR(anio) = 2020) ";
-    $resultado = $conn->query($sql);
-    $registrados = $resultado->fetch_assoc();
+                  <?php endwhile; ?>
+                 
+                </tr>
 
-    echo $registrados['total']; ?>
-</td>
-<td><?php $sql = " SELECT SUM(presupuesto) as total FROM cuentas ";
-    $sql .= " INNER JOIN proyectos ";
-    $sql .= " ON proyectos.proyecto_id= cuentas.proyecto_id ";
-    $sql .= " INNER JOIN registros ";
-    $sql .= " ON registros.registros_id= cuentas.registros_id ";
-    $sql .= " WHERE estado_id = 3 AND (MONTH(anio) = 2 AND YEAR(anio) = 2020) ";
-    $resultado = $conn->query($sql);
-    $registrados = $resultado->fetch_assoc();
-
-    echo $registrados['total']; ?></td>
-<td><?php $sql = " SELECT SUM(presupuesto) as total FROM cuentas ";
-    $sql .= " INNER JOIN proyectos ";
-    $sql .= " ON proyectos.proyecto_id= cuentas.proyecto_id ";
-    $sql .= " INNER JOIN registros ";
-    $sql .= " ON registros.registros_id= cuentas.registros_id ";
-    $sql .= " WHERE estado_id = 3 AND (MONTH(anio) = 3 AND YEAR(anio) = 2020) ";
-    $resultado = $conn->query($sql);
-    $registrados = $resultado->fetch_assoc();
-
-    echo $registrados['total']; ?></td>
-<td><?php
- echo '<pre>';
-                    var_dump(pagar(3,3,2020));
-                    echo '</pre';
-
-?></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-
-</table>
+              </table>
             </div>
             <!-- /.card-body -->
           </div>
@@ -209,7 +176,7 @@ include_once('templates/navegacion.php');
       </div>
       <!-- /.row -->
 
-      
+
     </div>
     <!-- /.container-fluid -->
   </section>

@@ -1,14 +1,18 @@
-        .nav-sidebar>.nav-header,
-        .sidebar-form {
-            text-transform: uppercase;
-            color: white;
-            font-weight: bold;
-        }
-        
-        .login-page .main-footer {
-            display: none;
-        }
+.nav-sidebar>.nav-header,
+.sidebar-form {
+    text-transform: uppercase;
+    color: white;
+    font-weight: bold;
+}
 
+.login-page .main-footer {
+    display: none;
+}
 
+#registros {
+    font-size: 13px;
+}
 
-        
+#registos tr th a {
+    text-decoration: none;
+}
