@@ -128,7 +128,7 @@ include_once('templates/navegacion.php');
             <div class="info-box bg-light">
               <div class="info-box-content">
                 <span class="info-box-text text-center text-muted">Estado</span>
-                <span class="info-box-number text-center text-muted mb-0"><?php echo $proyecto['estado'] ?> <span>
+                <span id = "detalle-cerrado" class="info-box-number text-center text-muted mb-0"><?php echo $proyecto['estado']?><span>
 
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">

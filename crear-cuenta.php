@@ -119,6 +119,7 @@ include_once('templates/navegacion.php');
                   <label for="presupuesto" class="col-sm-2 col-form-label">Presupuesto:</label>
                   <div class="col-sm-10">
                     <input type="number" class="form-control" id="presupuesto" name="presupuesto" placeholder="$ 0.0" required>
+                    <span id="resultado_resto" class="help-block"></span>
                   </div>
                 </div>
 
@@ -128,30 +129,38 @@ include_once('templates/navegacion.php');
               <!-- /.card-body -->
               <div class="card-footer">
                 <input type="hidden" name="registro" value="nuevo">
+                <?php if (!isset($id)) { ?>
+                  <button id="guardar-presu" type="submit" class="btn btn-dark float-right">Añadir</button>
+                <?php } else { ?>
 
-                <div class="row" style="justify-content: space-between;">
-                  <h3><span class="badge badge-danger">Presupuesto: $ <?php
-                                                                      $resultado = $conn->query(getPresupuesto($id));
-                                                                      $registrados = $resultado->fetch_assoc();
-                                                                      echo $registrados['presupuesto_inicial'];
-
-                                                                      ?></span></h3>
-
-                  <h3><span class="badge badge-danger">Inversion total: $ <?php
-                                                                          $resultado = $conn->query(getTotalInversionProyecto_id($id));
-                                                                          $registrados = $resultado->fetch_assoc();
-
-                                                                          if ($registrados['total'] == null) {
-
-                                                                            echo '0';
-                                                                          } else {
-                                                                            echo  $registrados['total'];
-                                                                          }
+                  <div class="row" style="justify-content: space-between;">
 
 
-                                                                          ?></span></h3>
-                  <button type="submit" class="btn btn-dark float-right">Añadir</button>
-                </div>
+                    <h3><span class="badge badge-danger">Presupuesto: $</span> <span id="presu" class="badge badge-danger">
+                        <?php
+                        $resultado = $conn->query(getPresupuesto($id));
+                        $registrados = $resultado->fetch_assoc();
+                        echo $registrados['presupuesto_inicial'];
+                        ?></span></h3>
+
+                    <h3><span class="badge badge-danger">Inversión total: $</span> <span id="presuTotal" class="badge badge-danger">
+                        <?php
+                        $resultado = $conn->query(getTotalInversionProyecto_id($id));
+                        $registrados = $resultado->fetch_assoc();
+
+                        if ($registrados['total'] == null) {
+
+                          echo '0';
+                        } else {
+                          echo  $registrados['total'];
+                        }
+                        ?></span></h3>
+                    <button id="guardar-presu" type="submit" class="btn btn-dark float-right">Añadir</button>
+                  </div>
+
+                <?php
+                } ?>
+
 
               </div>
               <!-- /.card-footer -->

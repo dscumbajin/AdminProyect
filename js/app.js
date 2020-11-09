@@ -66,10 +66,11 @@ $(function () {
     //Initialize Select2 Elements
     $('.seleccionar').select2();
 
-    $("#myBtn").click(function () {
+   
+    // DESTALLE-PROYECTO
+ $("#myBtn").click(function () {
         $("#exampleModal").modal("hide");
     });
-
 
     // Supero presupuesto total vs presupuesto invertido
     $("#boton01").click(function () {
@@ -100,6 +101,18 @@ $(function () {
         }
     });
 
+    // Clic Guardar cambios
+
+   /*  $('#detalle-cerrado').click(function(){
+        var detalle_cerrado = $('#detalle-cerrado').val();
+        console.log(detalle_cerrado);
+        if (detalle_cerrado == "Cerrado") {
+            $('#boton01').attr("disabled", true);
+        } else {
+            $('#boton01').attr("disabled", false);
+        } 
+    });
+ */
     // Valor año del listado por estado y año
 
     $('#Cabecera_1').datetimepicker({
@@ -142,13 +155,41 @@ $(function () {
 
     );
 
+    $('#presupuesto').on('input', function(){
+        var presu = $("#presu").text();
+        var presuTotal = $('#presuTotal').text();
+        /* console.log(presu);
+        console.log(presuTotal); */
 
-
-
-
-
-
-
-
+        if(parseInt(presuTotal) < parseInt(presu)){
+            var resto =parseInt(presu)- parseInt(presuTotal);
+            $('#resultado_resto').text('La inversión puede ser menor o igual a: $ '+ resto);
+            $('#presupuesto').on('input', function(){
+               var input = $('#presupuesto').val(); 
+            if (input > resto) {
+                $('#guardar-presu').attr("disabled", true);
+            } else {
+                $('#guardar-presu').attr("disabled", false);
+            }
+        })
+        }else{
+            $('#presupuesto').attr('disabled', true);
+            $('#guardar-presu').attr("disabled", true);
+            Swal.fire({
+                title: 'Supera el presupuesto',
+                text: "No se puede registrar una inversión!",
+                icon: 'warning',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            })
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
+        }
+    });
 
 });
