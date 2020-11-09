@@ -17,4 +17,7 @@ function pagar($estado_id, $mes, $anio)
                   }
 
                   date_default_timezone_set('America/Guayaquil');
+
+
+
 ?>

@@ -4,15 +4,23 @@ include_once('funciones/funciones.php');
 include_once('funciones/utilitarios.php');
 include_once('templates/header.php');
 $id = $_GET['id'];
-if (!filter_var($id, FILTER_VALIDATE_INT)) {
+
+/* if (!filter_var($id, FILTER_VALIDATE_INT)) {
   header("Location: ./404.php");
-}
+} */
 include_once('templates/barra.php');
 include_once('templates/navegacion.php');
 
 ?>
 
 
+<?php 
+    $phptemp=( int)$_COOKIE[ "query"]; 
+   /*  if (!is_nan($phptemp))
+    { 
+      
+    }  */
+    ?>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -25,7 +33,8 @@ include_once('templates/navegacion.php');
           <?php $sql = " SELECT estado FROM estados WHERE estado_id= $id ";
           $resultado = $conn->query($sql);
           $estado = $resultado->fetch_assoc(); ?>
-          <h1>Proyectos - <?php echo $estado['estado'] ?></h1>
+          <h1>Proyectos - <?php echo $estado['estado']; ?></h1>
+          
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -81,8 +90,8 @@ include_once('templates/navegacion.php');
                       <td><?php echo $proyecto['proyecto_id']; ?></td>
                       <td><a href="detalle-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>"><?php echo $proyecto['detalle']; ?></a></td>
                       <td><?php
-                      $dt = new DateTime($proyecto['inicio']);
-                      echo $dt->format('d/m/Y');?></td>
+                          $dt = new DateTime($proyecto['inicio']);
+                          echo $dt->format('d/m/Y'); ?></td>
                       <td><?php echo $proyecto['objetivo_estrategico']; ?></td>
                       <td><?php echo $proyecto['area']; ?></td>
                       <td><?php echo $proyecto['descripcion']; ?></td>
@@ -128,19 +137,19 @@ include_once('templates/navegacion.php');
 
           <div class="card">
             <div class="card-header">
-              
-            <div class="col-sm-2 input-group date" id="Cabecera_1" data-target-input="nearest">
-                    <input type="text" class="form-control datetimepicker-input" data-target="#Cabecera_1" name="anio" placeholder="Año" required />
-                    <div class="input-group-append" data-target="#Cabecera_1" data-toggle="datetimepicker">
-                      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                    </div>
-                  </div>
+
+              <div class="col-sm-2 input-group date" id="Cabecera_1" data-target-input="nearest">
+                <input type="text" class="form-control datetimepicker-input" data-target="#Cabecera_1" id="valor-query" name="valor-query" placeholder="Año" required />
+                <div class="input-group-append" data-target="#Cabecera_1" data-toggle="datetimepicker">
+                  <div id="chose" class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+              </div>
 
             </div>
             <!-- /.card-header -->
             <div class="card-body">
               <table id="registros1" class="table-responsive table table-bordered table-striped">
-                <tr >
+                <tr>
                   <th rowspan="2">
 
                   </th>
@@ -168,7 +177,7 @@ include_once('templates/navegacion.php');
 
                     <td>
                       <?php
-                      $resultado = $conn->query(pagar($id, $i, 2020));
+                      $resultado = $conn->query(pagar($id, $i, $phptemp));
                       $registrados = $resultado->fetch_assoc();
                       echo $registrados['total'];
                       $i++;
