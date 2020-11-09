@@ -19,9 +19,9 @@ $(document).ready(function() {
                             title: 'Correcto',
                             text: 'Se guardó corectamente',
                         })
-                        /*  setTimeout(function() {
-                             window.location.href = "admin-area.php";
-                         }, 2000); */
+                         setTimeout(function() {
+                            location.reload();
+                         }, 2000);
 
                 } else {
                     Swal.fire({

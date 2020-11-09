@@ -6,6 +6,7 @@ $id = $_GET['id'];
 include_once('templates/barra.php');
 include_once('templates/navegacion.php');
 
+
 ?>
 
 
@@ -85,7 +86,7 @@ include_once('templates/navegacion.php');
                           $sql = 'SELECT proyecto_id, detalle FROM proyectos';
                           $resultado = $conn->query($sql);
                           while ($proyecto = $resultado->fetch_assoc()) {
-                            if ($proyecto['proyecto_id'] == $proyecto_actual) { ?>
+                            if ($proyecto['proyecto_id'] == $proyecto_actual) {  ?>
                               <option value="<?php echo $proyecto['proyecto_id']; ?>" selected><?php echo $proyecto['detalle']  ?></option>
                             <?php } else { ?>
                               <option value="<?php echo $proyecto['proyecto_id']; ?>"><?php echo $proyecto['detalle']; ?></option>
@@ -127,7 +128,31 @@ include_once('templates/navegacion.php');
               <!-- /.card-body -->
               <div class="card-footer">
                 <input type="hidden" name="registro" value="nuevo">
-                <button type="submit" class="btn btn-dark float-right">Añadir</button>
+
+                <div class="row" style="justify-content: space-between;">
+                  <h3><span class="badge badge-danger">Presupuesto: $ <?php
+                                                                      $resultado = $conn->query(getPresupuesto($id));
+                                                                      $registrados = $resultado->fetch_assoc();
+                                                                      echo $registrados['presupuesto_inicial'];
+
+                                                                      ?></span></h3>
+
+                  <h3><span class="badge badge-danger">Inversion total: $ <?php
+                                                                          $resultado = $conn->query(getTotalInversionProyecto_id($id));
+                                                                          $registrados = $resultado->fetch_assoc();
+
+                                                                          if ($registrados['total'] == null) {
+
+                                                                            echo '0';
+                                                                          } else {
+                                                                            echo  $registrados['total'];
+                                                                          }
+
+
+                                                                          ?></span></h3>
+                  <button type="submit" class="btn btn-dark float-right">Añadir</button>
+                </div>
+
               </div>
               <!-- /.card-footer -->
             </form>

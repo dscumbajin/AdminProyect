@@ -150,8 +150,8 @@ include_once('templates/navegacion.php');
             <div class="card-body">
               <table id="registros1" class="table-responsive table table-bordered table-striped">
                 <tr>
-                  <th rowspan="2">
-
+                  <th rowspan="2" style="text-align: center;">
+                  <span class="badge badge-pill badge-dark" style="font-size: 15px;"><?php echo $phptemp ?></span>
                   </th>
                 </tr>
                 <tr id="Cabecera_2">
@@ -175,11 +175,17 @@ include_once('templates/navegacion.php');
                   $i = 1;
                   while ($i <= 12) : ?>
 
-                    <td>
+                    <td> <i class="fas fa-dollar-sign"></i>
                       <?php
                       $resultado = $conn->query(pagar($id, $i, $phptemp));
                       $registrados = $resultado->fetch_assoc();
-                      echo $registrados['total'];
+
+                      if ($registrados['total'] == null) {
+
+                        echo '0';
+                      } else {
+                        echo  $registrados['total'];
+                      }
                       $i++;
                       ?>
                     </td>

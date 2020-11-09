@@ -39,7 +39,7 @@ include_once('templates/navegacion.php');
                     <th>Inversión</th>
                     <th>Año</th>
                     <th>Mes</th>
-                    <th>Presupuesto</th>
+                    <th>Valor</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
@@ -80,7 +80,7 @@ include_once('templates/navegacion.php');
                         echo $anio;
                         ?>
                       </td>
-                      <td><?php echo $cuenta['presupuesto']; ?></td>
+                      <td> <i class="fas fa-comment-dollar"></i> <?php echo $cuenta['presupuesto']; ?></td>
                       <td>
                         <?php if ($_SESSION['nivel'] == 1) : ?>
                           <a href="editar-cuenta.php?id=<?php echo $cuenta['registros_id'] ; ?>" class="btn bg-success btn-flat margin">

@@ -84,7 +84,19 @@ $(function () {
             }, 500);
 
         } else {
-            alert("Supera el presupuesto")
+
+            Swal.fire({
+                title: 'Supera el presupuesto',
+                text: "No se puede registrar una inversión!",
+                icon: 'warning',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            })
+
         }
     });
 
@@ -115,15 +127,15 @@ $(function () {
 
     // Envio de parametro a url
     $('#valor-query').on('input', function () {
-        var query =parseInt($(this).val()) ;
-             
-    if (location.search.indexOf('q=') < 0) {
-        
-        crearCookie("query", query, 2);
-        setTimeout(() => {
-            location.reload();
-        }, 2000);
-    }
+        var query = parseInt($(this).val());
+
+        if (location.search.indexOf('q=') < 0) {
+
+            crearCookie("query", query, 2);
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
+        }
 
 
     }

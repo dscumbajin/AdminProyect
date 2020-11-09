@@ -205,11 +205,11 @@ include_once('templates/navegacion.php');
                             </div>
                             <div class="modal-footer">
                               <input type="hidden" name="registro" value="actualizar">
-                              <input type="hidden" name="proyecto_id" id="proyecto_id"  value="<?php echo $id ?>">
+                              <input type="hidden" name="proyecto_id" id="proyecto_id" value="<?php echo $id ?>">
                               <input type="hidden" name="id_registro" value="<?php echo $comentario['id_pe'] ?>">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                               <button type="submit" name="submitSave" id="myBtn" class="btn btn-primary">Guardar cambios</button>
-      
+
                             </div>
                           </form>
                         </div>
@@ -225,10 +225,7 @@ include_once('templates/navegacion.php');
           <!--Div presupuesto total-->
           <div class="col-12 col-sm-6">
             <?php
-            $sql = " SELECT  SUM(presupuesto) AS total FROM cuentas ";
-            $sql .= " INNER JOIN registros ON registros.registros_id = cuentas.registros_id ";
-            $sql .= " WHERE proyecto_id = $id ";
-            $resultado = $conn->query($sql);
+            $resultado = $conn->query(getTotalInversionProyecto_id($id));
             $registrados = $resultado->fetch_assoc();
             /*  echo '<pre>';
             var_dump($registrados);
@@ -237,7 +234,7 @@ include_once('templates/navegacion.php');
             <div class="info-box bg-light">
               <div class="info-box-content">
                 <span class="info-box-text text-center text-muted">Inversión Total</span>
-                <span class="info-box-number text-center text-muted mb-0" id = "presupuesto_inversion"> <i class="fas fa-dollar-sign"></i>
+                <span class="info-box-number text-center text-muted mb-0" id="presupuesto_inversion"> <i class="fas fa-dollar-sign"></i>
 
                   <?php
                   if ($registrados['total'] == null) {
@@ -250,12 +247,12 @@ include_once('templates/navegacion.php');
 
                 </span>
                 <!-- Button trigger modal -->
-                <button  id="boton01" type="button" class="btn btn-primary">
-                      Invertir
-                    </button>
-                
-             
-                </div>
+                <button id="boton01" type="button" class="btn btn-primary">
+                  Invertir
+                </button>
+
+
+              </div>
             </div>
           </div>
           <!--Div presupuesto-->
@@ -310,14 +307,11 @@ include_once('templates/navegacion.php');
               <div class="col-12 col-sm-2">
                 <div class="info-box bg-light">
                   <div class="info-box-content">
-                    <span class="info-box-text text-center text-muted">
+                    <span class="info-box-text text-center text-muted" style="text-transform: capitalize;">
                       <?php
-                      setlocale(LC_ALL, "es_EC");
-
+                      setlocale(LC_TIME, "spanish");
                       $fechaComoEntero = strtotime($registrados['anio']);
-                      $anio = strftime("%B", $fechaComoEntero);
-
-                      /*  date("F", $fechaComoEntero); */
+                      $anio = strftime("%B - %Y", $fechaComoEntero);
                       echo $anio;
                       ?>
                     </span>
