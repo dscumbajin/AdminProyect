@@ -98,7 +98,13 @@ include_once('templates/navegacion.php');
                       <td><?php echo $proyecto['estado_neural']; ?></td>
                       <td><?php echo $proyecto['estado']; ?></td>
                       <td><?php echo $proyecto['presupuesto_inicial']; ?></td>
-                      <td><a href="detalle-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>"> Detalle </a></td>
+                      <td>
+                      <?php
+                      $resultado = $conn->query(getTotalInversionProyecto_id($proyecto['proyecto_id']));
+                      $registrados = $resultado->fetch_assoc();
+                      echo $registrados['total'];
+                      ?>
+                      </td>
 
                       <td>
                         <?php if ($_SESSION['nivel'] == 1) : ?>

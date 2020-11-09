@@ -159,7 +159,15 @@ include_once('templates/navegacion.php');
                       ?>
                     </select>
                   </div>
+                  
                 </div>
+
+                <div id = "cuenta-div" class="form-group row">
+                  <label for="cuenta" class="col-sm-2 col-form-label">Nº cuenta</label>
+                  <div class="col-sm-10">
+                  <input type="text" class="form-control" id="cuenta" name="cuenta" value = "0" required >
+                  </div>
+                  </div>
 
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label ">Archivos:</label>

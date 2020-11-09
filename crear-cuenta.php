@@ -107,11 +107,12 @@ include_once('templates/navegacion.php');
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Mes:</label>
                   <div class="col-sm-10 input-group date" id="fecha" data-target-input="nearest">
-                    <input type="text" class="form-control datetimepicker-input" data-target="#fecha" name="anio" placeholder="Seleccionar fecha" required />
+                    <input type="text" class="form-control datetimepicker-input" data-target="#fecha" id= "input-fecha" name="anio" placeholder="Seleccionar fecha" required />
                     <div class="input-group-append" data-target="#fecha" data-toggle="datetimepicker">
                       <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
                   </div>
+                  <span class="col-sm-10" id="mensaje" class="help-block"></span>
                 </div>
                 <!-- /.form group -->
 

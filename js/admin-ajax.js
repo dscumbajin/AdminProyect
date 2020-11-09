@@ -15,13 +15,13 @@ $(document).ready(function() {
                 console.log(data);
                 if (resultado.respuesta == 'exito') {
                     Swal.fire({
-                            icon: 'success',
-                            title: 'Correcto',
-                            text: 'Se guardó corectamente',
-                        })
-                         setTimeout(function() {
-                            location.reload();
-                         }, 2000);
+                        icon: 'success',
+                        title: 'Correcto',
+                        text: 'Se guardó corectamente',
+                    })
+                    setTimeout(function() {
+                        location.reload();
+                    }, 2000);
 
                 } else {
                     Swal.fire({
@@ -55,13 +55,13 @@ $(document).ready(function() {
                 var resultado = data;
                 if (resultado.respuesta == 'exito') {
                     Swal.fire({
-                        icon: 'success',
-                        title: 'Correcto',
-                        text: 'Se guardó corectamente',
-                    })
-                    setTimeout(function() {
-                        window.location.href = "admin-area.php";
-                    }, 2000);
+                            icon: 'success',
+                            title: 'Correcto',
+                            text: 'Se guardó corectamente',
+                        })
+                        /*   setTimeout(function() {
+                              window.location.href = "admin-area.php";
+                          }, 2000); */
                 } else {
                     Swal.fire({
                         icon: 'error',

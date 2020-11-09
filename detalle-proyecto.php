@@ -127,13 +127,13 @@ include_once('templates/navegacion.php');
           <div class="col-12 col-sm-3">
             <div class="info-box bg-light">
               <div class="info-box-content">
-                <span class="info-box-text text-center text-muted">Estado</span>
-                <span id = "detalle-cerrado" class="info-box-number text-center text-muted mb-0"><?php echo $proyecto['estado']?><span>
 
+              <div style="justify-content: space-between;">
+                    
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                      Comentario
-                    </button>
+                    
+                    <a type="button"  data-toggle="modal" data-target="#exampleModal"> <i class="fas fa-comments" style = "color: #007bff;"></i></a>  
+                   
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">
@@ -215,6 +215,12 @@ include_once('templates/navegacion.php');
                         </div>
                       </div>
                     </div>
+                
+                </div>
+                <span class="info-box-text text-center text-muted">Estado</span>
+                
+                <span id = "detalle-cerrado" class="info-box-number text-center text-muted mb-0"><?php echo $proyecto['estado']?><span>
+                   
               </div>
             </div>
           </div>
