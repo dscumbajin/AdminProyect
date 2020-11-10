@@ -38,7 +38,7 @@ include_once('templates/navegacion.php');
       <div class="card-body">
 
         <div class="row">
-          <div class="col-12 col-sm-6">
+          <div class="col-12 col-sm-8">
             <!-- Horizontal Form -->
             <div class="card card-dark">
               <div class="card-header">
@@ -63,7 +63,7 @@ include_once('templates/navegacion.php');
                     <label for="detalle" class="col-sm-2 col-form-label">Proyecto</label>
                     <div class="col-sm-10">
                       <input type="text" class="form-control" id="detalle" name="detalle" placeholder="Nombre del proyecto" required value="<?php echo $proyecto['detalle'] ?>">
-                      
+
                     </div>
                   </div>
 
@@ -210,11 +210,11 @@ include_once('templates/navegacion.php');
                     </div>
                   </div>
 
-                  <div id = "cuenta-div" class="form-group row">
-                  <label for="cuenta" class="col-sm-2 col-form-label">Nº cuenta</label>
-                  <div class="col-sm-10">
-                  <input type="text" class="form-control" id="cuenta" name="cuenta"  value="<?php echo $proyecto['cuenta'] ?>" required >
-                  </div>
+                  <div id="cuenta-div" class="form-group row">
+                    <label for="cuenta" class="col-sm-2 col-form-label">Nº cuenta</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="cuenta" name="cuenta" value="<?php echo $proyecto['cuenta'] ?>" placeholder="Ingrese el número de cuenta" required>
+                    </div>
                   </div>
 
                   <!--Archivos -->
@@ -231,7 +231,7 @@ include_once('templates/navegacion.php');
                 <div class="card-footer">
                   <input type="hidden" name="registro" value="actualizar">
                   <input type="hidden" name="id_registro" value="<?php echo $id ?>">
-                  <input type="hidden" name="url_documento" value="<?php echo $proyecto['url_documento'];?>">
+                  <input type="hidden" name="url_documento" value="<?php echo $proyecto['url_documento']; ?>">
                   <button type="submit" class="btn btn-dark float-right">Guardar</button>
                 </div>
                 <!-- /.card-footer -->
@@ -241,13 +241,13 @@ include_once('templates/navegacion.php');
           </div>
 
 
-          <div class="col-12 col-sm-6">
+          <div class="col-12 col-sm-4">
 
             <div class="row">
               <?php
               if ($proyecto['url_documento'] == "") { ?>
 
-                <div class="col-lg-3 col-6">
+                <div class="col-lg-6 col-6">
                   <div class="small-box bg-ligt">
                     <div class="inner">
                       <p>No existen documentos</p>
@@ -264,7 +264,7 @@ include_once('templates/navegacion.php');
 
                 foreach ($array as $clave => $valor) { ?>
 
-                  <div class="col-lg-3 col-6">
+                  <div class="col-lg-6 col-6">
                     <div class="small-box bg-ligt">
                       <div class="inner">
                         <h6><?php echo $valor; ?></h6>

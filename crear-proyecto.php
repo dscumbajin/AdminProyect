@@ -165,7 +165,7 @@ include_once('templates/navegacion.php');
                 <div id = "cuenta-div" class="form-group row">
                   <label for="cuenta" class="col-sm-2 col-form-label">Nº cuenta</label>
                   <div class="col-sm-10">
-                  <input type="text" class="form-control" id="cuenta" name="cuenta" value = "0" required >
+                  <input type="text" class="form-control" id="cuenta" name="cuenta" value = "0" placeholder="Ingrese el número de cuenta" required >
                   </div>
                   </div>
 
