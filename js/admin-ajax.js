@@ -98,8 +98,8 @@ $(document).ready(function() {
                 url: 'modelo-' + tipo + '.php',
                 success: function(data) {
                     var resultado = JSON.parse(data);
-                    console.log(resultado);
-                    if (resultado.respuesta === 'exito') {
+              /*       console.log(resultado); */
+                    if (resultado.respuesta == 'exito') {
                         Swal.fire(
                             'Eliminado!',
                             'Registro eliminado.',

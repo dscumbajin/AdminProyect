@@ -61,7 +61,7 @@ $(function () {
 
     $('#fecha').datetimepicker({
         format: 'L',
-        locale: 'es'
+        locale:'es'
     });
 
     //Initialize Select2 Elements
@@ -140,7 +140,7 @@ $(function () {
 
 
     // Envio de parametro a url
-    $('#valor-query').keypress(function () {
+    $('#valor-query').on('input', function () {
         var query = parseInt($(this).val());
 
         if (location.search.indexOf('q=') < 0) {
@@ -225,7 +225,7 @@ $(function () {
 
         console.log(value_without_space);
         if (value_without_space == 'Análisis' || value_without_space == 'Entrega') {
-           /*  console.log('esconder div'); */
+            /*  console.log('esconder div'); */
             $('#cuenta-div').hide();
         } else {
             $('#cuenta-div').show();

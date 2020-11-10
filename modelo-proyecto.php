@@ -188,10 +188,12 @@ if ($_POST['registro'] == 'eliminar') {
     if (!$proyecto['url_documento'] == "") {
         $array = explode(",", $proyecto['url_documento']);
     }
+
     try {
         $stmt = $conn->prepare('DELETE FROM proyectos WHERE proyecto_id = ?');
         $stmt->bind_param('i', $id_borrar);
         $stmt->execute();
+
         if ($stmt->affected_rows) {
             
             if(sizeof($array)>0){
@@ -199,9 +201,11 @@ if ($_POST['registro'] == 'eliminar') {
                     unlink('docs/'.$valor);
                 }
             }
+
             $stmt = $conn->prepare('DELETE ca FROM registros ca  LEFT JOIN cuentas cc ON ca.registros_id = cc.registros_id  WHERE cc.proyecto_id = ?');            
             $stmt->bind_param('i', $id_borrar);
             $stmt->execute();
+            
             $respuesta = array(
                 'respuesta' => 'exito',
                 'id_eliminado' => $id_borrar

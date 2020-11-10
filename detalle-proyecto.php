@@ -128,99 +128,99 @@ include_once('templates/navegacion.php');
             <div class="info-box bg-light">
               <div class="info-box-content">
 
-              <div style="justify-content: space-between;">
-                    
-                    <!-- Button trigger modal -->
-                    
-                    <a type="button"  data-toggle="modal" data-target="#exampleModal"> <i class="fas fa-comments" style = "color: #007bff;"></i></a>  
-                   
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
+                <div style="justify-content: space-between;">
 
-                          <!-- Formulario del comentario-->
-                          <form name="guardar-registro" id="guardar-registro" action="modelo-proyecto-estado.php" method="post">
+                  <!-- Button trigger modal -->
+
+                  <a type="button" data-toggle="modal" data-target="#exampleModal"> <i class="fas fa-comments" style="color: #007bff; font-size: 20px;"></i></a>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+
+                        <!-- Formulario del comentario-->
+                        <form name="guardar-registro" id="guardar-registro" action="modelo-proyecto-estado.php" method="post">
 
 
-                            <div class="modal-body">
+                          <div class="modal-body">
 
-                              <!--Select estado-->
-                              <div class="form-group row">
-                                <label for="estado" class="col-sm-2 col-form-label">Estado:</label>
-                                <div class="col-sm-10">
-                                  <select name="estado" id="estado" class="form-control seleccionar" style="width: 100%;">
-                                    <option value="0">- Seleccione -</option>
-                                    <?php
-                                    try {
-                                      $estado_actual = $proyecto['estado_id'];
-                                      $sql = " SELECT * FROM estados ";
-                                      $resultado = $conn->query($sql);
-                                      while ($estado = $resultado->fetch_assoc()) {
+                            <!--Select estado-->
+                            <div class="form-group row">
+                              <label for="estado" class="col-sm-2 col-form-label">Estado:</label>
+                              <div class="col-sm-10">
+                                <select name="estado" id="estado" class="form-control seleccionar" style="width: 100%;">
+                                  <option value="0">- Seleccione -</option>
+                                  <?php
+                                  try {
+                                    $estado_actual = $proyecto['estado_id'];
+                                    $sql = " SELECT * FROM estados ";
+                                    $resultado = $conn->query($sql);
+                                    while ($estado = $resultado->fetch_assoc()) {
 
-                                        if ($estado['estado_id'] == $estado_actual) { ?>
-                                          <option value="<?php echo $estado['estado_id']; ?>" selected><?php echo $estado['estado']; ?>
-                                          </option>
-                                        <?php } else { ?>
-                                          <option value="<?php echo $estado['estado_id']; ?>">
-                                            <?php echo $estado['estado']; ?>
-                                          </option>
-                                    <?php }
-                                      }
-                                    } catch (Exception $e) {
-                                      echo "Error: " . $e->getMessage();
+                                      if ($estado['estado_id'] == $estado_actual) { ?>
+                                        <option value="<?php echo $estado['estado_id']; ?>" selected><?php echo $estado['estado']; ?>
+                                        </option>
+                                      <?php } else { ?>
+                                        <option value="<?php echo $estado['estado_id']; ?>">
+                                          <?php echo $estado['estado']; ?>
+                                        </option>
+                                  <?php }
                                     }
-                                    ?>
-                                  </select>
-                                </div>
+                                  } catch (Exception $e) {
+                                    echo "Error: " . $e->getMessage();
+                                  }
+                                  ?>
+                                </select>
                               </div>
+                            </div>
 
-                              <?php
-                              try {
-                                $sql = " SELECT * FROM proyecto_estado ";
-                                $sql .= " WHERE proyecto_id= $id";
-                                $resultado = $conn->query($sql);
-                                $comentario = $resultado->fetch_assoc();
-                                /* echo '<pre>';
+                            <?php
+                            try {
+                              $sql = " SELECT * FROM proyecto_estado ";
+                              $sql .= " WHERE proyecto_id= $id";
+                              $resultado = $conn->query($sql);
+                              $comentario = $resultado->fetch_assoc();
+                              /* echo '<pre>';
                               var_dump($comentario);
                               echo '</pre'; */
-                              } catch (Exception $e) {
-                                echo "Error: " . $e->getMessage();
-                              }
-                              ?>
+                            } catch (Exception $e) {
+                              echo "Error: " . $e->getMessage();
+                            }
+                            ?>
 
-                              <div class="form-group">
+                            <div class="form-group">
 
-                                <?php
-                                if ($comentario['comentario'] !== " ") { ?>
-                                  <hr>
-                                  <span class=""><?php echo $comentario['comentario'] ?> <span>
-                                      <hr>
-                                    <?php } ?>
+                              <?php
+                              if ($comentario['comentario'] !== " ") { ?>
+                                <hr>
+                                <span class=""><?php echo $comentario['comentario'] ?> <span>
+                                    <hr>
+                                  <?php } ?>
 
-                                    <input type="text" class="form-control" name="comentario" placeholder="Escribe un comentario">
+                                  <input type="text" class="form-control" name="comentario" placeholder="Escribe un comentario">
 
-
-                              </div>
-                            </div>
-                            <div class="modal-footer">
-                              <input type="hidden" name="registro" value="actualizar">
-                              <input type="hidden" name="proyecto_id" id="proyecto_id" value="<?php echo $id ?>">
-                              <input type="hidden" name="id_registro" value="<?php echo $comentario['id_pe'] ?>">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                              <button type="submit" name="submitSave" id="myBtn" class="btn btn-primary">Guardar cambios</button>
 
                             </div>
-                          </form>
-                        </div>
+                          </div>
+                          <div class="modal-footer">
+                            <input type="hidden" name="registro" value="actualizar">
+                            <input type="hidden" name="proyecto_id" id="proyecto_id" value="<?php echo $id ?>">
+                            <input type="hidden" name="id_registro" value="<?php echo $comentario['id_pe'] ?>">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" name="submitSave" id="myBtn" class="btn btn-primary">Guardar cambios</button>
+
+                          </div>
+                        </form>
                       </div>
                     </div>
-                
+                  </div>
+
                 </div>
                 <span class="info-box-text text-center text-muted">Estado</span>
-                
-                <span id = "detalle-cerrado" class="info-box-number text-center text-muted mb-0"><?php echo $proyecto['estado']?><span>
-                   
+
+                <span id="detalle-cerrado" class="info-box-number text-center text-muted mb-0"><?php echo $proyecto['estado'] ?><span>
+
               </div>
             </div>
           </div>
@@ -253,8 +253,11 @@ include_once('templates/navegacion.php');
 
                 </span>
                 <!-- Button trigger modal -->
-                <button id="boton01" type="button" class="btn btn-primary">
-                  Invertir
+
+
+
+                <button id="boton01" type="button" class="btn btn-primary " >
+                  <i class="fas fa-hand-holding-usd"></i> Invertir
                 </button>
 
 
