@@ -1,4 +1,4 @@
-$(function () {
+$(function() {
     $("#registros").DataTable({
         "responsive": true,
         "autoWidth": false,
@@ -21,7 +21,7 @@ $(function () {
 
     $('#crear_registro_admin').attr('disabled', true);
 
-    $('#repetir_password').on('input', function () {
+    $('#repetir_password').on('input', function() {
         var password_nuevo = $('#password').val();
         if ($(this).val() == password_nuevo) {
             $('#resultado_password').text('Passwords iguales');
@@ -37,15 +37,15 @@ $(function () {
 
     // validaciones
 
-    $('#presupuesto_inicial').on('input', function () {
+    $('#presupuesto_inicial').on('input', function() {
         this.value = this.value.replace(/[^0-9]/g, '');
     });
-    $('#presupuesto').keyup(function () {
+    $('#presupuesto').keyup(function() {
         this.value = (this.value + '').replace(/[^0-9]/g, '');
     });
 
     // Validar input tipo date
-    $(".anio").focusout(function () {
+    $(".anio").focusout(function() {
         s = $(this).val();
         var bits = s.split('/');
         var d = new Date(bits[2] + '/' + bits[0] + '/' + bits[1]);
@@ -61,7 +61,7 @@ $(function () {
 
     $('#fecha').datetimepicker({
         format: 'L',
-        locale:'es'
+        locale: 'es'
     });
 
     //Initialize Select2 Elements
@@ -69,18 +69,18 @@ $(function () {
 
 
     // DESTALLE-PROYECTO
-    $("#myBtn").click(function () {
+    $("#myBtn").click(function() {
         $("#exampleModal").modal("hide");
     });
 
     // Supero presupuesto total vs presupuesto invertido
-    $("#boton01").click(function () {
+    $("#boton01").click(function() {
         var proyecto_id = $("#proyecto_id").val();
         var presupuesto_inversion = $("#presupuesto_inversion").text();
         var presupuesto_total = $("#presupuesto_total").text();
         if (parseInt(presupuesto_inversion) < parseInt(presupuesto_total)) {
 
-            setTimeout(function () {
+            setTimeout(function() {
                 window.location.href = `crear-cuenta.php?id=${parseInt(proyecto_id)}`;
 
             }, 500);
@@ -104,7 +104,7 @@ $(function () {
 
     // Clic Guardar cambios
 
-    $('#boton01').click(function () {
+    $('#boton01').click(function() {
         var detalle_cerrado = $('#detalle-cerrado').text();
         console.log(detalle_cerrado);
         if (detalle_cerrado == "Cerrado") {
@@ -119,7 +119,7 @@ $(function () {
     $('#Cabecera_1').datetimepicker({
         viewMode: 'years',
         format: 'YYYY',
-        onClose: function (theDate) {
+        onClose: function(theDate) {
             $('#valor-query').text = theDate;
         }
     });
@@ -140,23 +140,23 @@ $(function () {
 
 
     // Envio de parametro a url
-    $('#valor-query').on('input', function () {
-        var query = parseInt($(this).val());
+    $('#valor-query').on('input', function() {
+            var query = parseInt($(this).val());
 
-        if (location.search.indexOf('q=') < 0) {
+            if (location.search.indexOf('q=') < 0) {
 
-            crearCookie("query", query, 2);
-            setTimeout(() => {
-                location.reload();
-            }, 2000);
+                crearCookie("query", query, 2);
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            }
+
+
         }
-
-
-    }
 
     );
 
-    $('#presupuesto').on('input', function () {
+    $('#presupuesto').on('input', function() {
         var presu = $("#presu").text();
         var presuTotal = $('#presuTotal').text();
         /* console.log(presu);
@@ -165,7 +165,7 @@ $(function () {
         if (parseInt(presuTotal) < parseInt(presu)) {
             var resto = parseInt(presu) - parseInt(presuTotal);
             $('#resultado_resto').text('La inversión puede ser menor o igual a: $ ' + resto);
-            $('#presupuesto').on('input', function () {
+            $('#presupuesto').on('input', function() {
                 var input = $('#presupuesto').val();
                 if (input > resto) {
                     $('#guardar-presu').attr("disabled", true);
@@ -194,22 +194,35 @@ $(function () {
     });
 
 
-    $('#input-fecha').on('input', function () {
+
+    $('#input-fecha').on('input', function() {
         var input_fecha = new Date($("#input-fecha").val());
+
         var fecha_actual = new Date();
         var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        if (input_fecha <= fecha_actual) {
+
+        if (input_fecha < fecha_actual) {
 
             /* console.log('no se puede ingresar lla fecha'); */
             $('#guardar-presu').attr("disabled", true);
             $('#mensaje').text('No puede registrar inversiones posteriores a la fecha: ' + fecha_actual.toLocaleDateString("es-Ec", options));
             $('#mensaje').show();
+            return false;
 
-
-        } else {
+        }
+        if (input_fecha == fecha_actual) {
             /* console.log('si se puede ingresar el registro'); */
             $('#mensaje').hide();
             $('#guardar-presu').attr("disabled", false);
+            return false;
+        }
+
+
+        if (input_fecha > fecha_actual) {
+            /* console.log('si se puede ingresar el registro'); */
+            $('#mensaje').hide();
+            $('#guardar-presu').attr("disabled", false);
+            return false;
 
         }
 
@@ -217,7 +230,7 @@ $(function () {
 
     $('#cuenta-div').hide();
 
-    $('#estado').on('change', function () {
+    $('#estado').on('change', function() {
 
         var estado = $("#estado option:selected").text();
         /* Elimino todos los espacios en blanco que tenga la cadena delante y detrás */

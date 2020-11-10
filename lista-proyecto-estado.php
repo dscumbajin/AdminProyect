@@ -71,16 +71,8 @@ include_once('templates/navegacion.php');
                 <tbody>
                   <?php
                   try {
-                    $sql = "SELECT proyecto_id, inicio, detalle, objetivo_estrategico, presupuesto_inicial, estado_neural, estado, area, descripcion ";
-                    $sql .= " FROM proyectos ";
-                    $sql .= " INNER JOIN portafolios ";
-                    $sql .= " ON proyectos.portafolio_id = portafolios.portafolio_id ";
-                    $sql .= " INNER JOIN programas ";
-                    $sql .= " ON proyectos.programa_id=programas.programa_id ";
-                    $sql .= " INNER JOIN estados ";
-                    $sql .= " ON proyectos.estado_id=estados.estado_id ";
-                    $sql .= " WHERE proyectos.estado_id = $id ";
-                    $resultado = $conn->query($sql);
+                    
+                    $resultado = $conn->query(getTotalByEstadoId($id));
                   } catch (Exception $e) {
                     $error = $e->getMessage();
                     echo $error;
@@ -98,14 +90,7 @@ include_once('templates/navegacion.php');
                       <td><?php echo $proyecto['estado_neural']; ?></td>
                       <td><?php echo $proyecto['estado']; ?></td>
                       <td><?php echo $proyecto['presupuesto_inicial']; ?></td>
-                      <td>
-                      <?php
-                      $resultado = $conn->query(getTotalInversionProyecto_id($proyecto['proyecto_id']));
-                      $registrados = $resultado->fetch_assoc();
-                      echo $registrados['total'];
-                      ?>
-                      </td>
-
+                      <td><?php echo $proyecto['total'];?></td>
                       <td>
                         <?php if ($_SESSION['nivel'] == 1) : ?>
                           <a href="editar-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>" class="btn bg-success btn-flat margin">

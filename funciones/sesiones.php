@@ -39,6 +39,19 @@ function getPresupuesto($proyecto_id){
     return $sql;
   }
 
+function getTotalByEstadoId($id){
+  $sql = " SELECT proyectos.proyecto_id, inicio, detalle, objetivo_estrategico, presupuesto_inicial, estado_neural, estado, area, descripcion, SUM(presupuesto) AS total ";
+  $sql .= " FROM proyectos ";
+  $sql .= " JOIN estados ON estados.estado_id = proyectos.estado_id ";
+  $sql .= " JOIN programas ON programas.programa_id=proyectos.programa_id  ";
+  $sql .= " JOIN portafolios ON portafolios.portafolio_id= proyectos.portafolio_id ";
+  $sql .= " JOIN cuentas ON cuentas.proyecto_id= proyectos.proyecto_id ";
+  $sql .= " JOIN registros ON registros.registros_id = cuentas.registros_id ";
+  $sql .= " WHERE estados.estado_id = $id ";
+  $sql .= " GROUP BY proyectos.proyecto_id ";
+  return $sql;
+}
+
 
 session_start();
 usuario_auntenticado();
