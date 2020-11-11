@@ -80,7 +80,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
-                Programa
+                Programas
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -106,7 +106,7 @@
               <i class=" nav-icon fas fa-building"></i>
 
               <p>
-                Portafolio
+                Portafolios
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -130,7 +130,7 @@
             <a href="#" class="nav-link">
               <i class=" nav-icon fas fa-file-invoice-dollar"></i>
               <p>
-                Presupuesto
+                Historial inversiones
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -141,12 +141,12 @@
                   <p>Ver Todos</p>
                 </a>
               </li>
-              <li class="nav-item">
+             <!--  <li class="nav-item">
                 <a href="crear-cuenta.php" class="nav-link">
                   <i class="nav-icon fas fa-plus-circle"></i>
                   <p>Agregar</p>
                 </a>
-              </li>
+              </li> -->
             </ul>
           </li>
 

@@ -16,7 +16,7 @@ include_once('templates/navegacion.php');
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Presupuestos</h1>
+          <h1>Inversiones</h1>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -29,14 +29,15 @@ include_once('templates/navegacion.php');
 
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Presupuestos Asignados</h3>
+              <h3 class="card-title">Historial inversiones</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
               <table id="registros" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Inversión</th>
+                    <th>Proyecto</th>
+                    <th>Nº cuenta</th>
                     <th>Año</th>
                     <th>Mes</th>
                     <th>Valor</th>
@@ -47,7 +48,7 @@ include_once('templates/navegacion.php');
                   <?php
                   try {
 
-                    $sql = " SELECT proyectos.proyecto_id, registros.registros_id, proyectos.detalle, presupuesto, anio  FROM cuentas ";
+                    $sql = " SELECT proyectos.proyecto_id, registros.registros_id, proyectos.detalle, proyectos.cuenta, presupuesto, anio  FROM cuentas ";
                     $sql .= " INNER JOIN registros ON registros.registros_id = cuentas.registros_id ";
                     $sql .= " INNER JOIN proyectos ON proyectos.proyecto_id = cuentas.proyecto_id ";
                     $sql .= " WHERE cuentas.proyecto_id = proyectos.proyecto_id ";
@@ -64,10 +65,10 @@ include_once('templates/navegacion.php');
                     echo '</pre'; */
                   ?>
                     <tr>
-                      <td>
-                        <?php echo $cuenta['detalle']; ?></td>
-                      <td>
-                        <?php
+                      <td><?php echo $cuenta['detalle']; ?></td>
+                      
+                      <td><?php echo $cuenta['cuenta']; ?></td>
+                      <td><?php
                         $fechaComoEntero = strtotime($cuenta['anio']);
                         $anio = date("Y", $fechaComoEntero);
                         echo $anio;
