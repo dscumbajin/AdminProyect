@@ -52,5 +52,15 @@ function getTotalByEstadoId($id){
   return $sql;
 }
 
+function getProyectosByEstadoId($id){
+  $sql = " SELECT proyectos.proyecto_id,cuenta, inicio, detalle, objetivo_estrategico, presupuesto_inicial, estado_neural, estado, area, descripcion";
+  $sql .= " FROM proyectos ";
+  $sql .= " JOIN estados ON estados.estado_id = proyectos.estado_id ";
+  $sql .= " JOIN programas ON programas.programa_id=proyectos.programa_id  ";
+  $sql .= " JOIN portafolios ON portafolios.portafolio_id= proyectos.portafolio_id ";
+  $sql .= " WHERE estados.estado_id = $id ";
+  return $sql;
+}
+
 session_start();
 usuario_auntenticado();

@@ -56,7 +56,7 @@ include_once('templates/navegacion.php');
       <div class="icon">
         <i class="fas fa-chart-line"></i>
       </div>
-      <a href="lista-proyecto-estado.php?id=1" class="small-box-footer">Más información <i class="fas fa-arrow-circle-right"></i></a>
+      <a href="lista-proyecto-estado-ae.php?id=1" class="small-box-footer">Más información <i class="fas fa-arrow-circle-right"></i></a>
     </div>
   </div>
 

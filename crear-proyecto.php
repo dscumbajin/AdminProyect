@@ -76,7 +76,7 @@ include_once('templates/navegacion.php');
                 <div class="form-group row">
                   <label for="presupuesto_inicial" class="col-sm-2 col-form-label">Presupuesto</label>
                   <div class="col-sm-10">
-                    <input type="number" class="form-control" id="presupuesto_inicial" name="presupuesto_inicial" placeholder="$0 " required >
+                    <input type="number" class="form-control" id="presupuesto_inicial" name="presupuesto_inicial" placeholder="$0 " required onkeypress="return filterFloat(event,this);" >
                   </div>
                 </div>
 

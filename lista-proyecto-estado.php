@@ -78,7 +78,10 @@ include_once('templates/navegacion.php');
                   } ?>
                   <?php while ($proyecto = $resultado->fetch_assoc()) { ?>
                     <tr>
-                      <td><a href="detalle-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>"><?php echo $proyecto['detalle']; ?></a></td>
+                    <td>
+                    <?php echo $proyecto['detalle']; ?> - 
+                    <a class="float-rigth" href="detalle-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>"> Detalle </a>
+                    </td>
                       <td><?php
                           $dt = new DateTime($proyecto['inicio']);
                           echo $dt->format('d/m/Y'); ?></td>
@@ -87,12 +90,12 @@ include_once('templates/navegacion.php');
                       <td><?php echo $proyecto['descripcion']; ?></td>
                       <td><?php echo $proyecto['estado_neural']; ?></td>
                       <td><?php echo $proyecto['estado']; ?></td>
-                      <td><?php echo $proyecto['estado'];?></td>
-                      <td><?php if ($proyecto['cuenta'] !== '0'){
+                      <td><?php if ($proyecto['cuenta'] !== null){
                          echo $proyecto['cuenta'];
                       }else{
                         echo "Asignar cuenta";
                       }?></td>
+                      <td><?php echo $proyecto['presupuesto_inicial']; ?></td>
                       <td><?php echo $proyecto['total'];?></td>
                       <td>
                         <?php if ($_SESSION['nivel'] == 1) : ?>
