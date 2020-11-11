@@ -55,7 +55,7 @@ include_once('templates/navegacion.php');
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">N° cuenta: <?php echo $proyecto['cuenta'] ?></h3>
-
+        <a id="back" href="#" class="float-right"><i class="fas fa-hand-point-left"></i> Atrás</a>
       </div>
       <div class="card-body">
         <!--New Row-->

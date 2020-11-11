@@ -29,7 +29,7 @@ include_once('templates/navegacion.php');
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">Crear nuevo proyecto</h3>
-
+        <a id="lista" href="#" class="float-right"><i class="fas fa-hand-point-left"></i> Atrás</a>
       </div>
       <div class="card-body">
 

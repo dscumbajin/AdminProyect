@@ -30,7 +30,7 @@ include_once('templates/navegacion.php');
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Historial inversiones</h3>
-            </div>
+              <a id="lista" href="#" class="float-right"><i class="fas fa-hand-point-left"></i> Atrás</a>            </div>
             <!-- /.card-header -->
             <div class="card-body">
               <table id="registros" class="table table-bordered table-striped">

@@ -28,8 +28,9 @@ include_once('templates/navegacion.php');
         <div class="col-12">
 
           <div class="card">
-            <div class="card-header">
+            <div class="card-header" >
               <h3 class="card-title">Administra los proyectos en esta sección</h3>
+              <a id="lista" href="#" class="float-right"><i class="fas fa-hand-point-left"></i> Atrás</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">

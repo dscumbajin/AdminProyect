@@ -33,7 +33,7 @@ include_once('templates/navegacion.php');
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">Editar Proyecto</h3>
-
+        <a id="back" href="#" class="float-right"><i class="fas fa-hand-point-left"></i> Atrás</a>
       </div>
       <div class="card-body">
 
@@ -42,7 +42,8 @@ include_once('templates/navegacion.php');
             <!-- Horizontal Form -->
             <div class="card card-dark">
               <div class="card-header">
-                <h3 class="card-title">Llena el formulario para editar un proyecto</h3>
+                <h3 class="card-title">Llena el formulario para editar el proyecto</h3>
+                
               </div>
               <!-- /.card-header -->
               <?php

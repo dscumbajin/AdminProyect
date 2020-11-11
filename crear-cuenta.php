@@ -18,7 +18,7 @@ include_once('templates/navegacion.php');
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Presupuesto</h1>
+          <h1>Inversiones</h1>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -30,8 +30,8 @@ include_once('templates/navegacion.php');
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">Presupuesto</h3>
-
+        <h3 class="card-title">Inversión</h3>
+        <a id="lista" href="#" class="float-right"><i class="fas fa-hand-point-left"></i> Atrás</a>
       </div>
       <div class="card-body">
 
@@ -39,7 +39,8 @@ include_once('templates/navegacion.php');
           <!-- Horizontal Form -->
           <div class="card card-dark">
             <div class="card-header">
-              <h3 class="card-title">Llena el formulario asignar el presupuesto al proyecto</h3>
+              <h3 class="card-title">Llena el formulario para registrar una inversión al proyecto</h3>
+              
             </div>
             <!-- /.card-header -->
             <!-- form start -->

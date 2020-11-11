@@ -6,7 +6,6 @@ $objetivo_estrategico = $_POST['objetivo_estrategico'];
 $presupuesto_inicial = $_POST['presupuesto_inicial'];
 $portafolio_id = $_POST['area'];
 $programa_id = $_POST['descripcion'];
-$cuenta_id = $_POST['cuenta'];
 $estado_neural = $_POST['estado_neural'];
 $estado = $_POST['estado'];
 $url_video = $_POST['url_video'];

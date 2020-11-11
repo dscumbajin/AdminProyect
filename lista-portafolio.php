@@ -16,7 +16,7 @@ include_once('templates/navegacion.php');
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Portafolio</h1>
+          <h1>Portafolios</h1>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -29,7 +29,9 @@ include_once('templates/navegacion.php');
 
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Administra el portafolio del proyecto </h3>
+              <h3 class="card-title">Administra los portafolios de los proyectos en esta sección </h3>
+              <a id="lista" href="#" class="float-right"><i class="fas fa-hand-point-left"></i> Atrás</a>
+
             </div>
             <!-- /.card-header -->
             <div class="card-body">

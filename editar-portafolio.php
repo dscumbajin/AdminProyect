@@ -20,7 +20,7 @@ include_once('templates/navegacion.php');
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Editar Portafolio</h1>
+          <h1>Portafolios</h1>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -33,7 +33,7 @@ include_once('templates/navegacion.php');
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">Editar Portafolio</h3>
-
+        <a id="back" href="#" class="float-right"><i class="fas fa-hand-point-left"></i> Atrás</a>
       </div>
       <div class="card-body">
 
@@ -41,7 +41,7 @@ include_once('templates/navegacion.php');
           <!-- Horizontal Form -->
           <div class="card card-dark">
             <div class="card-header">
-              <h3 class="card-title">Llena el formulario para editar el Portafolio</h3>
+              <h3 class="card-title">Llena el formulario para editar el área del portafolio</h3>
             </div>
             <!-- /.card-header -->
             <?php

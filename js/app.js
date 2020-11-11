@@ -37,14 +37,6 @@ $(function() {
 
     // validaciones
 
-    /*  $('#presupuesto_inicial').on('input', function() {
-        this.value = this.value.replace(/[^0-9]/g, '');
-    });
-    $('#presupuesto').keyup(function() {
-        this.value = (this.value + '').replace(/[^0-9]/g, '');
-    });
- */
-
     function filterFloat(evt, input) {
         // Backspace = 8, Enter = 13, ‘0′ = 48, ‘9′ = 57, ‘.’ = 46, ‘-’ = 43
         var key = window.Event ? evt.which : evt.keyCode;
@@ -283,6 +275,7 @@ $(function() {
 
             var tipo = $('#crear_registro').text();
             var input_cuenta = $('#cuenta').val();
+            console.log(input_cuenta);
 
             if (tipo == "Añadir") {
                 console.log(tipo);
@@ -294,10 +287,19 @@ $(function() {
                 $('#cuenta').removeAttr('disabled');
 
             } else {
-                $('#cuenta').attr('disabled', 'disabled');
+
+                $('#cuenta').attr('readonly', true);
+
             }
 
         }
+    });
+
+    $('#lista').click(() => {
+        $('#lista').attr('href', 'admin-area.php');
+    });
+    $('#back').click(() => {
+        window.history.back();
     });
 
 });
