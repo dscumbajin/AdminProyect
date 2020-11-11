@@ -70,7 +70,7 @@ include_once('templates/navegacion.php');
                     <tr>
                     <td>
                     <?php echo $proyecto['detalle']; ?> - 
-                    <a class="float-rigth" href="detalle-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>"> Detalle </a>
+                    <a class="float-rigth" href="detalle-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>"> <span class="badge badge-primary"style = "font-size: 13px"> Detalle</span> </a>
                     </td>
 
                       <td><?php
@@ -84,7 +84,8 @@ include_once('templates/navegacion.php');
                       <td><?php if ($proyecto['cuenta'] !== "0"){
                          echo $proyecto['cuenta'];
                       }else{
-                        echo "Asignar cuenta";
+                        echo' <span class="badge badge-danger">Asignar cuenta</span>';
+                        
                       }?></td>
                       <td><?php echo $proyecto['presupuesto_inicial']; ?></td>
                       <td>

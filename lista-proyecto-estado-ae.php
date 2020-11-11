@@ -79,7 +79,7 @@ include_once('templates/navegacion.php');
                     <tr>
                     <td>
                     <?php echo $proyecto['detalle']; ?> - 
-                    <a class="float-rigth" href="detalle-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>"> Detalle </a>
+                    <a class="float-rigth" href="detalle-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>"> <span class="badge badge-primary" style = "font-size: 13px"> Detalle</span>  </a>
                     </td>
                       <td><?php
                           $dt = new DateTime($proyecto['inicio']);
