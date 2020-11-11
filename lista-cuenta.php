@@ -83,11 +83,11 @@ include_once('templates/navegacion.php');
                       <td> <i class="fas fa-comment-dollar"></i> <?php echo $cuenta['presupuesto']; ?></td>
                       <td>
                         <?php if ($_SESSION['nivel'] == 1) : ?>
-                          <a href="editar-cuenta.php?id=<?php echo $cuenta['registros_id'] ; ?>" class="btn bg-success btn-flat margin">
-                            <i class="fas fa-pen"></i>
+                          <a href="editar-cuenta.php?id=<?php echo $cuenta['registros_id'] ; ?>" >
+                            <i class="fas fa-pen editar"></i>
                           </a>
-                          <a href="#" data-id="<?php echo $cuenta['registros_id']; ?>" data-tipo="cuenta" class="btn bg-danger btn-flat margin borrar_registro">
-                            <i class="far fa-trash-alt"></i>
+                          <a href="#" data-id="<?php echo $cuenta['registros_id']; ?>" data-tipo="cuenta" class="borrar_registro">
+                            <i class="far fa-trash-alt eliminar"></i>
                           </a>
                         <?php endif; ?>
                       </td>

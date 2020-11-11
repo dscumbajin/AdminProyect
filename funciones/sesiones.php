@@ -52,6 +52,5 @@ function getTotalByEstadoId($id){
   return $sql;
 }
 
-
 session_start();
 usuario_auntenticado();

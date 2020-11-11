@@ -12,16 +12,17 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         
         <div class="info" style="color: white;">
-          <a href="#" class="d-block"><?php echo $_SESSION['nombre']; ?></a>
+          
 
           <?php
           if ($_SESSION['nivel'] == 1) {
 
-            echo 'Usuario: <span class="badge badge-success">Admin</span>';
+            echo ' <span class="badge badge-success">Administrador</span>';
           } else {
-            echo 'Usuario: <span class="badge badge-primary">User</span>';
+            echo ' <span class="badge badge-primary">User</span>';
           }
           ?>
+          <a href="#" class="d-block">Usuario: <?php echo $_SESSION['nombre']; ?></a>
         </div>
       </div>
 

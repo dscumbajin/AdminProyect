@@ -72,8 +72,8 @@ include_once('templates/navegacion.php');
                       <td><?php echo $proyecto['proyecto_id']; ?></td>
                       <td><a href="detalle-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>"><?php echo $proyecto['detalle']; ?></a></td>
                       <td><?php
-                      $dt = new DateTime($proyecto['inicio']);
-                      echo $dt->format('d/m/Y');?></td>
+                          $dt = new DateTime($proyecto['inicio']);
+                          echo $dt->format('d/m/Y'); ?></td>
                       <td><?php echo $proyecto['objetivo_estrategico']; ?></td>
                       <td><?php echo $proyecto['area']; ?></td>
                       <td><?php echo $proyecto['descripcion']; ?></td>
@@ -84,11 +84,11 @@ include_once('templates/navegacion.php');
 
                       <td>
                         <?php if ($_SESSION['nivel'] == 1) : ?>
-                          <a href="editar-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>" class="btn bg-success btn-flat margin">
-                            <i class="fas fa-pen"></i>
+                          <a href="editar-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>">
+                            <i class="fas fa-pen editar"></i>
                           </a>
-                          <a href="#" data-id="<?php echo $proyecto['proyecto_id']; ?>" data-tipo="proyecto" class="btn bg-danger btn-flat margin borrar_registro">
-                            <i class="far fa-trash-alt"></i>
+                          <a href="#" data-id="<?php echo $proyecto['proyecto_id']; ?>" data-tipo="proyecto" class="borrar_registro">
+                            <i class="far fa-trash-alt eliminar"></i>
                           </a>
                         <?php endif; ?>
                       </td>

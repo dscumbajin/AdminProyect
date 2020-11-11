@@ -64,7 +64,7 @@ include_once('templates/navegacion.php');
                     <th>Estado neural</th>
                     <th>Estado</th>
                     <th>Presupuesto</th>
-                    <th>Inversión</th>
+                    <th>Inversión total</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
@@ -93,11 +93,11 @@ include_once('templates/navegacion.php');
                       <td><?php echo $proyecto['total'];?></td>
                       <td>
                         <?php if ($_SESSION['nivel'] == 1) : ?>
-                          <a href="editar-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>" class="btn bg-success btn-flat margin">
-                            <i class="fas fa-pen"></i>
+                          <a href="editar-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>" >
+                            <i class="fas fa-pen editar" ></i>
                           </a>
-                          <a href="#" data-id="<?php echo $proyecto['proyecto_id']; ?>" data-tipo="proyecto" class="btn bg-danger btn-flat margin borrar_registro">
-                            <i class="far fa-trash-alt"></i>
+                          <a href="#" data-id="<?php echo $proyecto['proyecto_id']; ?>" data-tipo="proyecto" class="borrar_registro">
+                            <i class="far fa-trash-alt eliminar" ></i>
                           </a>
                         <?php endif; ?>
                       </td>
@@ -132,7 +132,7 @@ include_once('templates/navegacion.php');
               <div class="col-sm-2 input-group date" id="Cabecera_1" data-target-input="nearest">
                 <input type="text" class="form-control datetimepicker-input" data-target="#Cabecera_1" id="valor-query" name="valor-query" placeholder="Año" required />
                 <div class="input-group-append" data-target="#Cabecera_1" data-toggle="datetimepicker">
-                  <div id="chose" class="input-group-text"><i class="fa fa-calendar"></i></div>
+                  <div id="chose" class="input-group-text"><i class="fas fa-calendar-alt eliminar" ></i></div>
                 </div>
               </div>
 

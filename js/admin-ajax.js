@@ -59,9 +59,9 @@ $(document).ready(function() {
                             title: 'Correcto',
                             text: 'Se guardó corectamente',
                         })
-                        /*   setTimeout(function() {
-                              window.location.href = "admin-area.php";
-                          }, 2000); */
+                        setTimeout(function() {
+                            location.reload();
+                        }, 2000);
                 } else {
                     Swal.fire({
                         icon: 'error',
@@ -79,16 +79,7 @@ $(document).ready(function() {
         e.preventDefault();
         var id = $(this).attr('data-id');
         var tipo = $(this).attr('data-tipo');
-        Swal.fire({
-            title: 'Estas seguro?',
-            text: "Un registro eliminado no se puede recuperar!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, eliminar!',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
+        
             $.ajax({
                 type: 'post',
                 data: {
@@ -117,7 +108,7 @@ $(document).ready(function() {
                 }
 
             });
-        })
+       
 
     });
 

@@ -17,6 +17,15 @@
     text-decoration: none;
 }
 
+.editar {
+    font-size: 20px;
+    color: green; 
+    margin-right: 10px;
+}
+.eliminar {
+    font-size: 20px;
+    color: red;
+}
 
 
 

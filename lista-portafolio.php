@@ -59,11 +59,11 @@ include_once('templates/navegacion.php');
                       <td><?php echo $portafolio['area']; ?></td>
                       <td>
                       <?php if ($_SESSION['nivel'] == 1) : ?>
-                        <a href="editar-portafolio.php?id=<?php echo $portafolio['portafolio_id']; ?>" class="btn bg-success btn-flat margin">
-                          <i class="fas fa-pen"></i>
+                        <a href="editar-portafolio.php?id=<?php echo $portafolio['portafolio_id']; ?>" >
+                          <i class="fas fa-pen editar"></i>
                         </a>
-                        <a href="#" data-id="<?php echo $portafolio['portafolio_id']; ?>" data-tipo="portafolio" class="btn bg-danger btn-flat margin borrar_registro">
-                          <i class="far fa-trash-alt"></i>
+                        <a href="#" data-id="<?php echo $portafolio['portafolio_id']; ?>" data-tipo="portafolio" class="borrar_registro">
+                          <i class="far fa-trash-alt eliminar"></i>
                         </a>
                         <?php endif; ?>
                       </td>

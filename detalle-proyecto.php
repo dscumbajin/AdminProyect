@@ -14,21 +14,10 @@ include_once('templates/navegacion.php');
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
-  <section class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1>Proyecto: <?php echo $id ?> </h1>
-        </div>
-      </div>
-    </div><!-- /.container-fluid -->
-  </section>
 
-  <!-- Main content -->
-  <section class="content">
-    <?php
+  <?php
     try {
-      $sql = "SELECT proyecto_id, detalle,url_video, url_documento, objetivo_estrategico, presupuesto_inicial, estado_neural, estados.estado_id, estado, area, descripcion ";
+      $sql = "SELECT proyecto_id,cuenta, detalle,url_video, url_documento, objetivo_estrategico, presupuesto_inicial, estado_neural, estados.estado_id, estado, area, descripcion ";
       $sql .= " FROM proyectos ";
       $sql .= " INNER JOIN portafolios ";
       $sql .= " ON proyectos.portafolio_id = portafolios.portafolio_id ";
@@ -48,10 +37,24 @@ include_once('templates/navegacion.php');
       echo "Error: " . $e->getMessage();
     }
     ?>
+
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Proyecto: <?php echo $proyecto['detalle'] ?> </h1>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title"><?php echo $proyecto['detalle'] ?></h3>
+        <h3 class="card-title">N° cuenta: <?php echo $proyecto['cuenta'] ?></h3>
 
       </div>
       <div class="card-body">

@@ -59,11 +59,11 @@ include_once('templates/navegacion.php');
                       <td><?php echo $programa['descripcion']; ?></td>
                       <td>
                       <?php if ($_SESSION['nivel'] == 1) : ?>
-                        <a href="editar-programa.php?id=<?php echo $programa['programa_id']; ?>" class="btn bg-success btn-flat margin">
-                          <i class="fas fa-pen"></i>
+                        <a href="editar-programa.php?id=<?php echo $programa['programa_id']; ?>" >
+                          <i class="fas fa-pen editar"></i>
                         </a>
-                        <a href="#" data-id="<?php echo $programa['programa_id']; ?>" data-tipo="programa" class="btn bg-danger btn-flat margin borrar_registro">
-                          <i class="far fa-trash-alt"></i>
+                        <a href="#" data-id="<?php echo $programa['programa_id']; ?>" data-tipo="programa" class="borrar_registro">
+                          <i class="far fa-trash-alt eliminar"></i>
                         </a>
                         <?php endif; ?>
                       </td>

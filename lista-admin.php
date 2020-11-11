@@ -62,16 +62,16 @@ include_once('templates/navegacion.php');
                          
                             echo '<span class="badge badge-success">Administrador</span>';
                         }else{
-                          echo '<span class="badge badge-primary">Estandar</span>';
+                          echo '<span class="badge badge-primary">User</span>';
                         }
                         ?>
                       </td>
                       <td>
-                        <a href="editar-admin.php?id=<?php echo $admin['id_admin']; ?>" class="btn bg-success btn-flat margin">
-                          <i class="fas fa-pen"></i>
+                        <a href="editar-admin.php?id=<?php echo $admin['id_admin']; ?>" >
+                          <i class="fas fa-pen editar"></i>
                         </a>
-                        <a href="#" data-id="<?php echo $admin['id_admin']; ?>" data-tipo="admin" class="btn bg-danger btn-flat margin borrar_registro">
-                          <i class="far fa-trash-alt"></i>
+                        <a href="#" data-id="<?php echo $admin['id_admin']; ?>" data-tipo="admin" class="borrar_registro">
+                          <i class="far fa-trash-alt eliminar"></i>
                         </a>
                       </td>
                     </tr>
