@@ -222,12 +222,16 @@ $(function() {
     });
 
 
+    // Validacion fecha anterior
 
     $('#input-fecha').on('input', function() {
-        var input_fecha = new Date($("#input-fecha").val());
 
-        var fecha_actual = new Date();
+        var input_fecha = new Date($("#input-fecha").val());
+        var hoy = new Date();
+        var tras = hoy.toLocaleDateString();
+        var fecha_actual = new Date(tras);
         var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
 
         if (input_fecha < fecha_actual) {
 
