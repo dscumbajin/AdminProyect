@@ -36,8 +36,6 @@ include_once('templates/navegacion.php');
               <table id="registros" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-
-                    <th>Item</th>
                     <th>Proyecto</th>
                     <th>Creado</th>
                     <th>Objetivo Estrategico</th>
@@ -45,15 +43,15 @@ include_once('templates/navegacion.php');
                     <th>Programa</th>
                     <th>Estado neural</th>
                     <th>Estado</th>
+                    <th>Nº cuenta </th>
                     <th>Presupuesto</th>
-                    <th>Inversión</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
                   try {
-                    $sql = "SELECT proyecto_id,inicio, detalle, objetivo_estrategico, presupuesto_inicial, estado_neural, estado, area, descripcion ";
+                    $sql = "SELECT proyecto_id,inicio,cuenta, detalle, objetivo_estrategico, presupuesto_inicial, estado_neural, estado, area, descripcion ";
                     $sql .= " FROM proyectos ";
                     $sql .= " INNER JOIN portafolios ";
                     $sql .= " ON proyectos.portafolio_id = portafolios.portafolio_id ";
@@ -69,8 +67,12 @@ include_once('templates/navegacion.php');
                   }
                   while ($proyecto = $resultado->fetch_assoc()) { ?>
                     <tr>
-                      <td><?php echo $proyecto['proyecto_id']; ?></td>
-                      <td><a href="detalle-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>"><?php echo $proyecto['detalle']; ?></a></td>
+                      
+                    <td>
+                    <?php echo $proyecto['detalle']; ?> - 
+                    <a class="float-rigth" href="detalle-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>"> Detalle </a>
+                    </td>
+
                       <td><?php
                           $dt = new DateTime($proyecto['inicio']);
                           echo $dt->format('d/m/Y'); ?></td>
@@ -79,9 +81,12 @@ include_once('templates/navegacion.php');
                       <td><?php echo $proyecto['descripcion']; ?></td>
                       <td><?php echo $proyecto['estado_neural']; ?></td>
                       <td><?php echo $proyecto['estado']; ?></td>
+                      <td><?php if ($proyecto['cuenta'] !== '0'){
+                         echo $proyecto['cuenta'];
+                      }else{
+                        echo "Asignar cuenta";
+                      }?></td>
                       <td><?php echo $proyecto['presupuesto_inicial']; ?></td>
-                      <td><a href="detalle-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>"> Detalle </a></td>
-
                       <td>
                         <?php if ($_SESSION['nivel'] == 1) : ?>
                           <a href="editar-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>">

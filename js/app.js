@@ -235,24 +235,32 @@ $(function() {
         var estado = $("#estado option:selected").text();
         /* Elimino todos los espacios en blanco que tenga la cadena delante y detrás */
         var value_without_space = $.trim(estado);
-        
 
-        console.log(value_without_space);
-        console.log(tipo);
+
+        /*         console.log(value_without_space);
+                console.log(tipo); */
         if (value_without_space == 'Análisis' || value_without_space == 'Entrega') {
             /*  console.log('esconder div'); */
             $('#cuenta-div').hide();
         } else {
             $('#cuenta-div').show();
-            
+
             var tipo = $('#crear_registro').text();
-            if(tipo == "Añadir"){
+            var input_cuenta = $('#cuenta').val();
+
+            if (tipo == "Añadir") {
                 console.log(tipo);
                 $('#cuenta').val('');
-            }else{
-                $('#cuenta').attr('disabled','disabled');
+            } else if (input_cuenta == 0) {
+
+                console.log(input_cuenta);
+                $('#cuenta').val('');
+                $('#cuenta').removeAttr('disabled');
+
+            } else {
+                $('#cuenta').attr('disabled', 'disabled');
             }
-            
+
         }
     });
 

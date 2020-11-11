@@ -232,7 +232,7 @@ include_once('templates/navegacion.php');
                   <input type="hidden" name="registro" value="actualizar">
                   <input type="hidden" name="id_registro" value="<?php echo $id ?>">
                   <input type="hidden" name="url_documento" value="<?php echo $proyecto['url_documento']; ?>">
-                  <button type="submit" class="btn btn-dark float-right">Guardar</button>
+                  <button type="submit" class="btn btn-dark float-right" >Guardar</button>
                 </div>
                 <!-- /.card-footer -->
               </form>

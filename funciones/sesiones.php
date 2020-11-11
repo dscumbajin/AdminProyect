@@ -40,7 +40,7 @@ function getPresupuesto($proyecto_id){
   }
 
 function getTotalByEstadoId($id){
-  $sql = " SELECT proyectos.proyecto_id, inicio, detalle, objetivo_estrategico, presupuesto_inicial, estado_neural, estado, area, descripcion, SUM(presupuesto) AS total ";
+  $sql = " SELECT proyectos.proyecto_id,cuenta, inicio, detalle, objetivo_estrategico, presupuesto_inicial, estado_neural, estado, area, descripcion, SUM(presupuesto) AS total ";
   $sql .= " FROM proyectos ";
   $sql .= " JOIN estados ON estados.estado_id = proyectos.estado_id ";
   $sql .= " JOIN programas ON programas.programa_id=proyectos.programa_id  ";
