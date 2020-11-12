@@ -228,7 +228,7 @@ $(function() {
 
         var input_fecha = new Date($("#input-fecha").val());
         var hoy = new Date();
-        var tras = hoy.toLocaleDateString();
+        var tras = hoy.toLocaleDateString('en-US');
         var fecha_actual = new Date(tras);
         var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
