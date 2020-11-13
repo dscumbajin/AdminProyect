@@ -21,7 +21,8 @@
 }
 
 table td {
-    padding: 5px 5px !important;
+    padding-left: 3px !important;
+    padding-right: 0px !important;
     
 }
 
