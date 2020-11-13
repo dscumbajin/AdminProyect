@@ -90,10 +90,13 @@ include_once('templates/navegacion.php');
                       </td>
                       <td><?php echo $proyecto['estado_neural']; ?></td>
                       <td><?php echo $proyecto['estado']; ?></td>
-                      <td><?php if ($proyecto['cuenta'] !== "0") {
-                            echo $proyecto['cuenta'];
+                      <td><?php 
+                      $tamanoCuenta = $proyecto['cuenta'];
+                      if (strlen($tamanoCuenta)<6) { 
+                        echo ' <span class="badge badge-danger">Asignar cuenta</span>';
+                           
                           } else {
-                            echo ' <span class="badge badge-danger">Asignar cuenta</span>';
+                            echo $proyecto['cuenta'];
                           } ?></td>
                       <td><?php echo $proyecto['presupuesto_inicial']; ?></td>
                       <td>

@@ -201,7 +201,7 @@ include_once('templates/navegacion.php');
                   <div class="form-group row">
                     <label for="estado" class="col-sm-2 col-form-label">Estado:</label>
                     <div class="col-sm-10">
-                      <select name="estado" id="estado" class="form-control seleccionar" style="width: 100%;">
+                      <select name="estado" id="estado-editar" class="form-control seleccionar" style="width: 100%;">
                         <option value="0">- Seleccione -</option>
                         <?php
                         try {

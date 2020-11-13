@@ -296,6 +296,38 @@ $(function() {
 
     });
 
+
+    $('#estado-editar').on('change', function() {
+
+        var estado = $("#estado-editar option:selected").text();
+        /* Elimino todos los espacios en blanco que tenga la cadena delante y detrás */
+        var value_without_space = $.trim(estado);
+        console.log(value_without_space);
+        var input_cuenta = $('#cuenta').val();
+        console.log(input_cuenta);
+        if (value_without_space == "Aprobado" && input_cuenta.length < 7) {
+            // mostar en input
+            $('#cuenta-div').show();
+            //dejar en blanco para el ingreso
+            $('#cuenta').attr('readonly', false);
+            $('#cuenta').val('');
+            $('#cuenta').attr('placeholder', 'formato: x.xx.xx.xx.xx');
+
+        }
+        if (value_without_space == "Aprobado" && input_cuenta.length > 8) {
+            // mostar en input
+            $('#cuenta-div').show();
+            //dejar en blanco para el ingreso
+            $('#cuenta').attr('readonly', true);
+            $('#cuenta').val(input_cuenta);
+            $('#cuenta').attr('placeholder', 'formato: x.xx.xx.xx.xx');
+
+        }
+
+
+    });
+
+
     $('#lista').click(() => {
         $('#lista').attr('href', 'admin-area.php');
     });
