@@ -83,10 +83,10 @@ include_once('templates/navegacion.php');
                         <a class="float-rigth" href="detalle-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>"> <span class="badge badge-primary" style="font-size: 13px"> Detalle</span> </a>
                       </td>
                       <td>
-                        <p style=" width: 130px; margin: 0 auto; text-align: justify"><?php echo $proyecto['objetivo_estrategico']; ?></p>
+                        <p class="ellipsis" ><?php echo $proyecto['objetivo_estrategico']; ?></p>
                       </td>
                       <td>
-                        <p style=" width: 130px; margin: 0 auto; text-align: justify"><?php echo $proyecto['alcance']; ?> </p>
+                        <p class="ellipsis" ><?php echo $proyecto['alcance']; ?> </p>
                       </td>
                       <td><?php echo $proyecto['estado_neural']; ?></td>
                       <td><?php echo $proyecto['estado']; ?></td>

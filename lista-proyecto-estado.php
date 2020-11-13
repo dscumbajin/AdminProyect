@@ -88,7 +88,7 @@ $phptemp = (int)$_COOKIE["query"];
 
                       <td id= "margen"><?php echo $proyecto['area']; ?></td>
                       <td>
-                        <p style=" width: 80px; margin: 0 0; text-align: justify"><?php echo $proyecto['descripcion']; ?></p>
+                        <p class="ellipsis"><?php echo $proyecto['descripcion']; ?></p>
                       </td>
                       <td><?php
                           $dt = new DateTime($proyecto['inicio']);
@@ -99,10 +99,10 @@ $phptemp = (int)$_COOKIE["query"];
                       </td>
 
                       <td>
-                        <p style=" width: 120px; margin: 0 0; text-align: justify"><?php echo $proyecto['objetivo_estrategico']; ?></p>
+                        <p class="ellipsis"><?php echo $proyecto['objetivo_estrategico']; ?></p>
                       </td>
                       <td>
-                        <p style=" width: 120px; margin: 0 0; text-align: justify"><?php echo $proyecto['alcance']; ?> </p>
+                        <p class="ellipsis"><?php echo $proyecto['alcance']; ?> </p>
                       </td>
 
                       <td><?php echo $proyecto['estado_neural']; ?></td>
