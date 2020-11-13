@@ -270,6 +270,7 @@ $(function() {
         console.log(value_without_space);
         var number = 1 + Math.floor(Math.random() * 60000);
         var cadena = number.toString();
+        var input_cuenta = $('#cuenta').val();
         //Crear nuevo proyecto
         if (value_without_space == "Análisis") {
             // mostar en input
@@ -283,7 +284,7 @@ $(function() {
             $('#cuenta').attr('readonly', true);
         }
 
-        if (value_without_space == "Aprobado") {
+        if (value_without_space == "Aprobado" && input_cuenta.length < 7) {
             // mostar en input
             $('#cuenta-div').show();
             //dejar en blanco para el ingreso
@@ -292,7 +293,21 @@ $(function() {
             $('#cuenta').attr('placeholder', 'formato: x.xx.xx.xx.xx');
 
         }
-        $('#cuenta').val(cadena);
+        if (value_without_space == "Proceso") {
+            $('#cuenta-div').hide();
+            $('#cuenta').val(cadena);
+        }
+        if (value_without_space == "Entrega") {
+            $('#cuenta-div').hide();
+            $('#cuenta').val(cadena);
+        }
+        if (value_without_space == "Cerrado") {
+            $('#cuenta-div').hide();
+            $('#cuenta').val(cadena);
+        }
+
+
+
 
     });
 
@@ -323,6 +338,16 @@ $(function() {
             $('#cuenta').attr('placeholder', 'formato: x.xx.xx.xx.xx');
 
         }
+        if (value_without_space == "Proceso" && input_cuenta.length < 8) {
+            // mostar en input
+            $('#cuenta-div').hide();
+            //dejar en blanco para el ingreso
+            $('#cuenta').attr('readonly', true);
+            $('#cuenta').val(input_cuenta);
+            $('#cuenta').attr('placeholder', 'formato: x.xx.xx.xx.xx');
+
+        }
+
 
 
     });
