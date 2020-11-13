@@ -93,6 +93,15 @@ include_once('templates/navegacion.php');
               </div>
             </div>
           </div>
+          <!--Div Objetivo-->
+          <div class=" col-12 <?php echo $cartel ?>">
+            <div class="info-box bg-light">
+              <div class="info-box-content">
+                <span class="info-box-text text-center text-muted">Objetivo</span>
+                <span class="info-box-number text-center text-muted mb-0"> <?php echo $proyecto['objetivo_estrategico'] ?> </span>
+              </div>
+            </div>
+          </div>
 
         </div>
 
@@ -295,7 +304,7 @@ include_once('templates/navegacion.php');
     } else { ?>
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Inversión</h3>
+          <h3 class="card-title">Presupuestos asignados</h3>
 
         </div>
 

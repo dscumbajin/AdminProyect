@@ -28,7 +28,7 @@ include_once('templates/navegacion.php');
         <div class="col-12">
 
           <div class="card">
-            <div class="card-header" >
+            <div class="card-header">
               <h3 class="card-title">Administra los proyectos en esta sección</h3>
               <a id="lista" href="#" class="float-right"><i class="fas fa-hand-point-left"></i> Atrás</a>
             </div>
@@ -37,12 +37,16 @@ include_once('templates/navegacion.php');
               <table id="registros" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Proyecto</th>
-                    <th>Creado</th>
-                    <th>Objetivo Estrategico</th>
+                  
                     <th>Portafolio</th>
                     <th>Programa</th>
-                    <th>Estado neural</th>
+                    <th>Creado</th>
+                    <th>Proyecto</th>
+                    <th>Objetivo</th>
+                    <th>Alcance</th>
+                    <th>
+                      <p style=" width: 50px; margin: 0 0;">Estado neural</p>
+                    </th>
                     <th>Estado</th>
                     <th>Nº cuenta </th>
                     <th>Presupuesto</th>
@@ -52,7 +56,7 @@ include_once('templates/navegacion.php');
                 <tbody>
                   <?php
                   try {
-                    $sql = "SELECT proyecto_id,inicio,cuenta, detalle, objetivo_estrategico, presupuesto_inicial, estado_neural, estado, area, descripcion ";
+                    $sql = "SELECT proyecto_id,inicio,cuenta, detalle, objetivo_estrategico, alcance, presupuesto_inicial, estado_neural, estado, area, descripcion ";
                     $sql .= " FROM proyectos ";
                     $sql .= " INNER JOIN portafolios ";
                     $sql .= " ON proyectos.portafolio_id = portafolios.portafolio_id ";
@@ -68,25 +72,29 @@ include_once('templates/navegacion.php');
                   }
                   while ($proyecto = $resultado->fetch_assoc()) { ?>
                     <tr>
-                    <td>
-                    <?php echo $proyecto['detalle']; ?> - 
-                    <a class="float-rigth" href="detalle-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>"> <span class="badge badge-primary"style = "font-size: 13px"> Detalle</span> </a>
-                    </td>
-
+                    
+                      <td id= "margen"><?php echo $proyecto['area']; ?></td>
+                      <td><?php echo $proyecto['descripcion']; ?></td>
                       <td><?php
                           $dt = new DateTime($proyecto['inicio']);
                           echo $dt->format('d/m/Y'); ?></td>
-                      <td><?php echo $proyecto['objetivo_estrategico']; ?></td>
-                      <td><?php echo $proyecto['area']; ?></td>
-                      <td><?php echo $proyecto['descripcion']; ?></td>
+                      <td>
+                        <?php echo $proyecto['detalle']; ?> -
+                        <a class="float-rigth" href="detalle-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>"> <span class="badge badge-primary" style="font-size: 13px"> Detalle</span> </a>
+                      </td>
+                      <td>
+                        <p style=" width: 130px; margin: 0 auto; text-align: justify"><?php echo $proyecto['objetivo_estrategico']; ?></p>
+                      </td>
+                      <td>
+                        <p style=" width: 130px; margin: 0 auto; text-align: justify"><?php echo $proyecto['alcance']; ?> </p>
+                      </td>
                       <td><?php echo $proyecto['estado_neural']; ?></td>
                       <td><?php echo $proyecto['estado']; ?></td>
-                      <td><?php if ($proyecto['cuenta'] !== "0"){
-                         echo $proyecto['cuenta'];
-                      }else{
-                        echo' <span class="badge badge-danger">Asignar cuenta</span>';
-                        
-                      }?></td>
+                      <td><?php if ($proyecto['cuenta'] !== "0") {
+                            echo $proyecto['cuenta'];
+                          } else {
+                            echo ' <span class="badge badge-danger">Asignar cuenta</span>';
+                          } ?></td>
                       <td><?php echo $proyecto['presupuesto_inicial']; ?></td>
                       <td>
                         <?php if ($_SESSION['nivel'] == 1) : ?>

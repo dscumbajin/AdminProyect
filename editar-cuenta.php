@@ -20,7 +20,7 @@ include_once('templates/navegacion.php');
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Inversión</h1>
+          <h1>Presupuesto</h1>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -32,7 +32,7 @@ include_once('templates/navegacion.php');
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">Editar inversón</h3>
+        <h3 class="card-title">Editar presupuesto</h3>
         <a id="back" href="#" class="float-right"><i class="fas fa-hand-point-left"></i> Atrás</a>
       </div>
       <div class="card-body">
@@ -41,7 +41,7 @@ include_once('templates/navegacion.php');
           <!-- Horizontal Form -->
           <div class="card card-dark">
             <div class="card-header">
-              <h3 class="card-title">Llena el formulario para editar el registtro de la inversión seleccionada</h3>
+              <h3 class="card-title">Llena el formulario para editar el presupuesto mensual del proyecto</h3>
             </div>
             <!-- /.card-header -->
             <?php
@@ -95,7 +95,7 @@ include_once('templates/navegacion.php');
                 <!-- /.form group -->
 
                 <div class="form-group row">
-                  <label for="presupuesto" class="col-sm-2 col-form-label">Presupuesto:</label>
+                  <label for="presupuesto" class="col-sm-2 col-form-label">Presupuesto mensual:</label>
                   <div class="col-sm-10">
                     <input type="number" class="form-control" id="presupuesto" name="presupuesto" placeholder="$ 0.0" required value="<?php echo $cuenta['presupuesto'] ?>">
                   </div>

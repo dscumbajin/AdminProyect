@@ -19,6 +19,27 @@ $(function() {
         }
     });
 
+    $("#registros-1").DataTable({
+        "responsive": true,
+        "autoWidth": false,
+        "pageLength": 10,
+        "language": {
+            paginate: {
+                next: 'Siguiente',
+                previous: 'Anterior',
+                last: 'Último',
+                firts: 'Primero'
+            },
+            info: 'Mostrando _START_ a _END_ de _TOTAL_ resultados',
+            emptyTable: 'No hay registros',
+            infoEmpty: 'Mostrando 0 to 0 of 0 Entradas',
+            search: 'Buscar: ',
+            lengthMenu: "Mostrar _MENU_ Entradas ",
+            infoFiltered: " (Filtrado de un total de _MAX_  entradas)"
+        }
+    });
+
+
     $('#crear_registro_admin').attr('disabled', true);
 
     $('#repetir_password').on('input', function() {

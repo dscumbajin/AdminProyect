@@ -18,7 +18,7 @@ include_once('templates/navegacion.php');
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Inversiones</h1>
+          <h1>Presupuesto</h1>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -30,7 +30,7 @@ include_once('templates/navegacion.php');
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">Inversión</h3>
+        <h3 class="card-title">Presupuesto</h3>
         <a id="lista" href="#" class="float-right"><i class="fas fa-hand-point-left"></i> Atrás</a>
       </div>
       <div class="card-body">
@@ -39,7 +39,7 @@ include_once('templates/navegacion.php');
           <!-- Horizontal Form -->
           <div class="card card-dark">
             <div class="card-header">
-              <h3 class="card-title">Llena el formulario para registrar una inversión al proyecto</h3>
+              <h3 class="card-title">Llena el formulario para asiganar un presupuesto mensual al proyecto</h3>
               
             </div>
             <!-- /.card-header -->
@@ -138,14 +138,14 @@ include_once('templates/navegacion.php');
                   <div class="row" style="justify-content: space-between;">
 
 
-                    <h3><span class="badge badge-danger">Presupuesto: $</span> <span id="presu" class="badge badge-danger">
+                    <h3><span class="badge badge-danger">Presupuesto total: $</span> <span id="presu" class="badge badge-danger">
                         <?php
                         $resultado = $conn->query(getPresupuesto($id));
                         $registrados = $resultado->fetch_assoc();
                         echo $registrados['presupuesto_inicial'];
                         ?></span></h3>
 
-                    <h3><span class="badge badge-danger">Inversión total: $</span> <span id="presuTotal" class="badge badge-danger">
+                    <h3><span class="badge badge-danger">Presupuesto mensual: $</span> <span id="presuTotal" class="badge badge-danger">
                         <?php
                         $resultado = $conn->query(getTotalInversionProyecto_id($id));
                         $registrados = $resultado->fetch_assoc();

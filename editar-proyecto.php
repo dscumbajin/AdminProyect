@@ -43,7 +43,7 @@ include_once('templates/navegacion.php');
             <div class="card card-dark">
               <div class="card-header">
                 <h3 class="card-title">Llena el formulario para editar el proyecto</h3>
-                
+
               </div>
               <!-- /.card-header -->
               <?php
@@ -58,43 +58,6 @@ include_once('templates/navegacion.php');
               <!-- form start -->
               <form class="form-horizontal" role="form" name="guardar-registro" id="guardar-registro-archivo" method="post" action="modelo-proyecto.php" enctype="multipart/form-data">
                 <div class="card-body">
-
-                  <!-- Input detalle del proyecto-->
-                  <div class="form-group row">
-                    <label for="detalle" class="col-sm-2 col-form-label">Proyecto</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="detalle" name="detalle" placeholder="Nombre del proyecto" required value="<?php echo $proyecto['detalle'] ?>">
-
-                    </div>
-                  </div>
-
-
-                  <!-- Input Objetivo estrategico-->
-
-                  <div class="form-group row">
-                    <label for="objetivo_estrategico" class="col-sm-2 col-form-label">Objetivo estratégico</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="objetivo_estrategico" name="objetivo_estrategico" placeholder="Objetivo estratégico" required value="<?php echo $proyecto['objetivo_estrategico'] ?>">
-                    </div>
-                  </div>
-
-                  <!-- InputLink de video-->
-
-                  <div class="form-group row">
-                    <label for="url_video" class="col-sm-2 col-form-label">Link video</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="url_video" name="url_video" placeholder="Link video youtube - opcional" value="<?php echo $proyecto['url_video'] ?>">
-                    </div>
-                  </div>
-
-                  <!-- Input presupuesto del proyecto-->
-
-                  <div class="form-group row">
-                    <label for="presupuesto_inicial" class="col-sm-2 col-form-label">Presupuesto</label>
-                    <div class="col-sm-10">
-                      <input type="number" class="form-control" id="presupuesto_inicial" name="presupuesto_inicial" placeholder="Presupuesto Inicial" required value="<?php echo $proyecto['presupuesto_inicial'] ?>"  required onkeypress="return filterFloat(event,this);">
-                    </div>
-                  </div>
 
                   <!--Select Portafolio-->
 
@@ -150,6 +113,52 @@ include_once('templates/navegacion.php');
                     </div>
                   </div>
 
+
+                  <!-- Input detalle del proyecto-->
+                  <div class="form-group row">
+                    <label for="detalle" class="col-sm-2 col-form-label">Proyecto</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="detalle" name="detalle" placeholder="Nombre del proyecto" required value="<?php echo $proyecto['detalle'] ?>">
+
+                    </div>
+                  </div>
+
+
+                  <!-- Input Objetivo estrategico-->
+
+                  <div class="form-group row">
+                    <label for="objetivo_estrategico" class="col-sm-2 col-form-label">Objetivo</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="objetivo_estrategico" name="objetivo_estrategico" placeholder="Objetivo estratégico" required value="<?php echo $proyecto['objetivo_estrategico'] ?>">
+                    </div>
+                  </div>
+
+                  <!-- Input alcance del proyecto-->
+                  <div class="form-group row">
+                    <label for="alcance" class="col-sm-2 col-form-label">Alcance</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="alcance" name="alcance" placeholder="Alcance del proyecto" required value="<?php echo $proyecto['alcance'] ?>">
+                    </div>
+                  </div>
+
+
+                  <!-- InputLink de video-->
+
+                  <div class="form-group row">
+                    <label for="url_video" class="col-sm-2 col-form-label">Link video</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="url_video" name="url_video" placeholder="Link video youtube - opcional" value="<?php echo $proyecto['url_video'] ?>">
+                    </div>
+                  </div>
+
+                  <!-- Input presupuesto del proyecto-->
+
+                  <div class="form-group row">
+                    <label for="presupuesto_inicial" class="col-sm-2 col-form-label">Presupuesto</label>
+                    <div class="col-sm-10">
+                      <input type="number" class="form-control" id="presupuesto_inicial" name="presupuesto_inicial" placeholder="Presupuesto Inicial" required value="<?php echo $proyecto['presupuesto_inicial'] ?>" required onkeypress="return filterFloat(event,this);">
+                    </div>
+                  </div>
 
                   <!--Select estado neural-->
 
@@ -233,7 +242,7 @@ include_once('templates/navegacion.php');
                   <input type="hidden" name="registro" value="actualizar">
                   <input type="hidden" name="id_registro" value="<?php echo $id ?>">
                   <input type="hidden" name="url_documento" value="<?php echo $proyecto['url_documento']; ?>">
-                  <button type="submit" class="btn btn-dark float-right" >Guardar</button>
+                  <button type="submit" class="btn btn-dark float-right">Guardar</button>
                 </div>
                 <!-- /.card-footer -->
               </form>

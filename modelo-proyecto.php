@@ -3,6 +3,7 @@ include_once('funciones/funciones.php');
 $inicio = date('Y-m-d',time());
 $detalle = $_POST['detalle'];
 $objetivo_estrategico = $_POST['objetivo_estrategico'];
+$alcance = $_POST['alcance'];
 $presupuesto_inicial = $_POST['presupuesto_inicial'];
 $portafolio_id = $_POST['area'];
 $programa_id = $_POST['descripcion'];
@@ -20,8 +21,8 @@ if ($_POST['registro'] == 'nuevo') {
         'post' => $_POST,
         'file' => $_FILES
     );
-    die(json_encode(($respuesta)));
- */
+    die(json_encode(($respuesta))); */
+
     $valores = array();
     //Como el elemento es un arreglos utilizamos foreach para extraer todos los valores
     foreach ($_FILES["archivo"]['tmp_name'] as $key => $tmp_name) {
@@ -57,8 +58,8 @@ if ($_POST['registro'] == 'nuevo') {
     $cadena = implode(",", $valores);
 
     try {
-        $stmt = $conn->prepare('INSERT INTO proyectos (inicio, detalle, objetivo_estrategico, presupuesto_inicial, estado_neural, estado_id, portafolio_id, programa_id, url_video, url_documento, cuenta) VALUES(?,?,?,?,?,?,?,?,?,?,?)');
-        $stmt->bind_param('sssdsiiisss',$inicio, $detalle, $objetivo_estrategico, $presupuesto_inicial, $estado_neural, $estado, $portafolio_id, $programa_id, $url_video, $cadena, $cuenta);
+        $stmt = $conn->prepare('INSERT INTO proyectos (inicio, detalle, objetivo_estrategico, alcance, presupuesto_inicial, estado_neural, estado_id, portafolio_id, programa_id, url_video, url_documento, cuenta) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)');
+        $stmt->bind_param('ssssdsiiisss',$inicio, $detalle, $objetivo_estrategico,$alcance, $presupuesto_inicial, $estado_neural, $estado, $portafolio_id, $programa_id, $url_video, $cadena, $cuenta);
         $stmt->execute();
 
         $id_registro = $stmt->insert_id;
@@ -139,12 +140,12 @@ if ($_POST['registro'] == 'actualizar') {
 
             if ($_FILES['archivo']['size'][$key] > 0) {
 
-                $stmt = $conn->prepare('UPDATE proyectos SET detalle= ?, objetivo_estrategico= ?, presupuesto_inicial =? , estado_neural= ?, estado_id= ?, portafolio_id= ?, programa_id= ?,url_video = ?, url_documento = ?, cuenta=?, editado = NOW() WHERE proyecto_id =?');
-                $stmt->bind_param('ssdsiiisssi', $detalle, $objetivo_estrategico, $presupuesto_inicial, $estado_neural, $estado, $portafolio_id, $programa_id, $url_video, $cadena, $cuenta, $id_registro);
+                $stmt = $conn->prepare('UPDATE proyectos SET detalle= ?, objetivo_estrategico= ? , alcance= ?, presupuesto_inicial =? , estado_neural= ?, estado_id= ?, portafolio_id= ?, programa_id= ?,url_video = ?, url_documento = ?, cuenta=?, editado = NOW() WHERE proyecto_id =?');
+                $stmt->bind_param('sssdsiiisssi', $detalle, $objetivo_estrategico,$alcance, $presupuesto_inicial, $estado_neural, $estado, $portafolio_id, $programa_id, $url_video, $cadena, $cuenta, $id_registro);
             } else {
                 // Sin Archivos
-                $stmt = $conn->prepare('UPDATE proyectos SET detalle= ?, objetivo_estrategico= ?, presupuesto_inicial =? , estado_neural= ?, estado_id= ?, portafolio_id= ?, programa_id= ?,url_video = ?, url_documento = ?, cuenta=?, editado = NOW() WHERE proyecto_id =?');
-                $stmt->bind_param('ssdsiiisssi', $detalle, $objetivo_estrategico, $presupuesto_inicial, $estado_neural, $estado, $portafolio_id, $programa_id, $url_video, $url_documento, $cuenta, $id_registro);
+                $stmt = $conn->prepare('UPDATE proyectos SET detalle= ?, objetivo_estrategico= ? , alcance= ?, presupuesto_inicial =? , estado_neural= ?, estado_id= ?, portafolio_id= ?, programa_id= ?,url_video = ?, url_documento = ?, cuenta=?, editado = NOW() WHERE proyecto_id =?');
+                $stmt->bind_param('sssdsiiisssi', $detalle, $objetivo_estrategico, $alcance, $presupuesto_inicial, $estado_neural, $estado, $portafolio_id, $programa_id, $url_video, $url_documento, $cuenta, $id_registro);
             }
         }
         $stmt->execute();

@@ -11,11 +11,24 @@
 
 #registros {
     font-size: 13px;
+    
 }
 
 #registos tr th a {
     text-decoration: none;
+    margin-left: 0px;
+    
 }
+
+table td {
+    padding: 5px 5px !important;
+    
+}
+
+#margen {
+    padding-left: 30px !important;
+}
+
 
 .editar {
     font-size: 20px;

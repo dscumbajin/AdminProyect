@@ -14,13 +14,13 @@ include_once('templates/navegacion.php');
 ?>
 
 
-<?php 
-    $phptemp=( int)$_COOKIE[ "query"]; 
-   /*  if (!is_nan($phptemp))
+<?php
+$phptemp = (int)$_COOKIE["query"];
+/*  if (!is_nan($phptemp))
     { 
       
     }  */
-    ?>
+?>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -34,7 +34,7 @@ include_once('templates/navegacion.php');
           $resultado = $conn->query($sql);
           $estado = $resultado->fetch_assoc(); ?>
           <h1>Proyectos - <?php echo $estado['estado']; ?></h1>
-          
+
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -55,12 +55,15 @@ include_once('templates/navegacion.php');
               <table id="registros" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Proyecto</th>
-                    <th>Creado</th>
-                    <th>Objetivo Estrategico</th>
                     <th>Portafolio</th>
                     <th>Programa</th>
-                    <th>Estado neural</th>
+                    <th>Creado</th>
+                    <th>Proyecto</th>
+                    <th>Objetivo</th>
+                    <th>Alcance</th>
+                    <th>
+                      <p style=" width: 50px; margin: 0 auto;">Estado neural</p>
+                    </th>
                     <th>Estado</th>
                     <th>Presupuesto</th>
                     <th>Acciones</th>
@@ -69,7 +72,7 @@ include_once('templates/navegacion.php');
                 <tbody>
                   <?php
                   try {
-                    
+
                     $resultado = $conn->query(getProyectosByEstadoId($id));
                   } catch (Exception $e) {
                     $error = $e->getMessage();
@@ -77,26 +80,31 @@ include_once('templates/navegacion.php');
                   } ?>
                   <?php while ($proyecto = $resultado->fetch_assoc()) { ?>
                     <tr>
-                    <td>
-                    <?php echo $proyecto['detalle']; ?> - 
-                    <a class="float-rigth" href="detalle-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>"> <span class="badge badge-primary" style = "font-size: 13px"> Detalle</span>  </a>
-                    </td>
+                      <td><?php echo $proyecto['area']; ?></td>
+                      <td><?php echo $proyecto['descripcion']; ?></td>
                       <td><?php
                           $dt = new DateTime($proyecto['inicio']);
                           echo $dt->format('d/m/Y'); ?></td>
-                      <td><?php echo $proyecto['objetivo_estrategico']; ?></td>
-                      <td><?php echo $proyecto['area']; ?></td>
-                      <td><?php echo $proyecto['descripcion']; ?></td>
+                      <td>
+                        <?php echo $proyecto['detalle']; ?> -
+                        <a class="float-rigth" href="detalle-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>"> <span class="badge badge-primary" style="font-size: 13px"> Detalle</span> </a>
+                      </td>
+                      <td>
+                        <p style=" width: 130px; margin: 0 auto; text-align: justify"><?php echo $proyecto['objetivo_estrategico']; ?></p>
+                      </td>
+                      <td>
+                        <p style=" width: 130px; margin: 0 auto; text-align: justify"><?php echo $proyecto['alcance']; ?> </p>
+                      </td>
                       <td><?php echo $proyecto['estado_neural']; ?></td>
                       <td><?php echo $proyecto['estado']; ?></td>
                       <td><?php echo $proyecto['presupuesto_inicial']; ?></td>
                       <td>
                         <?php if ($_SESSION['nivel'] == 1) : ?>
-                          <a href="editar-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>" >
-                            <i class="fas fa-pen editar" ></i>
+                          <a href="editar-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>">
+                            <i class="fas fa-pen editar"></i>
                           </a>
                           <a href="#" data-id="<?php echo $proyecto['proyecto_id']; ?>" data-tipo="proyecto" class="borrar_registro">
-                            <i class="far fa-trash-alt eliminar" ></i>
+                            <i class="far fa-trash-alt eliminar"></i>
                           </a>
                         <?php endif; ?>
                       </td>
@@ -120,7 +128,7 @@ include_once('templates/navegacion.php');
   </section>
   <!-- /.content -->
 
- 
+
 </div>
 <!-- /.content-wrapper -->
 

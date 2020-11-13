@@ -45,42 +45,6 @@ include_once('templates/navegacion.php');
 
               <div class="card-body">
 
-                <!-- Input detalle del proyecto-->
-
-                <div class="form-group row">
-                  <label for="detalle" class="col-sm-2 col-form-label">Proyecto</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="detalle" name="detalle" placeholder="Nombre del proyecto" required>
-                  </div>
-                </div>
-
-                <!-- Input Objetivo estrategico-->
-
-                <div class="form-group row">
-                  <label for="objetivo_estrategico" class="col-sm-2 col-form-label">Objetivo estratégico</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="objetivo_estrategico" name="objetivo_estrategico" placeholder="Objetivo estratégico" required>
-                  </div>
-                </div>
-
-                <!-- Input Objetivo Link de video-->
-
-                <div class="form-group row">
-                  <label for="url_video" class="col-sm-2 col-form-label">Link video</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="url_video" name="url_video" placeholder="Link video youtube - opcional">
-                  </div>
-                </div>
-                <!-- Input presupuesto del proyecto-->
-
-                <div class="form-group row">
-                  <label for="presupuesto_inicial" class="col-sm-2 col-form-label">Presupuesto</label>
-                  <div class="col-sm-10">
-                    <input type="number" class="form-control" id="presupuesto_inicial" name="presupuesto_inicial" placeholder="$0 " required onkeypress="return filterFloat(event,this);" >
-                  </div>
-                </div>
-
-
                 <!-- Select -->
 
                 <div class="form-group row">
@@ -125,7 +89,48 @@ include_once('templates/navegacion.php');
                   </div>
                 </div>
 
+                <!-- Input detalle del proyecto-->
 
+                <div class="form-group row">
+                  <label for="detalle" class="col-sm-2 col-form-label">Proyecto</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="detalle" name="detalle" placeholder="Nombre del proyecto" required>
+                  </div>
+                </div>
+
+                <!-- Input Objetivo estrategico-->
+
+                <div class="form-group row">
+                  <label for="objetivo_estrategico" class="col-sm-2 col-form-label">Objetivo</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="objetivo_estrategico" name="objetivo_estrategico" placeholder="Objetivo estratégico" required>
+                  </div>
+                </div>
+                <!-- Input Objetivo estrategico-->
+
+                <div class="form-group row">
+                  <label for="alcance" class="col-sm-2 col-form-label">Alcance</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="alcance" name="alcance" placeholder="Alcance del proyecto" required>
+                  </div>
+                </div>
+
+                <!-- Input Objetivo Link de video-->
+
+                <div class="form-group row">
+                  <label for="url_video|" class="col-sm-2 col-form-label">Link video</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="url_video" name="url_video" placeholder="Link video youtube - opcional">
+                  </div>
+                </div>
+                <!-- Input presupuesto del proyecto-->
+
+                <div class="form-group row">
+                  <label for="presupuesto_inicial" class="col-sm-2 col-form-label">Presupuesto</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" id="presupuesto_inicial" name="presupuesto_inicial" placeholder="$0 " required onkeypress="return filterFloat(event,this);">
+                  </div>
+                </div>
 
                 <!-- Select estado neutal-->
 
@@ -159,15 +164,15 @@ include_once('templates/navegacion.php');
                       ?>
                     </select>
                   </div>
-                  
+
                 </div>
 
-                <div id = "cuenta-div" class="form-group row">
+                <div id="cuenta-div" class="form-group row">
                   <label for="cuenta" class="col-sm-2 col-form-label">Nº cuenta</label>
                   <div class="col-sm-10">
-                  <input type="text" class="form-control" id="cuenta" name="cuenta" value = "0" placeholder="Ingrese el número de cuenta" required >
+                    <input type="text" class="form-control" id="cuenta" name="cuenta" value="0" placeholder="Ingrese el número de cuenta" required>
                   </div>
-                  </div>
+                </div>
 
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label ">Archivos:</label>

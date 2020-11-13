@@ -14,13 +14,13 @@ include_once('templates/navegacion.php');
 ?>
 
 
-<?php 
-    $phptemp=( int)$_COOKIE[ "query"]; 
-   /*  if (!is_nan($phptemp))
+<?php
+$phptemp = (int)$_COOKIE["query"];
+/*  if (!is_nan($phptemp))
     { 
       
     }  */
-    ?>
+?>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -34,7 +34,7 @@ include_once('templates/navegacion.php');
           $resultado = $conn->query($sql);
           $estado = $resultado->fetch_assoc(); ?>
           <h1>Proyectos - <?php echo $estado['estado']; ?></h1>
-          
+
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -55,23 +55,29 @@ include_once('templates/navegacion.php');
               <table id="registros" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Proyecto</th>
-                    <th>Creado</th>
-                    <th>Objetivo Estrategico</th>
+
                     <th>Portafolio</th>
                     <th>Programa</th>
-                    <th>Estado neural</th>
+                    <th>Creado</th>
+                    <th>Proyecto</th>
+                    <th>Objetivo</th>
+                    <th>Alcance</th>
+                    <th>
+                      <p style=" width: 50px; margin: 0 0;">Estado neural</p>
+                    </th>
                     <th>Estado</th>
                     <th>Nº cuenta</th>
                     <th>Presupuesto</th>
-                    <th>Inversión total</th>
+                    <th>
+                      <p style=" width: 55px; margin: 0 0;">Inversión total</p>
+                    </th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
                   try {
-                    
+
                     $resultado = $conn->query(getTotalByEstadoId($id));
                   } catch (Exception $e) {
                     $error = $e->getMessage();
@@ -79,32 +85,42 @@ include_once('templates/navegacion.php');
                   } ?>
                   <?php while ($proyecto = $resultado->fetch_assoc()) { ?>
                     <tr>
-                    <td>
-                    <?php echo $proyecto['detalle']; ?> - 
-                    <a class="float-rigth" href="detalle-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>"> <span class="badge badge-primary" style = "font-size: 13px"> Detalle</span>  </a>
-                    </td>
+
+                      <td id= "margen"><?php echo $proyecto['area']; ?></td>
+                      <td>
+                        <p style=" width: 80px; margin: 0 0; text-align: justify"><?php echo $proyecto['descripcion']; ?></p>
+                      </td>
                       <td><?php
                           $dt = new DateTime($proyecto['inicio']);
                           echo $dt->format('d/m/Y'); ?></td>
-                      <td><?php echo $proyecto['objetivo_estrategico']; ?></td>
-                      <td><?php echo $proyecto['area']; ?></td>
-                      <td><?php echo $proyecto['descripcion']; ?></td>
+                      <td>
+                        <?php echo $proyecto['detalle']; ?> -
+                        <a class="float-rigth" href="detalle-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>"> <span class="badge badge-primary" style="font-size: 13px"> Detalle</span> </a>
+                      </td>
+
+                      <td>
+                        <p style=" width: 120px; margin: 0 0; text-align: justify"><?php echo $proyecto['objetivo_estrategico']; ?></p>
+                      </td>
+                      <td>
+                        <p style=" width: 120px; margin: 0 0; text-align: justify"><?php echo $proyecto['alcance']; ?> </p>
+                      </td>
+
                       <td><?php echo $proyecto['estado_neural']; ?></td>
                       <td><?php echo $proyecto['estado']; ?></td>
-                      <td><?php if ($proyecto['cuenta'] !== null){
-                         echo $proyecto['cuenta'];
-                      }else{
-                        echo "Asignar cuenta";
-                      }?></td>
+                      <td><?php if ($proyecto['cuenta'] !== null) {
+                            echo $proyecto['cuenta'];
+                          } else {
+                            echo "Asignar cuenta";
+                          } ?></td>
                       <td><?php echo $proyecto['presupuesto_inicial']; ?></td>
-                      <td><?php echo $proyecto['total'];?></td>
+                      <td><?php echo $proyecto['total']; ?></td>
                       <td>
                         <?php if ($_SESSION['nivel'] == 1) : ?>
-                          <a href="editar-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>" >
-                            <i class="fas fa-pen editar" ></i>
+                          <a style="margin: 0 0;" href="editar-proyecto.php?id=<?php echo $proyecto['proyecto_id']; ?>">
+                            <i class="fas fa-pen editar"></i>
                           </a>
-                          <a href="#" data-id="<?php echo $proyecto['proyecto_id']; ?>" data-tipo="proyecto" class="borrar_registro">
-                            <i class="far fa-trash-alt eliminar" ></i>
+                          <a style="margin: 0 0;" href="#" data-id="<?php echo $proyecto['proyecto_id']; ?>" data-tipo="proyecto" class="borrar_registro">
+                            <i class="far fa-trash-alt eliminar"></i>
                           </a>
                         <?php endif; ?>
                       </td>
@@ -139,7 +155,7 @@ include_once('templates/navegacion.php');
               <div class="col-sm-2 input-group date" id="Cabecera_1" data-target-input="nearest">
                 <input type="text" class="form-control datetimepicker-input" data-target="#Cabecera_1" id="valor-query" name="valor-query" placeholder="Año" required />
                 <div class="input-group-append" data-target="#Cabecera_1" data-toggle="datetimepicker">
-                  <div id="chose" class="input-group-text"><i class="fas fa-calendar-alt eliminar" ></i></div>
+                  <div id="chose" class="input-group-text"><i class="fas fa-calendar-alt eliminar"></i></div>
                 </div>
               </div>
 
@@ -149,7 +165,7 @@ include_once('templates/navegacion.php');
               <table id="registros1" class="table-responsive table table-bordered table-striped">
                 <tr>
                   <th rowspan="2" style="text-align: center;">
-                  <span class="badge badge-pill badge-dark" style="font-size: 15px;"><?php echo $phptemp ?></span>
+                    <span class="badge badge-pill badge-dark" style="font-size: 15px;"><?php echo $phptemp ?></span>
                   </th>
                 </tr>
                 <tr id="Cabecera_2">
