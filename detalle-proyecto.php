@@ -17,7 +17,7 @@ include_once('templates/navegacion.php');
 
   <?php
     try {
-      $sql = "SELECT proyecto_id,cuenta, detalle,url_video, url_documento, objetivo_estrategico, presupuesto_inicial, estado_neural, estados.estado_id, estado, area, descripcion ";
+      $sql = "SELECT proyecto_id,cuenta,alcance,detalle,url_video, url_documento, objetivo_estrategico, presupuesto_inicial, estado_neural, estados.estado_id, estado, area, descripcion ";
       $sql .= " FROM proyectos ";
       $sql .= " INNER JOIN portafolios ";
       $sql .= " ON proyectos.portafolio_id = portafolios.portafolio_id ";
@@ -88,17 +88,17 @@ include_once('templates/navegacion.php');
           <div class=" col-12 <?php echo $cartel ?>">
             <div class="info-box bg-light">
               <div class="info-box-content">
-                <span class="info-box-text text-center text-muted">Objetivo</span>
-                <span class="info-box-number text-center text-muted mb-0"> <?php echo $proyecto['objetivo_estrategico'] ?> </span>
+                <span class="info-box-number text-center text-muted" style="text-transform: uppercase;">Objetivo</span>
+                <span class="  text-muted mb-0" style="text-align: justify;"> <?php echo $proyecto['objetivo_estrategico'] ?> </span>
               </div>
             </div>
           </div>
           <!--Div Objetivo-->
-          <div class=" col-12 <?php echo $cartel ?>">
+          <div class=" col-12 <?php echo $cartel + 2 ?>">
             <div class="info-box bg-light">
               <div class="info-box-content">
-                <span class="info-box-text text-center text-muted">Objetivo</span>
-                <span class="info-box-number text-center text-muted mb-0"> <?php echo $proyecto['objetivo_estrategico'] ?> </span>
+                <span class="info-box-number text-center text-muted" style="text-transform: uppercase;">Alcance</span>
+                <span class="  text-muted mb-0" style="text-align: justify;"> <?php echo $proyecto['alcance'] ?> </span>
               </div>
             </div>
           </div>
@@ -389,7 +389,7 @@ include_once('templates/navegacion.php');
                     <p><?php echo $clave + 1 ?></p>
                   </div>
                   <div class="icon">
-                    <i class="far fa-file-pdf" style="color: red;"></i>
+                    <i class="far fa-file" style="color: #A8A4A3;"></i> 
                   </div>
                   <a href="docs/<?php echo $valor; ?>" class="small-box-footer" style="color: black;">Abri archivo <i class="fas fa-arrow-circle-right"></i></a>
                 </div>

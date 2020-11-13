@@ -281,7 +281,7 @@ include_once('templates/navegacion.php');
                         <p><?php echo $clave + 1 ?></p>
                       </div>
                       <div class="icon">
-                        <i class="far fa-file-pdf" style="color: red;"></i>
+                      <i class="far fa-file" style="color: #A8A4A3;"></i>
                       </div>
                       <a href="docs/<?php echo $valor; ?>" class="small-box-footer" style="color: black;">Abri archivo <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
