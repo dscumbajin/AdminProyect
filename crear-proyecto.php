@@ -44,7 +44,6 @@ include_once('templates/navegacion.php');
             <form class="form-horizontal" role="form" name="guardar-registro" id="guardar-registro-archivo" method="post" action="modelo-proyecto.php" enctype="multipart/form-data">
 
               <div class="card-body">
-
                 <!-- Select -->
 
                 <div class="form-group row">
@@ -151,12 +150,12 @@ include_once('templates/navegacion.php');
                   <!-- /.form-group -->
                 </div>
 
-                <!-- Select estado-->
-                <div class="form-group row">
+                 <!-- Select estado-->
+              <div class="form-group row">
                   <label for="estado" class="col-sm-2 col-form-label">Estado:</label>
                   <div class="col-sm-10">
-                    <select name="estado" id="estado" class="form-control seleccionar" style="width: 100%;" >
-                   
+                    <select name="estado" id="estado" class="form-control seleccionar" style="width: 100%;" required>
+                    <option value="">- Seleccione -</option>
                       <?php
                       try {
                         $sql = 'SELECT * FROM estados';
@@ -179,6 +178,7 @@ include_once('templates/navegacion.php');
                     <input type="text" class="form-control" id="cuenta" name="cuenta" value="0" placeholder="Ingrese el número de cuenta" required>
                   </div>
                 </div>
+
 
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label ">Archivos:</label>

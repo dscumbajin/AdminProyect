@@ -267,36 +267,33 @@ $(function() {
         var estado = $("#estado option:selected").text();
         /* Elimino todos los espacios en blanco que tenga la cadena delante y detrás */
         var value_without_space = $.trim(estado);
-
-
-        /*         console.log(value_without_space);
-                console.log(tipo); */
-        if (value_without_space == 'Análisis' || value_without_space == 'Entrega') {
-            /*  console.log('esconder div'); */
-            $('#cuenta-div').hide();
-        } else {
+        console.log(value_without_space);
+        var number = 1 + Math.floor(Math.random() * 60000);
+        var cadena = number.toString();
+        //Crear nuevo proyecto
+        if (value_without_space == "Análisis") {
+            // mostar en input
             $('#cuenta-div').show();
 
-            var tipo = $('#crear_registro').text();
-            var input_cuenta = $('#cuenta').val();
-            console.log(input_cuenta);
+            $('#cuenta').attr('placeholder', 'Numero de 1 al 30');
 
-            if (tipo == "Añadir") {
-                console.log(tipo);
-                $('#cuenta').val('');
-            } else if (input_cuenta == 0) {
+            $('#cuenta').val(cadena);
+            console.log(number);
+            // poner valor aleatorio tamaño de 8
+            $('#cuenta').attr('readonly', true);
+        }
 
-                console.log(input_cuenta);
-                $('#cuenta').val('');
-                $('#cuenta').removeAttr('disabled');
-
-            } else {
-
-                $('#cuenta').attr('readonly', true);
-
-            }
+        if (value_without_space == "Aprobado") {
+            // mostar en input
+            $('#cuenta-div').show();
+            //dejar en blanco para el ingreso
+            $('#cuenta').attr('readonly', false);
+            $('#cuenta').val('');
+            $('#cuenta').attr('placeholder', 'formato: x.xx.xx.xx.xx');
 
         }
+        $('#cuenta').val(cadena);
+
     });
 
     $('#lista').click(() => {
