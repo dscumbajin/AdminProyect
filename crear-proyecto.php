@@ -98,20 +98,25 @@ include_once('templates/navegacion.php');
                   </div>
                 </div>
 
-                <!-- Input Objetivo estrategico-->
+               
 
-                <div class="form-group row">
-                  <label for="objetivo_estrategico" class="col-sm-2 col-form-label">Objetivo</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="objetivo_estrategico" name="objetivo_estrategico" placeholder="Objetivo estratégico" required>
+                <!-- Input Objetivo estrategico-->
+                <div class= "form-group row">
+                <label for="objetivo_estrategico" class="col-sm-2 col-form-label">Objetivo</label>
+                <div class="col-sm-10">
+                        <textarea class="form-control" rows="3" id="objetivo_estrategico" name="objetivo_estrategico" placeholder="Objetivo" required></textarea>
+
                   </div>
                 </div>
-                <!-- Input Objetivo estrategico-->
 
-                <div class="form-group row">
-                  <label for="alcance" class="col-sm-2 col-form-label">Alcance</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="alcance" name="alcance" placeholder="Alcance del proyecto" required>
+                <!-- Input alcance estrategico-->
+
+                <div class= "form-group row">
+                
+                <label for="alcance" class="col-sm-2 col-form-label">Alcance</label>
+                <div class="col-sm-10">
+                        <textarea class="form-control" rows="3" id="alcance" name="alcance" placeholder="Alcance del proyecto" required></textarea>
+
                   </div>
                 </div>
 
