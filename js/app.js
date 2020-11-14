@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     $("#registros").DataTable({
         "responsive": true,
         "autoWidth": false,
@@ -21,7 +21,7 @@ $(function() {
 
     $('#crear_registro_admin').attr('disabled', true);
 
-    $('#repetir_password').on('input', function() {
+    $('#repetir_password').on('input', function () {
         var password_nuevo = $('#password').val();
         if ($(this).val() == password_nuevo) {
             $('#resultado_password').text('Passwords iguales');
@@ -35,45 +35,9 @@ $(function() {
         }
     });
 
-    // validaciones
-
-    function filterFloat(evt, input) {
-        // Backspace = 8, Enter = 13, ‘0′ = 48, ‘9′ = 57, ‘.’ = 46, ‘-’ = 43
-        var key = window.Event ? evt.which : evt.keyCode;
-        var chark = String.fromCharCode(key);
-        var tempValue = input.value + chark;
-        if (key >= 48 && key <= 57) {
-            if (filter(tempValue) === false) {
-                return false;
-            } else {
-                return true;
-            }
-        } else {
-            if (key == 8 || key == 13 || key == 0) {
-                return true;
-            } else if (key == 46) {
-                if (filter(tempValue) === false) {
-                    return false;
-                } else {
-                    return true;
-                }
-            } else {
-                return false;
-            }
-        }
-    }
-
-    function filter(__val__) {
-        var preg = /^([0-9]+\.?[0-9]{0,2})$/;
-        if (preg.test(__val__) === true) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
+    
     // Validar input tipo date
-    $(".anio").focusout(function() {
+    $(".anio").focusout(function () {
         s = $(this).val();
         var bits = s.split('/');
         var d = new Date(bits[2] + '/' + bits[0] + '/' + bits[1]);
@@ -97,18 +61,18 @@ $(function() {
 
 
     // DESTALLE-PROYECTO
-    $("#myBtn").click(function() {
+    $("#myBtn").click(function () {
         $("#exampleModal").modal("hide");
     });
 
     // Supero presupuesto total vs presupuesto invertido
-    $("#boton01").click(function() {
+    $("#boton01").click(function () {
         var proyecto_id = $("#proyecto_id").val();
         var presupuesto_inversion = $("#presupuesto_inversion").text();
         var presupuesto_total = $("#presupuesto_total").text();
         if (parseInt(presupuesto_inversion) < parseInt(presupuesto_total)) {
 
-            setTimeout(function() {
+            setTimeout(function () {
                 window.location.href = `crear-cuenta.php?id=${parseInt(proyecto_id)}`;
 
             }, 500);
@@ -132,7 +96,7 @@ $(function() {
 
     // Clic Guardar cambios
 
-    $('#boton01').click(function() {
+    $('#boton01').click(function () {
         var detalle_cerrado = $('#detalle-cerrado').text();
         console.log(detalle_cerrado);
         if (detalle_cerrado == "Cerrado") {
@@ -147,7 +111,7 @@ $(function() {
     $('#Cabecera_1').datetimepicker({
         viewMode: 'years',
         format: 'YYYY',
-        onClose: function(theDate) {
+        onClose: function (theDate) {
             $('#valor-query').text = theDate;
         }
     });
@@ -168,23 +132,25 @@ $(function() {
 
 
     // Envio de parametro a url
-    $('#valor-query').on('input', function() {
-            var query = parseInt($(this).val());
+    $('#valor-query').on('input', function () {
+        var query = parseInt($(this).val());
 
-            if (location.search.indexOf('q=') < 0) {
+        if (location.search.indexOf('q=') < 0) {
 
-                crearCookie("query", query, 2);
-                setTimeout(() => {
-                    location.reload();
-                }, 2000);
-            }
-
-
+            crearCookie("query", query, 2);
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
         }
+
+
+    }
 
     );
 
-    $('#presupuesto').on('input', function() {
+    
+
+    $('#presupuesto').on('input', function () {
         var presu = $("#presu").text();
         var presuTotal = $('#presuTotal').text();
         /* console.log(presu);
@@ -193,7 +159,7 @@ $(function() {
         if (parseInt(presuTotal) < parseInt(presu)) {
             var resto = parseInt(presu) - parseInt(presuTotal);
             $('#resultado_resto').text('La inversión puede ser menor o igual a: $ ' + resto);
-            $('#presupuesto').on('input', function() {
+            $('#presupuesto').on('input', function () {
                 var input = $('#presupuesto').val();
                 if (input > resto) {
                     $('#guardar-presu').attr("disabled", true);
@@ -224,7 +190,7 @@ $(function() {
 
     // Validacion fecha anterior
 
-    $('#input-fecha').on('input', function() {
+    $('#input-fecha').on('input', function () {
 
         var input_fecha = new Date($("#input-fecha").val());
         var hoy = new Date();
@@ -262,7 +228,7 @@ $(function() {
 
     $('#cuenta-div').hide();
 
-    $('#estado').on('change', function() {
+    $('#estado').on('change', function () {
 
         var estado = $("#estado option:selected").text();
         /* Elimino todos los espacios en blanco que tenga la cadena delante y detrás */
@@ -285,12 +251,21 @@ $(function() {
         }
 
         if (value_without_space == "Aprobado" && input_cuenta.length < 7) {
+
+
             // mostar en input
             $('#cuenta-div').show();
             //dejar en blanco para el ingreso
             $('#cuenta').attr('readonly', false);
             $('#cuenta').val('');
             $('#cuenta').attr('placeholder', 'formato: x.xx.xx.xx.xx');
+            $('#cuenta')
+                .keypress(function (event) {
+                    if (this.value.length === 13) {
+                        return false;
+                    }
+                });
+
 
         }
         if (value_without_space == "Proceso") {
@@ -312,7 +287,7 @@ $(function() {
     });
 
 
-    $('#estado-editar').on('change', function() {
+    $('#estado-editar').on('change', function () {
 
         var estado = $("#estado-editar option:selected").text();
         /* Elimino todos los espacios en blanco que tenga la cadena delante y detrás */
@@ -327,6 +302,12 @@ $(function() {
             $('#cuenta').attr('readonly', false);
             $('#cuenta').val('');
             $('#cuenta').attr('placeholder', 'formato: x.xx.xx.xx.xx');
+            $('#cuenta')
+                .keypress(function (event) {
+                    if (this.value.length === 13) {
+                        return false;
+                    }
+                });
 
         }
         if (value_without_space == "Aprobado" && input_cuenta.length > 8) {
@@ -338,18 +319,14 @@ $(function() {
             $('#cuenta').attr('placeholder', 'formato: x.xx.xx.xx.xx');
 
         }
-        if (value_without_space == "Proceso" && input_cuenta.length < 8) {
+        if (value_without_space == "Proceso" && input_cuenta.length > 8) {
             // mostar en input
             $('#cuenta-div').hide();
             //dejar en blanco para el ingreso
             $('#cuenta').attr('readonly', true);
             $('#cuenta').val(input_cuenta);
             $('#cuenta').attr('placeholder', 'formato: x.xx.xx.xx.xx');
-
         }
-
-
-
     });
 
 

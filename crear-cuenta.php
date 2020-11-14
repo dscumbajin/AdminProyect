@@ -79,6 +79,7 @@ include_once('templates/navegacion.php');
                       $sql = "SELECT * FROM proyectos WHERE proyecto_id = $id ";
                       $resultado = $conn->query($sql);
                       $proyecto = $resultado->fetch_assoc(); ?>
+                      <input type="hidden" name="ncuenta" value="<?php echo $proyecto['cuenta'];?>">
                       <select name="cuenta" id="cuenta" class="form-control seleccionar" style="width: 100%;" readonly="readonly">
                         <option value="0">- Seleccione -</option>
                         <?php
@@ -120,7 +121,7 @@ include_once('templates/navegacion.php');
                 <div class="form-group row">
                   <label for="presupuesto" class="col-sm-2 col-form-label">Presupuesto:</label>
                   <div class="col-sm-10">
-                    <input type="number" class="form-control" id="presupuesto" name="presupuesto" placeholder="$ 0.0" required>
+                    <input type="text" class="form-control" id="presupuesto" name="presupuesto" placeholder="$ 0.0" required pattern = "^[0-9]\d*(\.\d+)?$">
                     <span id="resultado_resto" class="help-block"></span>
                   </div>
                 </div>

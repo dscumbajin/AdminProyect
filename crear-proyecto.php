@@ -132,7 +132,7 @@ include_once('templates/navegacion.php');
                 <div class="form-group row">
                   <label for="presupuesto_inicial" class="col-sm-2 col-form-label">Presupuesto</label>
                   <div class="col-sm-10">
-                    <input type="number" class="form-control" id="presupuesto_inicial" name="presupuesto_inicial" placeholder="$0 " required onkeypress="return filterFloat(event,this);">
+                    <input type="text" class="form-control" id="presupuesto_inicial" name="presupuesto_inicial" placeholder="$ 0.0 " required pattern = "^[0-9]\d*(\.\d+)?$">
                   </div>
                 </div>
 
@@ -175,7 +175,7 @@ include_once('templates/navegacion.php');
                 <div id="cuenta-div" class="form-group row">
                   <label for="cuenta" class="col-sm-2 col-form-label">Nº cuenta</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="cuenta" name="cuenta" value="0" placeholder="Ingrese el número de cuenta" required>
+                    <input type="text" class="form-control" id="cuenta" name="cuenta" value="0" placeholder="Ingrese el número de cuenta" required >
                   </div>
                 </div>
 

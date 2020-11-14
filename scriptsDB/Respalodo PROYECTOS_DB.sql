@@ -40,13 +40,14 @@ INSERT INTO `admins` (`id_admin`, `usuario`, `nombre`, `password`, `editado`, `n
 CREATE TABLE IF NOT EXISTS `cuentas` (
   `proyecto_id` int(11) NOT NULL DEFAULT '0',
   `registros_id` int(11) NOT NULL DEFAULT '0',
+  `cuenta` varchar(50) NOT NULL,
   PRIMARY KEY (`proyecto_id`,`registros_id`),
   KEY `FK_cuentas_registros` (`registros_id`),
   CONSTRAINT `FK_cuentas_proyectos` FOREIGN KEY (`proyecto_id`) REFERENCES `proyectos` (`proyecto_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_cuentas_registros` FOREIGN KEY (`registros_id`) REFERENCES `registros` (`registros_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla proyectos_db.cuentas: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla proyectos_db.cuentas: ~8 rows (aproximadamente)
 /*!40000 ALTER TABLE `cuentas` DISABLE KEYS */;
 /*!40000 ALTER TABLE `cuentas` ENABLE KEYS */;
 
@@ -141,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `proyectos` (
   CONSTRAINT `FK_proyectos_programas` FOREIGN KEY (`programa_id`) REFERENCES `programas` (`programa_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla proyectos_db.proyectos: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla proyectos_db.proyectos: ~7 rows (aproximadamente)
 /*!40000 ALTER TABLE `proyectos` DISABLE KEYS */;
 /*!40000 ALTER TABLE `proyectos` ENABLE KEYS */;
 
@@ -159,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `proyecto_estado` (
   CONSTRAINT `FK_proyecto_estado_proyectos` FOREIGN KEY (`proyecto_id`) REFERENCES `proyectos` (`proyecto_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla proyectos_db.proyecto_estado: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla proyectos_db.proyecto_estado: ~7 rows (aproximadamente)
 /*!40000 ALTER TABLE `proyecto_estado` DISABLE KEYS */;
 /*!40000 ALTER TABLE `proyecto_estado` ENABLE KEYS */;
 
@@ -172,7 +173,7 @@ CREATE TABLE IF NOT EXISTS `registros` (
   PRIMARY KEY (`registros_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla proyectos_db.registros: ~4 rows (aproximadamente)
+-- Volcando datos para la tabla proyectos_db.registros: ~10 rows (aproximadamente)
 /*!40000 ALTER TABLE `registros` DISABLE KEYS */;
 /*!40000 ALTER TABLE `registros` ENABLE KEYS */;
 

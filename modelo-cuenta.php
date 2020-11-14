@@ -2,13 +2,14 @@
 include_once('funciones/funciones.php');
 $cuenta = $_POST['cuenta'];
 $anio = $_POST['anio'];
+$ncuenta =$_POST['ncuenta'];
 $anio_formateada = date('Y-m-d', strtotime($anio));
 $presupuesto = $_POST['presupuesto'];
 $id_registro = $_POST['id_registro'];
 
 // Crear nuevo registro
 if ($_POST['registro'] == 'nuevo') {
-    //die(json_encode(($_POST))); 
+    /* die(json_encode(($_POST)));  */
     try {
 
         // registrar en registros
@@ -22,8 +23,9 @@ if ($_POST['registro'] == 'nuevo') {
 
         if ($stmt->affected_rows) {
 
-            $stmt = $conn->prepare('INSERT INTO cuentas (proyecto_id, registros_id) VALUES(?,?)');
-            $stmt->bind_param('ii', $cuenta, $id_registro);
+
+            $stmt = $conn->prepare('INSERT INTO cuentas (proyecto_id, registros_id, cuenta) VALUES(?,?,?)');
+            $stmt->bind_param('iis', $cuenta, $id_registro, $ncuenta);
             $stmt->execute();
 
             $respuesta = array(
