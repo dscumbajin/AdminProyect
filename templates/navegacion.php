@@ -130,7 +130,7 @@
             <a href="#" class="nav-link">
               <i class=" nav-icon fas fa-file-invoice-dollar"></i>
               <p>
-                Historial inversiones
+                Historial presupuestos
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
