@@ -187,6 +187,36 @@ $(function () {
         }
     });
 
+    var encerado = parseInt($("#presupuesto-edit").val());
+    $('#presupuesto-edit').on('input', function () {
+        var presuTri = $("#presu").text();
+        var presuTotal= $.trim(presuTri);
+        var presuTotalTri = $('#presuTotal').text();
+        var presuInversion= $.trim(presuTotalTri);
+        var input_edit = parseInt($("#presupuesto-edit").val());
+
+       var subtotal = presuTotal - presuInversion;
+       var bandera = encerado + subtotal
+      
+        
+       if(input_edit <= bandera ){
+        
+           /* console.log("Guardar" + bandera); */
+           $('#resultado_resto').text('La inversión puede ser menor o igual a: $ ' + bandera);
+           $('#guardar-presu-edit').attr("disabled", false);
+
+       }else {
+
+      /*   console.log('No guardar'+ bandera); */
+        $('#guardar-presu-edit').attr("disabled", true);
+       }
+
+      
+
+
+    });
+
+
 
     // Validacion fecha anterior
 

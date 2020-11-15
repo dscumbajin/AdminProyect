@@ -97,7 +97,8 @@ include_once('templates/navegacion.php');
                 <div class="form-group row">
                   <label for="presupuesto" class="col-sm-2 col-form-label">Presupuesto mensual:</label>
                   <div class="col-sm-10">
-                    <input type="number" class="form-control" id="presupuesto" name="presupuesto" placeholder="$ 0.0" required value="<?php echo $cuenta['presupuesto'] ?>">
+                    <input type="number" class="form-control" id="presupuesto-edit" name="presupuesto" placeholder="$ 0.0" required value="<?php echo $cuenta['presupuesto'] ?>">
+                    <span id="resultado_resto" class="help-block"></span>
                   </div>
                 </div>
 
@@ -107,7 +108,30 @@ include_once('templates/navegacion.php');
               <div class="card-footer">
                 <input type="hidden" name="registro" value="actualizar">
                 <input type="hidden" name="id_registro" value="<?php echo $id ?>">
-                <button type="submit" class="btn btn-dark float-right">Guardar</button>
+                <div class="row" style="justify-content: space-between;">
+
+                  <h3><span class="badge badge-danger">Presupuesto total: $</span> <span id="presu" class="badge badge-danger">
+                      <?php
+                      $resultado = $conn->query(getPresupuesto($valor));
+                      $registrados = $resultado->fetch_assoc();
+                      echo $registrados['presupuesto_inicial'];
+                      ?></span></h3>
+
+                  <h3><span class="badge badge-danger">Presupuesto mensual: $</span> <span id="presuTotal" class="badge badge-danger">
+                      <?php
+                      $resultado = $conn->query(getTotalInversionProyecto_id($valor));
+                      $registrados = $resultado->fetch_assoc();
+
+                      if ($registrados['total'] == null) {
+
+                        echo '0';
+                      } else {
+                        echo  $registrados['total'];
+                      }
+                      ?></span></h3>
+                  <button type="submit" class="btn btn-dark float-right" id= "guardar-presu-edit">Guardar</button>
+                </div>
+
               </div>
               <!-- /.card-footer -->
             </form>
