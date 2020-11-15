@@ -248,10 +248,10 @@ $(function () {
             console.log(number);
             // poner valor aleatorio tamaño de 8
             $('#cuenta').attr('readonly', true);
+            $("#estado_neural option[value=Activar]").attr("selected",true);  
         }
 
         if (value_without_space == "Aprobado" && input_cuenta.length < 7) {
-
 
             // mostar en input
             $('#cuenta-div').show();
@@ -261,10 +261,12 @@ $(function () {
             $('#cuenta').attr('placeholder', 'formato: x.xx.xx.xx.xx');
             $('#cuenta')
                 .keypress(function (event) {
-                    if (this.value.length === 13) {
+                    if (this.value.length === 16) {
                         return false;
                     }
                 });
+            $('#cuenta').attr("pattern", '([0-9]{1,2}\.[0-9]{1,2})*');
+            $("#estado_neural option[value=Activo]").attr("selected",true);  
 
 
         }
@@ -280,9 +282,6 @@ $(function () {
             $('#cuenta-div').hide();
             $('#cuenta').val(cadena);
         }
-
-
-
 
     });
 
@@ -304,10 +303,12 @@ $(function () {
             $('#cuenta').attr('placeholder', 'formato: x.xx.xx.xx.xx');
             $('#cuenta')
                 .keypress(function (event) {
-                    if (this.value.length === 13) {
+                    if (this.value.length === 16) {
                         return false;
                     }
                 });
+            $('#cuenta').attr("pattern", '([0-9]{1,2}\.[0-9]{1,2})*');
+            $("#estado_neural option[value=Activo]").attr("selected",true);  
 
         }
         if (value_without_space == "Aprobado" && input_cuenta.length > 8) {
@@ -317,6 +318,7 @@ $(function () {
             $('#cuenta').attr('readonly', true);
             $('#cuenta').val(input_cuenta);
             $('#cuenta').attr('placeholder', 'formato: x.xx.xx.xx.xx');
+            $("#estado_neural option[value=Activo]").attr("selected",true);  
 
         }
         if (value_without_space == "Proceso" && input_cuenta.length > 8) {
@@ -326,7 +328,30 @@ $(function () {
             $('#cuenta').attr('readonly', true);
             $('#cuenta').val(input_cuenta);
             $('#cuenta').attr('placeholder', 'formato: x.xx.xx.xx.xx');
+            $("#estado_neural option[value=Activo]").attr("selected",true);  
         }
+
+        if (value_without_space == "Cerrado" && input_cuenta.length > 8) {
+            // mostar en input
+            $('#cuenta-div').hide();
+            //dejar en blanco para el ingreso
+            $('#cuenta').attr('readonly', true);
+            $('#cuenta').val(input_cuenta);
+            $('#cuenta').attr('placeholder', 'formato: x.xx.xx.xx.xx');
+            $("#estado_neural option[value=Cerrado]").attr("selected",true);  
+        }
+        
+        if (value_without_space == "Cerrado") {
+            // mostar en input
+            $('#cuenta-div').hide();
+            //dejar en blanco para el ingreso
+            $('#cuenta').attr('readonly', true);
+            $('#cuenta').val(input_cuenta);
+            $('#cuenta').attr('placeholder', 'formato: x.xx.xx.xx.xx');
+            $("#estado_neural option[value=Cerrado]").attr("selected",true);  
+        }
+
+        
     });
 
 

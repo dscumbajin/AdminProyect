@@ -16,27 +16,28 @@ include_once('templates/navegacion.php');
   <!-- Content Header (Page header) -->
 
   <?php
-    try {
-      $sql = "SELECT proyecto_id,cuenta,alcance,detalle,url_video, url_documento, objetivo_estrategico, presupuesto_inicial, estado_neural, estados.estado_id, estado, area, descripcion ";
-      $sql .= " FROM proyectos ";
-      $sql .= " INNER JOIN portafolios ";
-      $sql .= " ON proyectos.portafolio_id = portafolios.portafolio_id ";
-      $sql .= " INNER JOIN programas ";
-      $sql .= " ON proyectos.programa_id=programas.programa_id ";
-      $sql .= " INNER JOIN estados ";
-      $sql .= " ON proyectos.estado_id=estados.estado_id ";
-      $sql .= " WHERE proyecto_id = $id ";
+  $estado_accion = "";
+  try {
+    $sql = "SELECT proyecto_id,cuenta,alcance,detalle,url_video, url_documento, objetivo_estrategico, presupuesto_inicial, estado_neural, estados.estado_id, estado, area, descripcion ";
+    $sql .= " FROM proyectos ";
+    $sql .= " INNER JOIN portafolios ";
+    $sql .= " ON proyectos.portafolio_id = portafolios.portafolio_id ";
+    $sql .= " INNER JOIN programas ";
+    $sql .= " ON proyectos.programa_id=programas.programa_id ";
+    $sql .= " INNER JOIN estados ";
+    $sql .= " ON proyectos.estado_id=estados.estado_id ";
+    $sql .= " WHERE proyecto_id = $id ";
 
-      $resultado = $conn->query($sql);
+    $resultado = $conn->query($sql);
 
-      $proyecto = $resultado->fetch_assoc();
-      /* echo '<pre>';
+    $proyecto = $resultado->fetch_assoc();
+    /* echo '<pre>';
       var_dump($proyecto);
       echo '</pre'; */
-    } catch (Exception $e) {
-      echo "Error: " . $e->getMessage();
-    }
-    ?>
+  } catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
+  }
+  ?>
 
   <section class="content-header">
     <div class="container-fluid">
@@ -50,7 +51,7 @@ include_once('templates/navegacion.php');
 
   <!-- Main content -->
   <section class="content">
-    
+
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
@@ -231,7 +232,7 @@ include_once('templates/navegacion.php');
                 </div>
                 <span class="info-box-text text-center text-muted">Estado</span>
 
-                <span id="detalle-cerrado" class="info-box-number text-center text-muted mb-0"><?php echo $proyecto['estado'] ?><span>
+                <span id="detalle-cerrado" class="info-box-number text-center text-muted mb-0"><?php echo $estado_accion = $proyecto['estado'] ?><span>
 
               </div>
             </div>
@@ -266,12 +267,15 @@ include_once('templates/navegacion.php');
                 </span>
                 <!-- Button trigger modal -->
 
+                <?php
+                if ($estado_accion == "Aprobado" || $estado_accion == "Proceso" ) { ?>
+                  <button id="boton01" type="button" class="btn btn-primary ">
+                    <i class="fas fa-hand-holding-usd"></i> Invertir
+                  </button>
 
+                <?php }
 
-                <button id="boton01" type="button" class="btn btn-primary " >
-                  <i class="fas fa-hand-holding-usd"></i> Invertir
-                </button>
-
+                ?>
 
               </div>
             </div>
@@ -389,7 +393,7 @@ include_once('templates/navegacion.php');
                     <p><?php echo $clave + 1 ?></p>
                   </div>
                   <div class="icon">
-                    <i class="far fa-file" style="color: #A8A4A3;"></i> 
+                    <i class="far fa-file" style="color: #A8A4A3;"></i>
                   </div>
                   <a href="docs/<?php echo $valor; ?>" class="small-box-footer" style="color: black;">Abri archivo <i class="fas fa-arrow-circle-right"></i></a>
                 </div>

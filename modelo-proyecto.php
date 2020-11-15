@@ -1,6 +1,6 @@
 <?php
 include_once('funciones/funciones.php');
-$inicio = date('Y-m-d',time());
+$inicio = date('Y-m-d', time());
 $detalle = $_POST['detalle'];
 $objetivo_estrategico = $_POST['objetivo_estrategico'];
 $alcance = $_POST['alcance'];
@@ -59,7 +59,7 @@ if ($_POST['registro'] == 'nuevo') {
 
     try {
         $stmt = $conn->prepare('INSERT INTO proyectos (inicio, detalle, objetivo_estrategico, alcance, presupuesto_inicial, estado_neural, estado_id, portafolio_id, programa_id, url_video, url_documento, cuenta) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)');
-        $stmt->bind_param('ssssdsiiisss',$inicio, $detalle, $objetivo_estrategico,$alcance, $presupuesto_inicial, $estado_neural, $estado, $portafolio_id, $programa_id, $url_video, $cadena, $cuenta);
+        $stmt->bind_param('ssssdsiiisss', $inicio, $detalle, $objetivo_estrategico, $alcance, $presupuesto_inicial, $estado_neural, $estado, $portafolio_id, $programa_id, $url_video, $cadena, $cuenta);
         $stmt->execute();
 
         $id_registro = $stmt->insert_id;
@@ -141,7 +141,7 @@ if ($_POST['registro'] == 'actualizar') {
             if ($_FILES['archivo']['size'][$key] > 0) {
 
                 $stmt = $conn->prepare('UPDATE proyectos SET detalle= ?, objetivo_estrategico= ? , alcance= ?, presupuesto_inicial =? , estado_neural= ?, estado_id= ?, portafolio_id= ?, programa_id= ?,url_video = ?, url_documento = ?, cuenta=?, editado = NOW() WHERE proyecto_id =?');
-                $stmt->bind_param('sssdsiiisssi', $detalle, $objetivo_estrategico,$alcance, $presupuesto_inicial, $estado_neural, $estado, $portafolio_id, $programa_id, $url_video, $cadena, $cuenta, $id_registro);
+                $stmt->bind_param('sssdsiiisssi', $detalle, $objetivo_estrategico, $alcance, $presupuesto_inicial, $estado_neural, $estado, $portafolio_id, $programa_id, $url_video, $cadena, $cuenta, $id_registro);
             } else {
                 // Sin Archivos
                 $stmt = $conn->prepare('UPDATE proyectos SET detalle= ?, objetivo_estrategico= ? , alcance= ?, presupuesto_inicial =? , estado_neural= ?, estado_id= ?, portafolio_id= ?, programa_id= ?,url_video = ?, url_documento = ?, cuenta=?, editado = NOW() WHERE proyecto_id =?');
@@ -190,22 +190,24 @@ if ($_POST['registro'] == 'eliminar') {
     }
 
     try {
+
+        $stmt = $conn->prepare('DELETE FROM registros WHERE EXISTS (SELECT 1 FROM cuentas WHERE cuentas.registros_id = registros.registros_id AND cuentas.proyecto_id = ?)');
+        $stmt->bind_param('i', $id_borrar);
+        $stmt->execute();
+
         $stmt = $conn->prepare('DELETE FROM proyectos WHERE proyecto_id = ?');
         $stmt->bind_param('i', $id_borrar);
         $stmt->execute();
 
         if ($stmt->affected_rows) {
-            
-            if(sizeof($array)>0){
+
+            if (sizeof($array) > 0) {
                 foreach ($array as $clave => $valor) {
-                    unlink('docs/'.$valor);
+                    unlink('docs/' . $valor);
                 }
             }
 
-            $stmt = $conn->prepare('DELETE ca FROM registros ca  LEFT JOIN cuentas cc ON ca.registros_id = cc.registros_id  WHERE cc.proyecto_id = ?');            
-            $stmt->bind_param('i', $id_borrar);
-            $stmt->execute();
-            
+
             $respuesta = array(
                 'respuesta' => 'exito',
                 'id_eliminado' => $id_borrar
