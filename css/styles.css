@@ -7,12 +7,13 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-font-smoothing: antialiased;
     -moz-osx-font-smoothing: antialiased;
+    
 }
 
 #header {
     height: 120px;
     width: 100%;
-    background: white;
+    background:#f2f2f2;
     border-bottom: 1px solid #ccc;
     border-top: 5px solid #f13e3e;
 }
@@ -433,4 +434,144 @@ textarea {
     #slider.slider-small h1 {
         padding-top: 35px;
     }
+}
+
+/** ESTILOS PEDIDOS WEB**/
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+input,
+button {
+    font-weight: normal !important;
+}
+
+input {
+    background: #f2f2f2 !important;
+    padding: 10px 20px !important;
+    border: none !important;
+    height: 40px !important;
+    transition: all 300ms ease-in !important;
+    border-bottom: 1px solid #c3c3c3 !important;
+
+}
+
+input:hover {
+    border-bottom: 1px solid #666666 !important;
+
+}
+
+input:focus,
+button:focus {
+    outline: none !important;
+    box-shadow: none !important
+}
+
+label {
+    color: #666666 !important;
+    font-size: 15px !important;
+    margin-bottom: 15px;
+
+}
+
+i {
+    cursor: pointer;
+}
+
+@media(max-width:600px) {
+    .card {
+        min-width: 400px !important;
+    }
+
+    .navbar-footer {
+        float: none !important;
+    }
+
+    .acciones {
+        flex-direction: column !important;
+    }
+
+    .acciones button {
+        flex: 0 1 100% !important;
+    }
+
+    button {
+        margin-left: 0 !important;
+    }
+}
+
+@media(max-width:450px) {
+    .card {
+        min-width: 300px !important;
+    }
+
+}
+
+@media(max-width:400px) {
+    .card {
+        min-width: 200px !important;
+        padding: 40px 25px 40px 25px !important;
+    }
+
+}
+
+@media(max-width:370px) {
+    .card {
+        min-width: 100% !important;
+        width: 100% !important;
+    }
+
+}
+
+.acciones {
+    display: flex;
+    margin-top: 40px;
+    justify-content: space-between;
+}
+
+.acciones button {
+    flex: 0 1 46% !important;
+    cursor: pointer;
+    padding: 10px 20px !important;
+    width: 100%;
+}
+
+.acciones .btn-signin {
+    margin-top: 0 !important;
+    height: 40px;
+}
+
+
+.buscarlabel {
+    font-family: 'Roboto', sans-serif;
+    position: absolute;
+    top: 0;
+    font-size: 14px;
+    margin: 10px;
+    padding: 10px 10px;
+    -webkit-transition: top .2s ease-in-out, font-size .2s ease-in-out;
+    transition: top .2s ease-in-out, font-size .2s ease-in-out;
+    background: transparent !important;
+}
+
+.buscarlabel.active {
+    top: -35px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #495560 !important;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 20px;
+    border: 2px solid white;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #f05855;
+    color: #495560;
+    max-width: 400px;
+}
+
+input[type=text]:focus {
+    outline: none;
 }
